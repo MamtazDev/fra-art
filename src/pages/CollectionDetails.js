@@ -30,15 +30,7 @@ const CollectionDetails = () => {
       .then((data) => setCollection(data.collections));
   }, []);
 
-  const handleSearch = (event) => {
-    let value = event.target.value.toLowerCase();
-    let result = [];
-    console.log(value);
-    result = collections.filter((data) => {
-      return data.collections.name.search(value) != -1;
-    });
-    setFilteredData(result);
-  };
+  
   return (
     <div>
       <div
@@ -47,7 +39,7 @@ const CollectionDetails = () => {
     )`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          height: "550px",
+          // height: "550px",
           backgroundBlendMode: "overlay",
           backgroundColor: "rgba(255, 255, 255, 0.685)",
           margin: "80px 0",
@@ -72,22 +64,31 @@ const CollectionDetails = () => {
               <i class="fs-3 text-black fa-solid fa-globe"></i>
             </Link>
           </div>
-          <div className="w-50 mx-auto bg-white px-5 py-2 rounded mb-3">
-            <div className="row">
-              <div className="col-3">
+          <div className=" w-50 mx-auto bg-white px-5 py-2 rounded mb-3">
+            <div className="row g-5">
+              <div className="col-6 col-lg-3">
                 <h6>{collection[0]?.tokenCount}</h6>
                 <p className="text-secondary p-0 m-0">items</p>
               </div>
-              <div className="col-3">
-                <h6>🥈💸 {collection[0]?.tokenCount}</h6>
+              <div className="col-6 col-lg-3">
+                <h6>
+                  🥈💸{" "}
+                  {Math.max(
+                    collection[0]?.floorSale["1day"],
+                    collection[0]?.floorSale["7day"],
+                    collection[0]?.floorSale["30day"]
+                  )}
+                </h6>
                 <p className="text-secondary p-0 m-0">top offer</p>
               </div>
-              <div className="col-3">
-                <h6>💸 {collection[0]?.floorSale["1day"]}</h6>
+              <div className="col-6 col-lg-3">
+                <h6>💸 {collection[0]?.floorAsk?.price?.amount?.decimal}</h6>
                 <p className="text-secondary p-0 m-0">floor</p>
               </div>
-              <div className="col-3">
-                <h6>💸 {collection[0]?.volume?.allTime}</h6>
+              <div className="col-6 col-lg-3">
+                <h6>
+                  💸 {(collection[0]?.volume?.allTime / 1000).toFixed(2)}k
+                </h6>
                 <p className="text-secondary p-0 m-0">total volume</p>
               </div>
             </div>
@@ -113,7 +114,7 @@ const CollectionDetails = () => {
 
       <div className="py-5 my-5 px-4">
         <div className="row g-5">
-          <div className="col-3">
+          <div className="col-12 col-lg-3">
             <h2>Filter</h2>
             <div class="accordion" id="accordionExample">
               <div class="accordion-item">
@@ -147,7 +148,7 @@ const CollectionDetails = () => {
               </div>
             </div>
           </div>
-          <div className="col-9">
+          <div className="col-12 col-lg-9">
             <div className="row g-5">
               {collections.length === 0 && (
                 <div>
@@ -166,7 +167,7 @@ const CollectionDetails = () => {
                           .includes(filteredData);
                   })
                   .map((collection, index) => (
-                    <div className="col-3" key={index}>
+                    <div className="col-12 col-md-6 col-lg-3" key={index}>
                       <Link to={`/trendingDetails/${collection.collection.id}`}>
                         <img
                           className="w-100"

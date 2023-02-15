@@ -4,19 +4,35 @@ import { useParams } from "react-router-dom";
 const User = () => {
   const { pid } = useParams();
   const [collection, setCollection] = useState({});
+  const [attribute, setAttribute] = useState([]);
   useEffect(() => {
-    console.log("id", pid);
-
     fetch(`https://api.reservoir.tools/collections/v5?id=${pid}`)
       .then((res) => res.json())
       .then((data) => setCollection(data.collections));
   }, []);
+  useEffect(() => {
+    fetch(`
+    https://api.reservoir.tools/collections/${pid}/attributes/explore/v4`)
+      .then((res) => res.json())
+      .then((data) => setAttribute(data.attributes));
+  }, []);
+  console.log("attribute", attribute);
+  const newAttribute = [];
+  for (let i = 0; i < attribute.length; i++) {
+    let neww = attribute[i];
+    if (!attribute.includes) {
+      newAttribute.push(neww);
+    }
+  }
+  const uniqueArr = attribute.filter(
+    (obj, index, self) => index === self.findIndex((t) => t.key === obj.key)
+  );
 
   return (
     <div>
       <div className="container py-5 my-5">
         <div className="row g-5">
-          <div className="col-6">
+          <div className="col-12 col-lg-6">
             <img
               className="w-100 border rounded"
               src={collection[0]?.image}
@@ -37,9 +53,9 @@ const User = () => {
             </div>
             <div className="border rounded p-3">
               <div className="d-flex justify-content-between">
-              <h3>Token Info</h3>
-              <h3>💎💰</h3>
-                </div>
+                <h3>Token Info</h3>
+                <h3>💎💰</h3>
+              </div>
               <div className="d-flex justify-content-between">
                 <p> Contract Address :</p>
                 <p className="fw-bold text-primary">
@@ -74,7 +90,7 @@ const User = () => {
               </div>
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-12 col-lg-6">
             <div className="border rounded p-3 mb-3">
               <div className="d-flex align-items-center">
                 <img
@@ -91,9 +107,9 @@ const User = () => {
                 <p>
                   {collection[0]?.royalties?.recipient?.slice(0, 4) +
                     "..." +
-                    collection[0]?.royalties?.recipient.slice(
-                      collection[0]?.royalties?.recipient.length - 4,
-                      collection[0]?.royalties?.recipient.length
+                    collection[0]?.royalties?.recipient?.slice(
+                      collection[0]?.royalties?.recipient?.length - 4,
+                      collection[0]?.royalties?.recipient?.length
                     )}
                 </p>
               )}
@@ -111,6 +127,11 @@ const User = () => {
                 </div>
                 <div>
                   <h5>Top Offer</h5>
+                  {Math.max(
+                    collection[0]?.floorSale["1day"],
+                    collection[0]?.floorSale["7day"],
+                    collection[0]?.floorSale["30day"]
+                  )}
                 </div>
               </div>
             </div>
@@ -118,21 +139,25 @@ const User = () => {
             <div className="border rounded p-3">
               <h6>Attributes</h6>
               <div className="row g-3">
-                <div className="col-6 ">
-                  <div className="bg-light rounded p-3">
-                    <h6> Sea {collection[0]?.floorSale["1day"]}</h6>
+                {uniqueArr.map((att, index) => (
+                  <div key={index} className="col-12 col-lg-6 ">
+                    <div className="bg-light rounded p-3">
+                      <p className="text-primary p-0 m-0"> {att?.key}</p>
+                      <div className="d-flex justify-content-between">
+                        <div>
+                          <h6 className="p-0 m-0"> {att?.value}</h6>
+                          <p className="p-0 m-0">
+                            {att?.tokenCount} ({att?.onSaleCount / 100}%)
+                          </p>
+                        </div>
+                        <div>
+                          <h6 className="p-0 m-0"> {att?.floorAskPrices}</h6>
+                          <p className="p-0 m-0">floor price</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="col-6 ">
-                  <div className="bg-light rounded p-3">
-                    <h6> Egg {collection[0]?.floorSale["7day"]}</h6>
-                  </div>
-                </div>
-                <div className="col-6 ">
-                  <div className="bg-light rounded p-3">
-                    <h6> Egg {collection[0]?.floorSale["30day"]}</h6>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

@@ -1,0 +1,8 @@
+.accordion .accordion-item .accordion-button:not(.collapsed) {
+  color: black;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: unset !important;
+  color: black !important;
+}

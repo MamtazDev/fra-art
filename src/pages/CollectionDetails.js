@@ -167,7 +167,7 @@ const CollectionDetails = () => {
                   })
                   .map((collection, index) => (
                     <div className="col-3" key={index}>
-                      <Link to={`/details/${collection.collection.id}`}>
+                      <Link to={`/trendingDetails/${collection.collection.id}`}>
                         <img
                           className="w-100"
                           src={collection.collection.image}

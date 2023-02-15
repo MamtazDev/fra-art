@@ -341,7 +341,7 @@ const Navbar = ({ nav }) => {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="parent-parent-menu-item">
-                  <Link to="/item">Trending</Link>
+                  <Link to="/trending">Trending</Link>
                 </li>
                 <li className="parent-parent-menu-item">
                   <Link to="/crowdpad">Crowdpad</Link>

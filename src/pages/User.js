@@ -11,7 +11,7 @@ const User = () => {
       .then((res) => res.json())
       .then((data) => setCollection(data.collections));
   }, []);
-   
+
   return (
     <div>
       <div className="container py-5 my-5">
@@ -24,9 +24,9 @@ const User = () => {
             />
             <div className="border rounded p-3 my-3">
               <h3>Collection Info</h3>
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center mb-3">
                 <img
-                  width={50}
+                  width={30}
                   className="rounded-circle me-3"
                   src={collection[0]?.image}
                   alt=""
@@ -36,30 +36,42 @@ const User = () => {
               <p> {collection[0]?.description}</p>
             </div>
             <div className="border rounded p-3">
+              <div className="d-flex justify-content-between">
               <h3>Token Info</h3>
-              <p>
-                Contract Address :{" "}
-                {collection[0]?.floorAsk?.token?.contract
-                  ? collection[0]?.floorAsk?.token?.contract.slice(0, 4) +
-                    "..." +
-                    collection[0]?.floorAsk?.token?.contract.slice(
-                      collection[0]?.floorAsk?.token?.contract.length - 4,
-                      collection[0]?.floorAsk?.token?.contract.length
-                    )
-                  : "not available"}
-              </p>
-              <p>
-                Token ID :{" "}
-                {collection[0]?.floorAsk?.token?.tokenId
-                  ? collection[0]?.floorAsk?.token?.tokenId
-                  : "not available"}
-              </p>
-              <p>
-                Token Standard :{" "}
-                {collection[0]?.floorAsk?.token?.name
-                  ? collection[0]?.floorAsk?.token?.name
-                  : "not available"}
-              </p>
+              <h3>💎💰</h3>
+                </div>
+              <div className="d-flex justify-content-between">
+                <p> Contract Address :</p>
+                <p className="fw-bold text-primary">
+                  {" "}
+                  {collection[0]?.floorAsk?.token?.contract
+                    ? collection[0]?.floorAsk?.token?.contract.slice(0, 4) +
+                      "..." +
+                      collection[0]?.floorAsk?.token?.contract.slice(
+                        collection[0]?.floorAsk?.token?.contract.length - 4,
+                        collection[0]?.floorAsk?.token?.contract.length
+                      )
+                    : "not available"}
+                </p>
+              </div>
+              <div className="d-flex justify-content-between">
+                <p> Token ID :</p>
+                <p className="fw-bold">
+                  {" "}
+                  {collection[0]?.floorAsk?.token?.tokenId
+                    ? collection[0]?.floorAsk?.token?.tokenId
+                    : "not available"}
+                </p>
+              </div>
+              <div className="d-flex justify-content-between">
+                <p> Token Standard :</p>
+                <p className="fw-bold">
+                  {" "}
+                  {collection[0]?.floorAsk?.token?.name
+                    ? collection[0]?.floorAsk?.token?.name
+                    : "not available"}
+                </p>
+              </div>
             </div>
           </div>
           <div className="col-6">
@@ -75,25 +87,27 @@ const User = () => {
               </div>
               <h6>Owner</h6>
 
-              {
-                collection && 
-              
-              <p>
-                {collection[0]?.royalties?.recipient?.slice(0, 4) +
-                  "..." +
-                  collection[0]?.royalties?.recipient?.slice(
-                    collection[0]?.royalties?.recipient?.length - 4,
-                    collection[0]?.royalties?.recipient?.length
-                  )}
-              </p>
-}
+              {collection && (
+                <p>
+                  {collection[0]?.royalties?.recipient?.slice(0, 4) +
+                    "..." +
+                    collection[0]?.royalties?.recipient.slice(
+                      collection[0]?.royalties?.recipient.length - 4,
+                      collection[0]?.royalties?.recipient.length
+                    )}
+                </p>
+              )}
             </div>
 
             <div className="border rounded p-3 mb-3">
               <div className="d-flex justify-content-between">
                 <div>
                   <h5>List Price</h5>
-                  <p>{collection[0]?.floorAskPrice ? collection[0]?.floorAskPrice : "-"}</p>
+                  <p>
+                    {collection[0]?.floorAskPrice
+                      ? collection[0]?.floorAskPrice
+                      : "-"}
+                  </p>
                 </div>
                 <div>
                   <h5>Top Offer</h5>

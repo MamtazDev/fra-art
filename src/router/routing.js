@@ -186,9 +186,9 @@ const Routing = () => {
           <Route path="/admin/otp2" element={<Otp2 />} />
           <Route path="/admin/verify-email" element={<VerifyEmail />} />
           <Route path="/admin/reset" element={<Reset />} />
-          <Route path="/item" element={<Collection />} />
-          <Route path="/item/:id" element={<CollectionDetails />} />
-          <Route path="/details/:pid" element={<User />} />
+          <Route path="/trending" element={<Collection />} />
+          <Route path="/trending/:id" element={<CollectionDetails />} />
+          <Route path="/trendingDetails/:pid" element={<User />} />
         </Routes>
         <BackToTop />
         {!location.pathname.includes("admin") && <Footer />}

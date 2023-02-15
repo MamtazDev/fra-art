@@ -61,7 +61,7 @@ const Collection = () => {
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>
-                      <Link to={`/item/${collection?.primaryContract}`}>
+                      <Link to={`/trending/${collection?.primaryContract}`}>
                         <img
                           width={50}
                           className="rounded-circle  me-4"

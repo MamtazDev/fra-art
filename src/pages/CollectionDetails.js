@@ -11,6 +11,9 @@ const CollectionDetails = () => {
   const [collection, setCollection] = useState({});
   const [visible, setVisible] = useState(false);
   const [attribute, setAttribute] = useState([]);
+
+  const [customAttribues, setCustomAttribute] = useState([]);
+
   useEffect(() => {
     axios
       .get(`https://api.reservoir.tools/users/${id}/collections/v2`)
@@ -23,8 +26,14 @@ const CollectionDetails = () => {
     fetch(`https://api.reservoir.tools/collections/v5?id=${id}`)
       .then((res) => res.json())
       .then((data) => setCollection(data.collections));
-  }, []);
 
+    // attribute
+    fetch(`https://api.reservoir.tools/collections/${id}/attributes/all/v2`)
+      .then((response) => response.json())
+      .then((response) => setCustomAttribute(response.attributes))
+      .catch((err) => console.error(err));
+  }, []);
+  console.log("customAtt", customAttribues);
   useEffect(() => {
     fetch(`
     https://api.reservoir.tools/collections/${id}/attributes/explore/v4`)
@@ -117,6 +126,54 @@ const CollectionDetails = () => {
         <div className="row g-5">
           <div className="col-12 col-lg-3">
             <h2>Filter</h2>
+            {/* <ul>
+              {customAttribues.map((item) => (
+                <li>
+                  {item.key}
+                  <ul>
+                    {item.values.map((subItem) => (
+                      <li>
+                        {subItem.value} - {subItem.count}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul> */}
+
+            <div class="accordion" id="accordionExample">
+              {customAttribues.map((item, index) => (
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id={"heading" + index}>
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={"#collapse" + index}
+                      aria-expanded="true"
+                      aria-controls={"collapse" + index}
+                    >
+                      {item.key}
+                    </button>
+                  </h2>
+                  <div
+                    id={"collapse" + index}
+                    class="accordion-collapse collapse show"
+                    aria-labelledby={"heading" + index}
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div class="accordion-body">
+                      {item.values.map((subItem) => (
+                        <p>
+                          {subItem.value} - {subItem.count}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <div class="accordion" id="accordionExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
@@ -243,13 +300,14 @@ const CollectionDetails = () => {
                     .map((att, index) => (
                       <div className="col-12 col-md-6 col-lg-3" key={index}>
                         <Link to={`/trendingDetails/${index}`}>
-                        {att.sampleImages.map((pic,index)=>  <img
-                        key={index}
-                            className="w-100 my-2"
-                            src={pic}
-                            alt=""
-                          />)}
-                        
+                          {att.sampleImages.map((pic, index) => (
+                            <img
+                              key={index}
+                              className="w-100 my-2"
+                              src={pic}
+                              alt=""
+                            />
+                          ))}
                         </Link>
                         <p className="text-center">
                           {att.key} <br />

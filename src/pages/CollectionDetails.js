@@ -10,27 +10,28 @@ const CollectionDetails = () => {
   const [filteredData, setFilteredData] = useState("");
   const [collection, setCollection] = useState({});
   const [visible, setVisible] = useState(false);
-
+  const [attribute, setAttribute] = useState([]);
   useEffect(() => {
-    console.log("id", id);
-
     axios
       .get(`https://api.reservoir.tools/users/${id}/collections/v2`)
       .then((response) => {
         setCollections(response.data.collections);
-        // setFilteredData(response.data.collections);
       });
   }, []);
 
   useEffect(() => {
-    console.log("id", id);
-
     fetch(`https://api.reservoir.tools/collections/v5?id=${id}`)
       .then((res) => res.json())
       .then((data) => setCollection(data.collections));
   }, []);
 
-  
+  useEffect(() => {
+    fetch(`
+    https://api.reservoir.tools/collections/${id}/attributes/explore/v4`)
+      .then((res) => res.json())
+      .then((data) => setAttribute(data.attributes));
+  }, []);
+  console.log(attribute);
   return (
     <div>
       <div
@@ -54,7 +55,7 @@ const CollectionDetails = () => {
           />
           <h2 className="mt-2">{collection[0]?.name}</h2>
           <div className="d-flex justify-content-center mb-3">
-            <Link to={collection[0]?.twitterUsername}>
+            <Link to={"https://twitter.com/" + collection[0]?.twitterUsername}>
               <img className="me-3" width={30} src={twitter} alt="" />
             </Link>
             <Link to={collection[0]?.discordUrl}>
@@ -146,40 +147,117 @@ const CollectionDetails = () => {
                   </div>
                 </div>
               </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="true"
+                    aria-controls="collapseTwo"
+                  >
+                    Volume
+                  </button>
+                </h2>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    <input
+                      className="w-100 py-2 mb-5 px-4"
+                      type="text"
+                      onChange={(e) => setFilteredData(e.target.value)}
+                      placeholder="Search"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          {/* data from user collection */}
           <div className="col-12 col-lg-9">
-            <div className="row g-5">
-              {collections.length === 0 && (
-                <div>
-                  <h1 className="text-danger text-center">
-                    No item available in this collection
-                  </h1>
-                </div>
-              )}
-              {collections.length > 0 &&
-                collections
-                  ?.filter((item) => {
-                    return filteredData.toLowerCase() === ""
-                      ? item
-                      : item.collection?.name
-                          ?.toLowerCase()
-                          .includes(filteredData);
-                  })
-                  .map((collection, index) => (
-                    <div className="col-12 col-md-6 col-lg-3" key={index}>
-                      <Link to={`/trendingDetails/${collection.collection.id}`}>
-                        <img
-                          className="w-100"
-                          src={collection.collection.image}
-                          alt=""
-                        />
-                      </Link>
-                      <p className="text-center">
-                        {collection.collection.name}
-                      </p>
-                    </div>
-                  ))}
+            <h1>data from user collection api</h1>
+            <div>
+              <div className="row g-5">
+                {collections.length === 0 && (
+                  <div>
+                    <h1 className="text-danger text-center">
+                      No item available in this collection
+                    </h1>
+                  </div>
+                )}
+                {collections.length > 0 &&
+                  collections
+                    ?.filter((item) => {
+                      return filteredData.toLowerCase() === ""
+                        ? item
+                        : (
+                            item.collection?.name.toLowerCase() ||
+                            JSON.stringify(item.collection?.volume?.allTime)
+                          ).includes(filteredData);
+                    })
+                    .map((collection, index) => (
+                      <div className="col-12 col-md-6 col-lg-3" key={index}>
+                        <Link
+                          to={`/trendingDetails/${collection.collection.id}`}
+                        >
+                          <img
+                            className="w-100"
+                            src={collection.collection.image}
+                            alt=""
+                          />
+                        </Link>
+                        <p className="text-center">
+                          {collection.collection.name} <br />
+                          {collection.collection.volume["allTime"]}
+                        </p>
+                      </div>
+                    ))}
+              </div>
+            </div>
+          </div>
+
+          {/* data from attribute */}
+          <div className="col-12 col-lg-9">
+            <h1>data from attributes api</h1>
+            <div>
+              <div className="row g-5">
+                {attribute.length === 0 && (
+                  <div>
+                    <h1 className="text-danger text-center">
+                      No item available in this collection
+                    </h1>
+                  </div>
+                )}
+                {attribute.length > 0 &&
+                  attribute
+                    ?.filter((item) => {
+                      return filteredData.toLowerCase() === ""
+                        ? item
+                        : item.key.toLowerCase().includes(filteredData);
+                    })
+                    .map((att, index) => (
+                      <div className="col-12 col-md-6 col-lg-3" key={index}>
+                        <Link to={`/trendingDetails/${index}`}>
+                        {att.sampleImages.map((pic,index)=>  <img
+                        key={index}
+                            className="w-100 my-2"
+                            src={pic}
+                            alt=""
+                          />)}
+                        
+                        </Link>
+                        <p className="text-center">
+                          {att.key} <br />
+                          {att.value}
+                        </p>
+                      </div>
+                    ))}
+              </div>
             </div>
           </div>
         </div>

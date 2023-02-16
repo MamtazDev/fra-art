@@ -26,20 +26,6 @@ const Collection = () => {
 
   return (
     <div>
-      {/* <div
-        style={{
-          backgroundImage: `url(${bg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          height: "500px",
-          backgroundBlendMode: "overlay",
-          backgroundColor: "rgba(255, 255, 255, 0.514)",
-          margin: "80px 0",
-        }}
-      >
-      
-      </div> */}
-
       <div className="container my-5 ">
         <h2 className="mt-5 text-center  py-5">Trending Collections</h2>
         <div className="row g-5">
@@ -73,14 +59,15 @@ const Collection = () => {
                     </td>
                     <td>
                       {" "}
-                      {collection.volume["1day"].toFixed(2)} k <br />{" "}
+                      {(collection.volume["allTime"] / 1000).toFixed(2)} k{" "}
+                      <br />{" "}
                       <span className="text-success">
                         {" "}
                         {(collection.volume["30day"] / 100).toFixed(2)} %
                       </span>
                     </td>
                     <td> {collection.floorSale["1day"].toFixed(2)} </td>
-                    <td>@mdo</td>
+                    <td>{collection.tokenCount}</td>
                   </tr>
                 ))}
             </tbody>

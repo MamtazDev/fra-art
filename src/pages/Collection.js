@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ParamsContext } from "../context/ParamsProvider";
 
 const Collection = () => {
+  const { setUserId } = useContext(ParamsContext);
+
   const [collections, setCollection] = useState([]);
 
   const [load, setLoad] = useState(6);
@@ -23,6 +26,8 @@ const Collection = () => {
       setShow(true);
     }
   }, [load]);
+
+  console.log("okCollection", collections);
 
   return (
     <div>
@@ -46,8 +51,8 @@ const Collection = () => {
                 .map((collection, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>
-                      <Link to={`/trending/${collection?.primaryContract}`}>
+                    <td >
+                      <Link to={`/trending/${collection?.floorAsk?.maker}`}>
                         <img
                           width={50}
                           className="rounded-circle  me-4"

@@ -1,11 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import twitter from "../assets/images/Twitter.svg";
 import ether from "../assets/images/etherscan-logo-circle.svg";
+import { ParamsContext } from "../context/ParamsProvider";
 
 const CollectionDetails = () => {
   const { id } = useParams();
+  const { userId } = useContext(ParamsContext);
+
   const [collections, setCollections] = useState({});
   const [filteredData, setFilteredData] = useState("");
   const [collection, setCollection] = useState({});
@@ -16,7 +19,7 @@ const CollectionDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`https://api.reservoir.tools/users/${id}/collections/v2`)
+      .get(`https://api.reservoir.tools/users/${userId}/collections/v2`)
       .then((response) => {
         setCollections(response.data.collections);
       });
@@ -107,12 +110,16 @@ const CollectionDetails = () => {
             <p className="w-50 mx-auto fw-bold">{collection[0]?.description}</p>
           ) : (
             <p className="w-50 mx-auto fw-bold">
-              {collection[0]?.description && collection[0]?.description.slice(0, 300)}
+              {collection[0]?.description &&
+                collection[0]?.description.slice(0, 300)}
             </p>
           )}
           <p
-            className={ collection[0]?.description &&
-              collection[0]?.description.length < 300 ? "d-none" : "d-block"
+            className={
+              collection[0]?.description &&
+              collection[0]?.description.length < 300
+                ? "d-none"
+                : "d-block"
             }
             onClick={() => setVisible(!visible)}
           >

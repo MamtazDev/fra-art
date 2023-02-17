@@ -8,12 +8,15 @@ import "react-input-range/lib/css/index.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
 import Routing from "./router/routing";
+import ParamsProvider from "./context/ParamsProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Routing />
-    </Router>
+    <ParamsProvider>
+      <Router>
+        <Routing />
+      </Router>
+    </ParamsProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

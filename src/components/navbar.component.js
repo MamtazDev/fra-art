@@ -347,7 +347,7 @@ const Navbar = ({ nav }) => {
                   Collections
                   <ul className="child_collection shadow rounded p-3">
                     <li><Link to="/trending">All Collection</Link> </li>
-                    <li><Link to="/hot">Hot Collections</Link> </li>
+                    <li><Link to="/hot">Hot Mints</Link> </li>
                     <li><Link to="/newly">Newly Added</Link> </li>
                     <li><Link to="/top">Top Collection</Link> </li>
                   </ul>

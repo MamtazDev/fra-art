@@ -16,7 +16,7 @@ ul.child_collection {
   opacity: 0;
   cursor: pointer;
   transition-duration: 0.3s;
-  width: 172px;
+  width: 200px;
   color: black;
   background-color: white;
 }
@@ -30,3 +30,10 @@ ul.child_collection li a {
 .parent_collection:hover .child_collection{
   opacity: 1;
 }
+
+.new-features{
+  margin-top: -50px;
+  margin-bottom: 30px;
+}
+
+.span.negative { color : red; }

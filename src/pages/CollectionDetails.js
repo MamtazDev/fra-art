@@ -19,18 +19,25 @@ const CollectionDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`https://api.reservoir.tools/users/${userId}/collections/v2`)
+      .get(`https://api.reservoir.tools/users/${id}/collections/v2`)
       .then((response) => {
         setCollections(response.data.collections);
       });
   }, []);
 
   useEffect(() => {
-    fetch(`https://api.reservoir.tools/collections/v5?id=${id}`)
+    fetch(
+      `https://api.reservoir.tools/collections/v5?id=${localStorage.getItem(
+        "params"
+      )}`
+    )
       .then((res) => res.json())
       .then((data) => setCollection(data.collections));
 
     // attribute
+  }, [userId]);
+
+  useEffect(() => {
     fetch(`https://api.reservoir.tools/collections/${id}/attributes/all/v2`)
       .then((response) => response.json())
       .then((response) => setCustomAttribute(response.attributes))
@@ -43,13 +50,12 @@ const CollectionDetails = () => {
       .then((res) => res.json())
       .then((data) => setAttribute(data.attributes));
   }, []);
-
+  // console.log("collec", collections);
   return (
     <div>
       <div
         style={{
-          backgroundImage: `url(${collection[0]?.banner},
-    )`,
+          backgroundImage: `url(${collection[0]?.banner})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundBlendMode: "overlay",

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ParamsContext } from "../context/ParamsProvider";
 
 const TopCollection = () => {
   const [volumeCollection, setVolumeCollection] = useState([]);
+  const { setUserId } = useContext(ParamsContext);
 
   const [load, setLoad] = useState(6);
   const [show, setShow] = useState(true);
@@ -22,6 +24,8 @@ const TopCollection = () => {
       setShow(true);
     }
   }, [load]);
+
+  console.log(volumeCollection, "volumie");
   return (
     <div>
       <div className="container my-5 ">
@@ -44,8 +48,8 @@ const TopCollection = () => {
                 .map((collection, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>
-                      <Link to={`/trending/${collection?.primaryContract}`}>
+                    <td onClick={() => setUserId(collection?.primaryContract)}>
+                      <Link to={`/trending/${collection?.floorAsk?.maker}`}>
                         <img
                           width={50}
                           height={50}

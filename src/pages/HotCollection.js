@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ParamsContext } from "../context/ParamsProvider";
 
 const HotCollection = () => {
+  const { setUserId } = useContext(ParamsContext);
+
   const [floorCollection, setFloorCollection] = useState([]);
   const [load, setLoad] = useState(6);
   const [show, setShow] = useState(true);
@@ -45,8 +48,8 @@ const HotCollection = () => {
                 .map((collection, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>
-                      <Link to={`/trending/${collection?.primaryContract}`}>
+                    <td onClick={() => setUserId(collection?.primaryContract)}>
+                      <Link to={`/trending/${collection?.floorAsk?.maker}`}>
                         <img
                           width={50}
                           height={50}

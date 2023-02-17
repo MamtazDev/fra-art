@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ParamsContext } from "../context/ParamsProvider";
 
 const NewlyCollection = () => {
+  const { setUserId } = useContext(ParamsContext);
   const [newCollection, setNewCollection] = useState([]);
   const [show, setShow] = useState(true);
   const [load, setLoad] = useState(6);
@@ -20,6 +22,8 @@ const NewlyCollection = () => {
       setShow(true);
     }
   }, [load]);
+
+  console.log("newlyadded", newCollection);
   return (
     <div>
       <div className="container my-5 ">
@@ -42,7 +46,7 @@ const NewlyCollection = () => {
                 .map((collection, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>
+                    <td onClick={() => setUserId(collection?.primaryContract)}>
                       <Link to={`/trending/${collection?.primaryContract}`}>
                         <img
                           width={50}

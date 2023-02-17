@@ -40,18 +40,19 @@ const Collection = () => {
                 <th scope="col">#</th>
                 <th scope="col">Collection</th>
                 <th scope="col">Volume</th>
-                <th scope="col"> Floor Price</th>
+                <th scope="col"> Price</th>
+                <th scope="col"> Sales</th>
                 <th scope="col">Supply</th>
               </tr>
             </thead>
             <tbody>
               {collections
                 // .slice(0, load)
-                .reverse()
+                .sort((a, b) => b.floorSale["1day"] - a.floorSale["1day"])
                 .map((collection, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td >
+                    <td onClick={() => setUserId(collection?.primaryContract)}>
                       <Link to={`/trending/${collection?.floorAsk?.maker}`}>
                         <img
                           width={50}
@@ -69,10 +70,43 @@ const Collection = () => {
                       <br />{" "}
                       <span className="text-success">
                         {" "}
-                        {(collection.volume["30day"] / 100).toFixed(2)} %
+                        {(
+                          (collection.volume["30day"] -
+                            collection.volume["1day"]) /
+                          100
+                        ).toFixed(2)}{" "}
+                        %
                       </span>
                     </td>
-                    <td> {collection.floorSale["1day"].toFixed(2)} </td>
+                    <td>
+                      {" "}
+                      {collection.floorAsk?.price?.amount?.decimal.toFixed(
+                        2
+                      )}{" "}
+                    </td>
+                    <td className="d-flex flex-column justify-content-center">
+                      <p>{collection.floorSale["1day"].toFixed(2)}</p>
+
+                      <p>
+                        <span
+                          className={
+                            collection.floorSale["30day"] -
+                              collection.floorSale["1day"] >
+                            0
+                              ? "text-success"
+                              : "text-danger"
+                          }
+                        >
+                          {" "}
+                          {(
+                            (collection.floorSale["30day"] -
+                              collection.floorSale["1day"]) *
+                            100
+                          ).toFixed(1)}{" "}
+                          %
+                        </span>
+                      </p>
+                    </td>
                     <td>{collection.tokenCount}</td>
                   </tr>
                 ))}

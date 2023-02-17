@@ -7,7 +7,7 @@ function Notification() {
         headTitle="Notification"
         pageTitle="Notification"
         pageTitleSub={"Welcome FraArt Notification page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Home"}
         child={"Notification"}
       >

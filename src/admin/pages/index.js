@@ -14,7 +14,7 @@ function Home({ lineData, doughnutData }) {
         headTitle="Dashboard"
         // pageTitle="Dashboard"
         pageTitleSub={"Welcome FraArt Dashboard"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Home"}
         child={"Dashboard"}
       >

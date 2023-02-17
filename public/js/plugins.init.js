@@ -119,8 +119,8 @@ if (document.getElementsByClassName("tiny-three-item-nav-arrow").length > 0) {
     autoplayTimeout: 3000,
     navPosition: "bottom",
     controlsText: [
-      '<i class="mdi mdi-chevron-left "></i>',
-      '<i class="mdi mdi-chevron-right"></i>',
+      '<i className="mdi mdi-chevron-left "></i>',
+      '<i className="mdi mdi-chevron-right"></i>',
     ],
     nav: false,
     speed: 400,
@@ -153,8 +153,8 @@ if (document.getElementsByClassName("tiny-four-item-nav-arrow").length > 0) {
     autoplayTimeout: 3000,
     navPosition: "bottom",
     controlsText: [
-      '<i class="mdi mdi-chevron-left "></i>',
-      '<i class="mdi mdi-chevron-right"></i>',
+      '<i className="mdi mdi-chevron-left "></i>',
+      '<i className="mdi mdi-chevron-right"></i>',
     ],
     nav: false,
     speed: 400,
@@ -220,8 +220,8 @@ if (document.getElementsByClassName("tiny-five-item-nav-arrow").length > 0) {
     autoplayTimeout: 3000,
     navPosition: "bottom",
     controlsText: [
-      '<i class="mdi mdi-chevron-left "></i>',
-      '<i class="mdi mdi-chevron-right"></i>',
+      '<i className="mdi mdi-chevron-left "></i>',
+      '<i className="mdi mdi-chevron-right"></i>',
     ],
     nav: false,
     speed: 400,
@@ -549,7 +549,7 @@ try {
     } else {
       this.txt = fullTxt.substring(0, this.txt.length + 1);
     }
-    this.el.innerHTML = '<span class="wrap">' + this.txt + "</span>";
+    this.el.innerHTML = '<span className="wrap">' + this.txt + "</span>";
     var that = this;
     var delta = 200 - Math.random() * 100;
     if (this.isDeleting) {

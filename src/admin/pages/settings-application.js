@@ -9,7 +9,7 @@ function SettingsPreferences() {
         headTitle="Application"
         pageTitle="Application"
         pageTitleSub={"Welcome FraArt Settings Application page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Settings"}
         child={"Application"}
       >

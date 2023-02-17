@@ -8,7 +8,7 @@ function SettingsSecurity() {
         headTitle="Security"
         pageTitle="Security"
         pageTitleSub={"Welcome FraArt Settings Security page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Settings"}
         child={"Security"}
       >

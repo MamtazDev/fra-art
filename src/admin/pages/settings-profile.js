@@ -11,7 +11,7 @@ function SettingsProfile() {
         headTitle="Profile"
         pageTitle="Profile"
         pageTitleSub={"Welcome FraArt Settings Profile page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Settings"}
         child={"Profile"}
       >

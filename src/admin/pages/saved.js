@@ -8,7 +8,7 @@ function CreateInvoice() {
         headTitle="Saved"
         pageTitle="Saved Items"
         pageTitleSub={"Welcome FraArt Saved page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Home"}
         child={"Saved"}
       >

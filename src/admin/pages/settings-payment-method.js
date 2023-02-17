@@ -8,7 +8,7 @@ function SettingsPayment() {
         headTitle="Payment Method"
         pageTitle="Payment Method"
         pageTitleSub={"Welcome FraArt Settings Payment Method page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Settings"}
         child={"Payment Method"}
       >

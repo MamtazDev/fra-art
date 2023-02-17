@@ -8,7 +8,7 @@ function Bill() {
         headTitle="Collections"
         pageTitle="Collections"
         pageTitleSub={"Welcome FraArt Collections page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Home"}
         child={"Payments"}
       >

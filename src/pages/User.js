@@ -166,7 +166,7 @@ const User = () => {
           </div>
         </div>
 
-        <div className="row g-5 my-5">
+        {/* <div className="row g-5 my-5">
           <h1 className="text-center">Sample Images</h1>
           {collection[0]?.sampleImages?.length === 0 && (
             <h1 className="text-danger text-center my-5">
@@ -178,7 +178,7 @@ const User = () => {
               <img className="w-100" src={pic} alt="" />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

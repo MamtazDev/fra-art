@@ -9,7 +9,7 @@ function Invoice() {
         headTitle="Bids"
         pageTitle="Bids"
         pageTitleSub={"Welcome FraArt Bids page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Home"}
         child={"Bids"}
       >

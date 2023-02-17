@@ -7,7 +7,7 @@ function Profile() {
         headTitle="Profile"
         pageTitle="Profile"
         pageTitleSub={"Welcome FraArt Profile page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Home"}
         child={"Profile"}
       >

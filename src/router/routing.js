@@ -57,6 +57,9 @@ import ItemDetail from "../pages/itemDetail.page";
 import Collection from "../pages/Collection";
 import CollectionDetails from "../pages/CollectionDetails";
 import User from "../pages/User";
+import HotCollection from "../pages/HotCollection";
+import NewlyCollection from "../pages/NewlyCollection";
+import TopCollection from "../pages/TopCollection";
 
 const Routing = () => {
   const location = useLocation();
@@ -187,6 +190,9 @@ const Routing = () => {
           <Route path="/admin/verify-email" element={<VerifyEmail />} />
           <Route path="/admin/reset" element={<Reset />} />
           <Route path="/trending" element={<Collection />} />
+          <Route path="/hot" element={<HotCollection />} />
+          <Route path="/newly" element={<NewlyCollection />} />
+          <Route path="/top" element={<TopCollection />} />
           <Route path="/trending/:id" element={<CollectionDetails />} />
           <Route path="/trendingDetails/:pid" element={<User />} />
         </Routes>

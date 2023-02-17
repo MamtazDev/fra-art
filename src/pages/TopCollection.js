@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Collection = () => {
-  const [collections, setCollection] = useState([]);
+const TopCollection = () => {
+  const [volumeCollection, setVolumeCollection] = useState([]);
 
   const [load, setLoad] = useState(6);
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.reservoir.tools/collections/v5")
+    fetch("https://api.reservoir.tools/collections/v5?sortBy=allTimeVolume")
       .then((res) => res.json())
-      .then((data) => setCollection(data.collections));
+      .then((data) => setVolumeCollection(data.collections));
   }, []);
-
   const handleLoadMore = () => {
     setLoad(load + 6);
   };
   useEffect(() => {
-    if (load >= collections.length) {
+    if (load >= volumeCollection.length) {
       setShow(false);
     } else {
       setShow(true);
     }
   }, [load]);
-
   return (
     <div>
       <div className="container my-5 ">
-        <h2 className="mt-5 text-center  py-5">All Collection</h2>
+        <h2 className="mt-5 text-center  py-5">Top Collection</h2>
         <div className="row g-5">
           <table className="table caption-top">
             <thead>
@@ -40,7 +38,7 @@ const Collection = () => {
               </tr>
             </thead>
             <tbody>
-              {collections
+              {volumeCollection
                 // .slice(0, load)
                 .reverse()
                 .map((collection, index) => (
@@ -66,7 +64,11 @@ const Collection = () => {
                         {(collection.volume["30day"] / 100).toFixed(2)} %
                       </span>
                     </td>
-                    <td> {collection.floorSale["1day"].toFixed(2)} </td>
+                    <td>
+                      {" "}
+                      {collection.floorSale["1day"] &&
+                        collection.floorSale["1day"].toFixed(2)}{" "}
+                    </td>
                     <td>{collection.tokenCount}</td>
                   </tr>
                 ))}
@@ -83,4 +85,4 @@ const Collection = () => {
   );
 };
 
-export default Collection;
+export default TopCollection;

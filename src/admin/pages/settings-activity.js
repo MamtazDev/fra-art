@@ -8,7 +8,7 @@ function SettingsActivity() {
         headTitle="Activity"
         pageTitle="Activity"
         pageTitleSub={"Welcome FraArt Activity page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Settings"}
         child={"Activity"}
       >

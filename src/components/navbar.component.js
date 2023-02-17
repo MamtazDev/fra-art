@@ -340,9 +340,42 @@ const Navbar = ({ nav }) => {
                 <li className="parent-parent-menu-item">
                   <Link to="/">Home</Link>
                 </li>
-                <li className="parent-parent-menu-item">
-                  <Link to="/trending">Trending</Link>
-                </li>
+                {/* <li className="parent-parent-menu-item"> */}
+                  {/* <Link to="/trending">Collection</Link> */}
+                  <li class=" dropdown">
+                    <button
+                    style={{padding:"25px 0"}}
+                      class="border-0 bg-transparent dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+               Collections
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <Link to="/trending" class="dropdown-item" href="#">
+                          All Collection
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/hot" class="dropdown-item" href="#">
+                       Hot Collections
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/newly" class="dropdown-item" href="#">
+                       Newly Added
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/top" class="dropdown-item" href="#">
+                         Top Collection
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                {/* </li> */}
                 <li className="parent-parent-menu-item">
                   <Link to="/crowdpad">Crowdpad</Link>
                 </li>

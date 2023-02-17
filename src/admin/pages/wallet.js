@@ -13,7 +13,7 @@ function Balance({ investmentData }) {
         headTitle="Wallet"
         pageTitle="Wallet"
         pageTitleSub={"Welcome FraArt Wallet page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Home"}
         child={"Wallet"}
       >

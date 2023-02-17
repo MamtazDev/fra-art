@@ -33,14 +33,14 @@ const CollectionDetails = () => {
       .then((response) => setCustomAttribute(response.attributes))
       .catch((err) => console.error(err));
   }, []);
-  console.log("customAtt", customAttribues);
+
   useEffect(() => {
     fetch(`
     https://api.reservoir.tools/collections/${id}/attributes/explore/v4`)
       .then((res) => res.json())
       .then((data) => setAttribute(data.attributes));
   }, []);
-  console.log(attribute);
+
   return (
     <div>
       <div
@@ -49,7 +49,6 @@ const CollectionDetails = () => {
     )`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          // height: "550px",
           backgroundBlendMode: "overlay",
           backgroundColor: "rgba(255, 255, 255, 0.685)",
           margin: "80px 0",
@@ -71,7 +70,7 @@ const CollectionDetails = () => {
               <img className="me-3" width={30} src={ether} alt="" />
             </Link>
             <Link to={collection[0]?.externalUrl}>
-              <i class="fs-3 text-black fa-solid fa-globe"></i>
+              <i className="fs-3 text-black fa-solid fa-globe"></i>
             </Link>
           </div>
           <div className=" w-50 mx-auto bg-white px-5 py-2 rounded mb-3">
@@ -108,16 +107,16 @@ const CollectionDetails = () => {
             <p className="w-50 mx-auto fw-bold">{collection[0]?.description}</p>
           ) : (
             <p className="w-50 mx-auto fw-bold">
-              {collection[0]?.description.slice(0, 300)}
+              {collection[0]?.description && collection[0]?.description.slice(0, 300)}
             </p>
           )}
           <p
-            className={
+            className={ collection[0]?.description &&
               collection[0]?.description.length < 300 ? "d-none" : "d-block"
             }
             onClick={() => setVisible(!visible)}
           >
-            <i class="fa-solid fa-angle-down"></i>
+            <i className="fa-solid fa-angle-down"></i>
           </p>
         </div>
       </div>
@@ -126,59 +125,13 @@ const CollectionDetails = () => {
         <div className="row g-5">
           <div className="col-12 col-lg-3">
             <h2>Filter</h2>
-            {/* <ul>
-              {customAttribues.map((item) => (
-                <li>
-                  {item.key}
-                  <ul>
-                    {item.values.map((subItem) => (
-                      <li>
-                        {subItem.value} - {subItem.count}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul> */}
 
-            <div class="accordion" id="accordionExample">
-              {customAttribues.map((item, index) => (
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id={"heading" + index}>
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target={"#collapse" + index}
-                      aria-expanded="true"
-                      aria-controls={"collapse" + index}
-                    >
-                      {item.key}
-                    </button>
-                  </h2>
-                  <div
-                    id={"collapse" + index}
-                    class="accordion-collapse collapse show"
-                    aria-labelledby={"heading" + index}
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div class="accordion-body">
-                      {item.values.map((subItem) => (
-                        <p>
-                          {subItem.value} - {subItem.count}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div class="accordion" id="accordionExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
+            {/* accordion with collection api */}
+            <div className="accordion" id="accordionExample">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingOne">
                   <button
-                    class="accordion-button"
+                    className="accordion-button"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseOne"
@@ -190,11 +143,11 @@ const CollectionDetails = () => {
                 </h2>
                 <div
                   id="collapseOne"
-                  class="accordion-collapse collapse show"
+                  className="accordion-collapse collapse show"
                   aria-labelledby="headingOne"
                   data-bs-parent="#accordionExample"
                 >
-                  <div class="accordion-body">
+                  <div className="accordion-body">
                     <input
                       className="w-100 py-2 mb-5 px-4"
                       type="text"
@@ -204,10 +157,10 @@ const CollectionDetails = () => {
                   </div>
                 </div>
               </div>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="headingTwo">
                   <button
-                    class="accordion-button"
+                    className="accordion-button"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseTwo"
@@ -219,11 +172,11 @@ const CollectionDetails = () => {
                 </h2>
                 <div
                   id="collapseTwo"
-                  class="accordion-collapse collapse show"
+                  className="accordion-collapse collapse show"
                   aria-labelledby="headingTwo"
                   data-bs-parent="#accordionExample"
                 >
-                  <div class="accordion-body">
+                  <div className="accordion-body">
                     <input
                       className="w-100 py-2 mb-5 px-4"
                       type="text"
@@ -234,10 +187,44 @@ const CollectionDetails = () => {
                 </div>
               </div>
             </div>
+
+            {/* accordion with attribute api */}
+            {/* <div className="accordion" id="accordionExample">
+              {customAttribues && customAttribues.map((item, index) => (
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id={"heading" + index}>
+                    <button
+                      className="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={"#collapse" + index}
+                      aria-expanded="true"
+                      aria-controls={"collapse" + index}
+                    >
+                      {item.key}
+                    </button>
+                  </h2>
+                  <div
+                    id={"collapse" + index}
+                    className="accordion-collapse collapse show"
+                    aria-labelledby={"heading" + index}
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div className="accordion-body">
+                      {item.values?.map((subItem) => (
+                        <p>
+                          {subItem.value} - {subItem.count}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div> */}
           </div>
           {/* data from user collection */}
           <div className="col-12 col-lg-9">
-            <h1>data from user collection api</h1>
+            {/* <h1>Data from user collection api: {id}</h1> */}
             <div>
               <div className="row g-5">
                 {collections.length === 0 && (
@@ -279,8 +266,8 @@ const CollectionDetails = () => {
           </div>
 
           {/* data from attribute */}
-          <div className="col-12 col-lg-9">
-            <h1>data from attributes api</h1>
+          {/* <div className="col-12 col-lg-9">
+            <h1>Data from attributes api: {id}</h1>
             <div>
               <div className="row g-5">
                 {attribute.length === 0 && (
@@ -317,7 +304,7 @@ const CollectionDetails = () => {
                     ))}
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

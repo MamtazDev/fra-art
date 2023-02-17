@@ -9,7 +9,7 @@ function SettingsApi() {
         headTitle="API"
         pageTitle="API"
         pageTitleSub={"Welcome FraArt API page"}
-        pageClass={"dashboard"}
+        pageclassName={"dashboard"}
         parent={"Settings"}
         child={"API"}
       >

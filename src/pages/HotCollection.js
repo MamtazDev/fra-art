@@ -52,6 +52,7 @@ const HotCollection = () => {
                       <Link to={`/trending/${collection?.primaryContract}`}>
                         <img
                           width={50}
+                          height={50}
                           className="rounded-circle  me-4"
                           src={collection.image}
                           alt=""

@@ -107,12 +107,16 @@ const CollectionDetails = () => {
             <p className="w-50 mx-auto fw-bold">{collection[0]?.description}</p>
           ) : (
             <p className="w-50 mx-auto fw-bold">
-              {collection[0]?.description && collection[0]?.description.slice(0, 300)}
+              {collection[0]?.description &&
+                collection[0]?.description.slice(0, 300)}
             </p>
           )}
           <p
-            className={ collection[0]?.description &&
-              collection[0]?.description.length < 300 ? "d-none" : "d-block"
+            className={
+              collection[0]?.description &&
+              collection[0]?.description.length < 300
+                ? "d-none"
+                : "d-block"
             }
             onClick={() => setVisible(!visible)}
           >

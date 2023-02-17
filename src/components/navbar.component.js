@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { client01, logoLight, logoDark } from "../utils/images.util";
+import "../../src/pages/new.css";
 
 const Navbar = ({ nav }) => {
   const [myPublicAddress, setMyPublicAddress] = useState("qhut0...hfteh45");
@@ -341,41 +342,50 @@ const Navbar = ({ nav }) => {
                   <Link to="/">Home</Link>
                 </li>
                 {/* <li className="parent-parent-menu-item"> */}
-                  {/* <Link to="/trending">Collection</Link> */}
-                  <li class=" dropdown">
-                    <button
-                    style={{padding:"25px 0"}}
-                      class="border-0 bg-transparent dropdown-toggle"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-               Collections
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <Link to="/trending" class="dropdown-item" href="#">
-                          All Collection
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/hot" class="dropdown-item" href="#">
-                       Hot Collections
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/newly" class="dropdown-item" href="#">
-                       Newly Added
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/top" class="dropdown-item" href="#">
-                         Top Collection
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
-                {/* </li> */}
+              
+                <li className="parent_collection">
+                  Collections
+                  <ul className="child_collection shadow rounded p-3">
+                    <li> All Collection</li>
+                    <li> Hot Collections</li>
+                    <li> Newly Added</li>
+                    <li> Top Collection</li>
+                  </ul>
+                </li>
+                {/* <li class=" dropdown">
+                  <button
+                    style={{ padding: "25px 0" }}
+                    class="border-0 bg-transparent dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Collections
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <Link to="/trending" class="dropdown-item" href="#">
+                        All Collection
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/hot" class="dropdown-item" href="#">
+                        Hot Collections
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/newly" class="dropdown-item" href="#">
+                        Newly Added
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/top" class="dropdown-item" href="#">
+                        Top Collection
+                      </Link>
+                    </li>
+                  </ul>
+                </li> */}
+           
                 <li className="parent-parent-menu-item">
                   <Link to="/crowdpad">Crowdpad</Link>
                 </li>

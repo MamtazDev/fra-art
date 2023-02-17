@@ -6,3 +6,21 @@
   background-color: unset !important;
   color: black !important;
 }
+.parent_collection {
+  position: relative;
+  padding: 25px 0;
+}
+ul.child_collection {
+  position: absolute;
+  z-index: 9999;
+  opacity: 0;
+  cursor: pointer;
+  transition-duration: 1s;
+  width: 172px;
+}
+ul.child_collection li {
+  list-style: none;
+}
+.parent_collection:hover .child_collection{
+  opacity: 1;
+}

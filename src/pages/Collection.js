@@ -55,6 +55,7 @@ const Collection = () => {
                       <Link to={`/trending/${collection?.floorAsk?.maker}`}>
                         <img
                           width={50}
+                          height={50}
                           className="rounded-circle  me-4"
                           src={collection.image}
                           alt=""

@@ -346,10 +346,10 @@ const Navbar = ({ nav }) => {
                 <li className="parent_collection">
                   Collections
                   <ul className="child_collection shadow rounded p-3">
-                    <li> All Collection</li>
-                    <li> Hot Collections</li>
-                    <li> Newly Added</li>
-                    <li> Top Collection</li>
+                    <li><Link to="/trending">All Collection</Link> </li>
+                    <li><Link to="/hot">Hot Mints</Link> </li>
+                    <li><Link to="/newly">Newly Added</Link> </li>
+                    <li><Link to="/top">Top Collection</Link> </li>
                   </ul>
                 </li>
                 {/* <li class=" dropdown">

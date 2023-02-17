@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const HotCollection = () => {
-
-
-  const [floorCollection, setfloorCollection] = useState([]);
+  const [floorCollection, setFloorCollection] = useState([]);
   const [load, setLoad] = useState(6);
   const [show, setShow] = useState(true);
-
 
   useEffect(() => {
     fetch("https://api.reservoir.tools/collections/v5?sortBy=floorAskPrice")
       .then((res) => res.json())
-      .then((data) => setfloorCollection(data.collections));
+      .then((data) => setFloorCollection(data.collections));
   }, []);
 
   const handleLoadMore = () => {
@@ -52,6 +49,7 @@ const HotCollection = () => {
                       <Link to={`/trending/${collection?.primaryContract}`}>
                         <img
                           width={50}
+                          height={50}
                           className="rounded-circle  me-4"
                           src={collection.image}
                           alt=""

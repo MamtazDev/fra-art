@@ -4,14 +4,16 @@ import { Link, useParams } from "react-router-dom";
 import twitter from "../assets/images/Twitter.svg";
 import ether from "../assets/images/etherscan-logo-circle.svg";
 import { ParamsContext } from "../context/ParamsProvider";
+import { FaEthereum } from "react-icons/fa";
 
 const CollectionDetails = () => {
   const { id } = useParams();
-  const { userId } = useContext(ParamsContext);
+  // const { userId } = useContext(ParamsContext);
 
-  const [collections, setCollections] = useState({});
-  const [filteredData, setFilteredData] = useState("");
-  const [collection, setCollection] = useState({});
+  const [collections, setCollections] = useState([]);
+  const [collectionsAll, setCollectionsAll] = useState({});
+
+  const [collection, setCollection] = useState([]);
   const [visible, setVisible] = useState(false);
   const [attribute, setAttribute] = useState([]);
 
@@ -19,23 +21,25 @@ const CollectionDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`https://api.reservoir.tools/users/${id}/collections/v2`)
-      .then((response) => {
-        setCollections(response.data.collections);
-      });
-  }, []);
+      .get(
+        `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&limit=20&includeTopBid=false&includeDynamicPricing=true&normalizeRoyalties=false`
+      )
+      .then(
+        (response) => {
+          setCollections(response.data.tokens);
+          setCollectionsAll(response.data.tokens);
+        }
+        // setCollections(response.data.collections);
+      );
+  }, [collections]);
 
   useEffect(() => {
-    fetch(
-      `https://api.reservoir.tools/collections/v5?id=${localStorage.getItem(
-        "params"
-      )}`
-    )
+    fetch(`https://api.reservoir.tools/collections/v5?id=${id}`)
       .then((res) => res.json())
       .then((data) => setCollection(data.collections));
 
     // attribute
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
     fetch(`https://api.reservoir.tools/collections/${id}/attributes/all/v2`)
@@ -50,7 +54,31 @@ const CollectionDetails = () => {
       .then((res) => res.json())
       .then((data) => setAttribute(data.attributes));
   }, []);
-  // console.log("collec", collections);
+
+  // const volumeHandler = (e) => {
+  //   console.log("Input value", e.target.value);
+  //   const valN = e.target.value;
+  //   const vluSrt = collectionsAll.filter((item) =>
+  //     JSON.stringify(item.collection?.volume?.allTime).includes(valN)
+  //   );
+  //   setCollections(vluSrt);
+  //   // parseInt(item?.volume?.allTime) === valN
+  //   console.log(vluSrt);
+  // };
+
+  const nameHandler = (e) => {
+    console.log("Input value", e.target.value);
+    const valN = e.target.value;
+    const vluSrt = collectionsAll.filter((item) =>
+      item.token?.name.toLowerCase().includes(valN)
+    );
+    setCollections(vluSrt);
+    // parseInt(item?.volume?.allTime) === valN
+    console.log(vluSrt);
+  };
+
+  useEffect(() => {}, [collections]);
+  console.log("collec", collections);
   return (
     <div>
       <div
@@ -164,7 +192,8 @@ const CollectionDetails = () => {
                     <input
                       className="w-100 py-2 mb-5 px-4"
                       type="text"
-                      onChange={(e) => setFilteredData(e.target.value)}
+                      onChange={(e) => nameHandler(e)}
+                      // onChange={(e) => setFilteredData(e.target.value)}
                       placeholder="Search"
                     />
                   </div>
@@ -193,7 +222,8 @@ const CollectionDetails = () => {
                     <input
                       className="w-100 py-2 mb-5 px-4"
                       type="text"
-                      onChange={(e) => setFilteredData(e.target.value)}
+                      // onChange={(e) => volumeHandler(e)}
+                      // onChange={(e) => setFilteredData(e.target.value)}
                       placeholder="Search"
                     />
                   </div>
@@ -236,6 +266,7 @@ const CollectionDetails = () => {
             </div> */}
           </div>
           {/* data from user collection */}
+
           <div className="col-12 col-lg-9">
             {/* <h1>Data from user collection api: {id}</h1> */}
             <div>
@@ -249,35 +280,47 @@ const CollectionDetails = () => {
                 )}
                 {collections.length > 0 &&
                   collections
-                    ?.filter((item) => {
-                      return filteredData.toLowerCase() === ""
-                        ? item
-                        : (
-                            item.collection?.name.toLowerCase() ||
-                            JSON.stringify(item.collection?.volume?.allTime)
-                          ).includes(filteredData);
-                    })
+                    // ?.filter((item) => {
+                    //   return filteredData.toLowerCase() === ""
+                    //     ? item
+                    //     : (
+                    //         item.collection?.name.toLowerCase() ||
+                    //         JSON.stringify(item.collection?.volume?.allTime)
+                    //       ).includes(filteredData);
+                    // })
                     .map((collection, index) => (
+                      // console.log(collection, "gggg")
                       <div className="col-12 col-md-6 col-lg-3" key={index}>
                         <Link
-                          to={`/trendingDetails/${collection.collection.id}`}
+                          to={`/trendingDetails/${collection.token?.collection?.id}/${collection.token.tokenId}`}
                         >
                           <img
                             className="w-100"
-                            src={collection.collection.image}
+                            src={collection.token?.image}
                             alt=""
                           />
                         </Link>
-                        <p className="text-center">
-                          {collection.collection.name} <br />
-                          {collection.collection.volume["allTime"]}
-                        </p>
+                        <div className="text-center mt-2">
+                          <div className="d-flex justify-content-around">
+                            <p>{collection.token?.name}</p>{" "}
+                            <p className="border rounded px-2">
+                              {" "}
+                              {collection.token?.rarity}
+                            </p>
+                          </div>
+                          <p>
+                            <FaEthereum />
+                            {
+                              collection.market?.floorAsk?.price?.currency
+                                ?.decimals
+                            }
+                          </p>
+                        </div>
                       </div>
                     ))}
               </div>
             </div>
           </div>
-
           {/* data from attribute */}
           {/* <div className="col-12 col-lg-9">
             <h1>Data from attributes api: {id}</h1>

@@ -380,85 +380,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        <div className="row">
-          {collections?.slice(0, 3).map((data, index) => {
-            return (
-              <div className="col-lg-4 col-md-6 mt-4 pt-2" key={index}>
-                <Link
-                  to={`/trending/${data?.floorAsk?.maker}`}
-                  onClick={() => setUserId(data?.primaryContract)}
-                >
-                  <div className="card bg-white collections collection-primary rounded-md shadow p-2 pb-0">
-                    <div className="row g-2">
-                      <div className="col-12">
-                        <img
-                          src={data?.sampleImages[0]}
-                          className="img-fluid shadow-sm rounded-md"
-                          alt=""
-                        />
-                      </div>
-
-                      <div className="col-4">
-                        <img
-                          src={data?.sampleImages[1]}
-                          className="img-fluid shadow-sm rounded-md"
-                          alt=""
-                        />
-                      </div>
-
-                      <div className="col-4">
-                        <img
-                          src={data?.sampleImages[2]}
-                          className="img-fluid shadow-sm rounded-md"
-                          alt=""
-                        />
-                      </div>
-
-                      <div className="col-4">
-                        <img
-                          src={data?.sampleImages[3]}
-                          className="img-fluid shadow-sm rounded-md"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-
-                    <div className="content text-center p-4 mt-n5">
-                      <div className="position-relative d-inline-flex">
-                        <img
-                          src={data?.image}
-                          className="avatar avatar-small rounded-pill img-thumbnail shadow-md"
-                          alt=""
-                        />
-                        <span className="verified text-primary">
-                          <i className="mdi mdi-check-decagram"></i>
-                        </span>
-                      </div>
-
-                      <div className="mt-2">
-                        <a href="" className="text-dark title h5">
-                          {data?.name}
-                        </a>
-                        <p className="text-muted mb-0 small">
-                          {data.onSaleCount} Items
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <section className="section">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12">
-              {/* <div className="features-absolute"> */}
-              <div className="new-features">
+              <div className="features-absolute">
                 <div className="row justify-content-center" id="reserve-form">
                   <div className="col-xl-10 mt-lg-5">
                     <div className="card bg-white feature-top border-0 shadow rounded p-3">
@@ -537,6 +462,79 @@ const Home = () => {
           </div>
         </div>
 
+        <div className="row">
+          {collections?.slice(0, 3).map((data, index) => {
+            return (
+              <div className="col-lg-4 col-md-6 mt-4 pt-2" key={index}>
+                <Link
+                  to={`/trending/${data?.floorAsk?.maker}`}
+                  onClick={() => setUserId(data?.primaryContract)}
+                >
+                  <div className="card bg-white collections collection-primary rounded-md shadow p-2 pb-0">
+                    <div className="row g-2">
+                      <div className="col-12">
+                        <img
+                          src={data?.sampleImages[0]}
+                          className="img-fluid shadow-sm rounded-md"
+                          alt=""
+                        />
+                      </div>
+
+                      <div className="col-4">
+                        <img
+                          src={data?.sampleImages[1]}
+                          className="img-fluid shadow-sm rounded-md"
+                          alt=""
+                        />
+                      </div>
+
+                      <div className="col-4">
+                        <img
+                          src={data?.sampleImages[2]}
+                          className="img-fluid shadow-sm rounded-md"
+                          alt=""
+                        />
+                      </div>
+
+                      <div className="col-4">
+                        <img
+                          src={data?.sampleImages[3]}
+                          className="img-fluid shadow-sm rounded-md"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+
+                    <div className="content text-center p-4 mt-n5">
+                      <div className="position-relative d-inline-flex">
+                        <img
+                          src={data?.image}
+                          className="avatar avatar-small rounded-pill img-thumbnail shadow-md"
+                          alt=""
+                        />
+                        <span className="verified text-primary">
+                          <i className="mdi mdi-check-decagram"></i>
+                        </span>
+                      </div>
+
+                      <div className="mt-2">
+                        <a href="" className="text-dark title h5">
+                          {data?.name}
+                        </a>
+                        <p className="text-muted mb-0 small">
+                          {data.onSaleCount} Items
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <section className="section">
         <div className="container mt-4 pt-2 mt-lg-0 pt-lg-0">
           <div className="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4">
             {allData.map((data) => {

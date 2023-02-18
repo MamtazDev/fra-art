@@ -16,24 +16,45 @@ ul.child_collection {
   opacity: 0;
   cursor: pointer;
   transition-duration: 0.3s;
-  width: 200px;
+  width: 250px;
   color: black;
   background-color: white;
 }
 ul.child_collection li {
   list-style: none;
 }
+
+ul.child_collection li:hover{
+  background-color: #DBDBDB;
+  
+}
 ul.child_collection li a {
   text-decoration: none;
   color: black;
 }
+
+ul.child_collection li p{
+ margin: 0;
+}
+
+ul.child_collection li p:hover{
+  margin: 0;
+  color: #007bff;
+ }
+ ul.child_collection li path:hover{
+  fill: #007bff;
+ }
 .parent_collection:hover .child_collection{
   opacity: 1;
 }
 
-.new-features{
-  margin-top: -50px;
-  margin-bottom: 30px;
+.features-absolute{
+  margin: -300px 0 0px;
 }
 
-.span.negative { color : red; }
+.small-text{
+  font-size: x-small;
+}
+.color-change:hover{
+  color: blue;
+}

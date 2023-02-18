@@ -194,7 +194,7 @@ const Routing = () => {
           <Route path="/newly" element={<NewlyCollection />} />
           <Route path="/top" element={<TopCollection />} />
           <Route path="/trending/:id" element={<CollectionDetails />} />
-          <Route path="/trendingDetails/:pid" element={<User />} />
+          <Route path="/trendingDetails/:pid/:token" element={<User />} />
         </Routes>
         <BackToTop />
         {!location.pathname.includes("admin") && <Footer />}

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ParamsContext } from "../context/ParamsProvider";
+import { FaEthereum } from "react-icons/fa";
 
 const Collection = () => {
   const { setUserId } = useContext(ParamsContext);
@@ -52,8 +53,10 @@ const Collection = () => {
                 .map((collection, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td onClick={() => setUserId(collection?.primaryContract)}>
-                      <Link to={`/trending/${collection?.floorAsk?.maker}`}>
+                    <td
+                    // onClick={() => setUserId(collection?.primaryContract)}
+                    >
+                      <Link to={`/trending/${collection?.primaryContract}`}>
                         <img
                           width={50}
                           height={50}
@@ -80,18 +83,21 @@ const Collection = () => {
                     </td>
                     <td>
                       {" "}
-                      {collection.floorAsk?.price?.amount?.decimal.toFixed(
+                      <FaEthereum />
+                      {collection.floorAsk?.price?.currency?.decimals.toFixed(
                         2
                       )}{" "}
                     </td>
-                    <td className="d-flex flex-column justify-content-center">
-                      <p>{collection.floorSale["1day"].toFixed(2)}</p>
+                    <td className="d-flex flex-column ">
+                      <p className="mb-0">
+                        {collection.floorSale["1day"].toFixed(2)}
+                      </p>
 
-                      <p>
+                      <p className="mb-0">
                         <span
                           className={
                             collection.floorSale["30day"] -
-                              collection.floorSale["1day"] >
+                              collection.floorSale["1day"] >=
                             0
                               ? "text-success"
                               : "text-danger"

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ParamsContext } from "../context/ParamsProvider";
+import { FaEthereum } from "react-icons/fa";
 
 const NewlyCollection = () => {
   const { setUserId } = useContext(ParamsContext);
@@ -42,11 +43,19 @@ const NewlyCollection = () => {
             <tbody>
               {newCollection
                 // .slice(0, load)
-                .reverse()
+                // .reverse()
+                // .filter((data) => data.floorAsk?.price !== null)
+                .sort(
+                  (a, b) =>
+                    b.floorAsk?.price?.currency?.decimals -
+                    a.floorAsk?.price?.currency?.decimals
+                )
                 .map((collection, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td onClick={() => setUserId(collection?.primaryContract)}>
+                    <td
+                    // onClick={() => setUserId(collection?.primaryContract)}
+                    >
                       <Link to={`/trending/${collection?.primaryContract}`}>
                         <img
                           width={50}
@@ -69,8 +78,12 @@ const NewlyCollection = () => {
                     </td>
                     <td>
                       {" "}
-                      {collection.floorSale["1day"] &&
-                        collection.floorSale["1day"].toFixed(2)}{" "}
+                      <FaEthereum />
+                      {collection.floorAsk?.price === null
+                        ? 0
+                        : collection.floorAsk?.price?.currency?.decimals.toFixed(
+                            2
+                          )}
                     </td>
                     <td>{collection.tokenCount}</td>
                   </tr>

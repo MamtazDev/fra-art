@@ -62,6 +62,10 @@
     background: $gradient-white-overlay;
 }
 
+// .features-absolute{
+//     margin: -300px 0 0px
+// }
+
 
 //Title
 .title-heading {
@@ -230,8 +234,7 @@
 }
 
 .features-absolute {
-    margin: -100px 0 0px;
-
+   
     @media (max-width: 768px) {
         margin: -140px 0 0;
     }

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ParamsContext } from "../context/ParamsProvider";
+import { FaEthereum } from "react-icons/fa";
 
 const TopCollection = () => {
   const [volumeCollection, setVolumeCollection] = useState([]);
@@ -25,7 +26,7 @@ const TopCollection = () => {
     }
   }, [load]);
 
-  console.log(volumeCollection, "volumie");
+  console.log(volumeCollection, "toppp");
   return (
     <div>
       <div className="container my-5 ">
@@ -37,19 +38,26 @@ const TopCollection = () => {
                 <th scope="col">#</th>
                 <th scope="col">Collection</th>
                 <th scope="col">Volume</th>
-                <th scope="col"> Floor Price</th>
+                <th scope="col"> Market Cap</th>
                 <th scope="col">Supply</th>
               </tr>
             </thead>
             <tbody>
               {volumeCollection
                 // .slice(0, load)
-                .reverse()
+                // .reverse()
+                .sort(
+                  (a, b) =>
+                    b.floorAsk?.price?.currency?.decimals -
+                    a.floorAsk?.price?.currency?.decimals
+                )
                 .map((collection, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td onClick={() => setUserId(collection?.primaryContract)}>
-                      <Link to={`/trending/${collection?.floorAsk?.maker}`}>
+                    <td
+                    // onClick={() => setUserId(collection?.primaryContract)}
+                    >
+                      <Link to={`/trending/${collection?.primaryContract}`}>
                         <img
                           width={50}
                           height={50}
@@ -71,8 +79,10 @@ const TopCollection = () => {
                     </td>
                     <td>
                       {" "}
-                      {collection.floorSale["1day"] &&
-                        collection.floorSale["1day"].toFixed(2)}{" "}
+                      <FaEthereum />
+                      {collection.floorAsk?.price?.currency?.decimals.toFixed(
+                        2
+                      )}
                     </td>
                     <td>{collection.tokenCount}</td>
                   </tr>

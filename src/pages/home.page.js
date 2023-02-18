@@ -467,8 +467,8 @@ const Home = () => {
             return (
               <div className="col-lg-4 col-md-6 mt-4 pt-2" key={index}>
                 <Link
-                  to={`/trending/${data?.floorAsk?.maker}`}
-                  onClick={() => setUserId(data?.primaryContract)}
+                  to={`/trending/${data?.primaryContract}`}
+                  // onClick={() => setUserId(data?.primaryContract)}
                 >
                   <div className="card bg-white collections collection-primary rounded-md shadow p-2 pb-0">
                     <div className="row g-2">

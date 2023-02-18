@@ -31,7 +31,7 @@ const CollectionDetails = () => {
         }
         // setCollections(response.data.collections);
       );
-  }, [collections]);
+  }, []);
 
   useEffect(() => {
     fetch(`https://api.reservoir.tools/collections/v5?id=${id}`)
@@ -75,6 +75,10 @@ const CollectionDetails = () => {
     setCollections(vluSrt);
     // parseInt(item?.volume?.allTime) === valN
     console.log(vluSrt);
+  };
+
+  const handleAttribute = (attribute) => {
+    console.log(attribute);
   };
 
   useEffect(() => {}, [collections]);
@@ -233,36 +237,37 @@ const CollectionDetails = () => {
 
             {/* accordion with attribute api */}
             {/* <div className="accordion" id="accordionExample">
-              {customAttribues && customAttribues.map((item, index) => (
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id={"heading" + index}>
-                    <button
-                      className="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target={"#collapse" + index}
-                      aria-expanded="true"
-                      aria-controls={"collapse" + index}
+              {customAttribues &&
+                customAttribues.map((item, index) => (
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id={"heading" + index}>
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={"#collapse" + index}
+                        aria-expanded="true"
+                        aria-controls={"collapse" + index}
+                      >
+                        {item.key}
+                      </button>
+                    </h2>
+                    <div
+                      id={"collapse" + index}
+                      className="accordion-collapse collapse show"
+                      aria-labelledby={"heading" + index}
+                      data-bs-parent="#accordionExample"
                     >
-                      {item.key}
-                    </button>
-                  </h2>
-                  <div
-                    id={"collapse" + index}
-                    className="accordion-collapse collapse show"
-                    aria-labelledby={"heading" + index}
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div className="accordion-body">
-                      {item.values?.map((subItem) => (
-                        <p>
-                          {subItem.value} - {subItem.count}
-                        </p>
-                      ))}
+                      <div className="accordion-body">
+                        {item.values?.map((subItem) => (
+                          <p onClick={() => handleAttribute(subItem.value)}>
+                            {subItem.value} - {subItem.count}
+                          </p>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div> */}
           </div>
           {/* data from user collection */}

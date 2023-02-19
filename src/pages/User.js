@@ -166,6 +166,14 @@ const User = () => {
                         : "-"}
                     </div>
                   </div>
+                  <a
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    href="#exampleModalToggle"
+                    role="button"
+                  >
+                    Buy Now
+                  </a>
                 </div>
 
                 {/* <div className="border rounded p-3">
@@ -240,6 +248,38 @@ const User = () => {
       </div>
     ))}
   </div> */}
+
+            <div
+              class="modal fade"
+              id="exampleModalToggle"
+              aria-hidden="true"
+              aria-labelledby="exampleModalToggleLabel"
+              tabindex="-1"
+            >
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">
+                      Wallet
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close "
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      X
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Empower your NFT Journey with buy and sell fractions of NFTs
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -343,7 +343,7 @@ const Navbar = ({ nav }) => {
                 </li>
                 {/* <li className="parent-parent-menu-item"> */}
 
-                <li className="parent_collection">
+                <li className="parent_collection pointer parent-parent-menu-item">
                   Collections
                   <ul className="child_collection shadow rounded  px-0  d-flex flex-column">
                     <li className="w-100  px-2 d-flex flex-column py-2">
@@ -481,18 +481,18 @@ const Navbar = ({ nav }) => {
                   </ul>
                 </li> */}
 
-                <li className="parent-parent-menu-item">
+                {/* <li className="parent-parent-menu-item">
                   <Link to="/crowdpad">Crowdpad</Link>
-                </li>
+                </li> */}
                 <li className="parent-parent-menu-item">
                   <Link to="/rockpool">Fra-Art pool</Link>
                 </li>
-                <li className="parent-parent-menu-item">
+                {/* <li className="parent-parent-menu-item">
                   <Link to="/marketplace">Marketplace</Link>
-                </li>
-                <li className="parent-parent-menu-item">
+                </li> */}
+                {/* <li className="parent-parent-menu-item">
                   <Link to="/bridge">Bridge</Link>
-                </li>
+                </li> */}
               </ul>
             ) : headerId === 1 ? (
               <ul className="navigation-menu nav-right">

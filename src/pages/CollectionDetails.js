@@ -267,7 +267,7 @@ const CollectionDetails = () => {
                       aria-labelledby={"heading" + index}
                       data-bs-parent="#accordionExample"
                     >
-                      <div className="accordion-body">
+                      <div className="accordion-body pointer">
                         {item.values?.map((subItem) => (
                           <p
                             onClick={() =>
@@ -342,15 +342,9 @@ const CollectionDetails = () => {
                             <div class="d-flex align-items-center">
                               <a
                                 href="#!"
-                                class="w-50 bg-primary text-white text-center p-1"
+                                class="w-100 bg-primary text-white text-center p-1"
                               >
                                 Buy Now
-                              </a>
-                              <a
-                                href="#!"
-                                class="w-50 w-50 bg-white text-dark text-center p-1"
-                              >
-                                Add to Cart
                               </a>
                             </div>
                           </div>

@@ -107,6 +107,9 @@ a{
 .new-slide{
   margin-top: -180px;
 }
+.pointer{
+  cursor: pointer;
+}
 
 @media (max-width: 768px) {
   .new-slide {

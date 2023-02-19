@@ -374,13 +374,15 @@ const Home = () => {
               <div className="col-12">
                 <div className="title-heading text-center px-4">
                   <h4 className="display-6 text-white title-dark fw-medium mb-3">
-                    The way to Find <br /> any{" "}
+                    {/* The way to Find <br /> any{" "}
                     <span className="text-gradient-primary">Digital</span>{" "}
-                    Content
+                    Content */}
+                    Empower your NFT Journey <br /> with buy and sell fractions
+                    of NFTs
                   </h4>
                   <p className="text-white title-dark mb-0">
-                    Discover limited-edition digital arts. Create, Sell and Buy
-                    now.
+                    Fractionalization is also a unique way to unlock NFT utility
+                    and community building around popular NFTs.
                   </p>
                 </div>
               </div>

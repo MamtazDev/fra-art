@@ -347,7 +347,16 @@ const Home = () => {
         <div className="container position-relative" style={{ zIndex: 1 }}>
           <div className="bg-half-100 rounded-md shadow-sm position-relative overflow-hidden">
             <div className="bg-video-wrapper">
-              <iframe src="https://player.vimeo.com/video/502163294?background=1&autoplay=1&loop=1&byline=0&title=0"></iframe>
+              {/* <iframe src="https://player.vimeo.com/video/502163294?background=1&autoplay=1&loop=1&byline=0&title=0"></iframe> */}
+
+              <iframe
+                width="560"
+                height="315"
+                src={`https://www.youtube.com/embed/qt1equGhkQE?autoplay=1&mute=1&loop=1`}
+                title="YouTube video player"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+              />
             </div>
             <div className="bg-overlay bg-linear-gradient-2"></div>
             <div className="row justify-content-center my-5">

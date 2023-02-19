@@ -6,6 +6,8 @@ import "../../src/pages/new.css";
 const Navbar = ({ nav }) => {
   const [myPublicAddress, setMyPublicAddress] = useState("qhut0...hfteh45");
   const [headerId, setHeaderId] = useState(0);
+  const [value, setValue] = useState("");
+  const [collections, setCollection] = useState([]);
 
   const isMetaMaskInstalled = useCallback(() => {
     const { ethereum } = window;
@@ -29,6 +31,10 @@ const Navbar = ({ nav }) => {
       }
     }
   }, [isMetaMaskInstalled]);
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
 
   useEffect(() => {
     checkWalletConnet();
@@ -152,6 +158,13 @@ const Navbar = ({ nav }) => {
   useEffect(() => {
     checkWalletConnet();
   }, [checkWalletConnet]);
+  useEffect(() => {
+    fetch("https://api.reservoir.tools/collections/v5")
+      .then((res) => res.json())
+      .then((data) => setCollection(data.collections));
+  }, []);
+
+  console.log(value);
 
   return (
     <>
@@ -213,7 +226,10 @@ const Navbar = ({ nav }) => {
                           name="s"
                           id="searchItem"
                           placeholder="Search..."
+                          value={value}
+                          onChange={handleChange}
                         />
+
                         <input
                           type="submit"
                           id="searchItemsubmit"
@@ -221,6 +237,33 @@ const Navbar = ({ nav }) => {
                         />
                       </form>
                     </div>
+                  </div>
+                  <div>
+                    {collections
+                      .filter((item) => {
+                        const searchTerm = value.toLocaleLowerCase();
+                        const collectionName = item.name.toLocaleLowerCase();
+                        // if()
+                        return (
+                          searchTerm && collectionName.startsWith(searchTerm)
+                        );
+                      })
+                      .slice(0, 5)
+                      .map((itm) => (
+                        <Link to={`/trending/${itm?.primaryContract}`}>
+                          <div className="p-3 d-flex align-items-center gap-2">
+                            <div>
+                              <img
+                                width={20}
+                                height={20}
+                                src={itm.image}
+                                className="rounded-circle"
+                              />
+                            </div>
+                            <div>{itm.name}</div>
+                          </div>
+                        </Link>
+                      ))}
                   </div>
                 </div>
               </div>

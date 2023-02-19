@@ -22,7 +22,7 @@ const CollectionDetails = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&limit=20&includeTopBid=false&includeDynamicPricing=true&normalizeRoyalties=false`
+        `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true`
       )
       .then(
         (response) => {
@@ -77,8 +77,17 @@ const CollectionDetails = () => {
     console.log(vluSrt);
   };
 
-  const handleAttribute = (attribute) => {
-    console.log(attribute);
+  const handleAttribute = (keys, values) => {
+    // const filtered = collectionsAll.filter((item) =>
+    //   item.token?.attributes.some((itms) => itms.value.includes(keys))
+    // );
+    // setCollections(filtered);
+
+    fetch(
+      `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true&attributes%5B${keys}%5D=${values}`
+    )
+      .then((res) => res.json())
+      .then((data) => setCollections(data.tokens));
   };
 
   useEffect(() => {}, [collections]);
@@ -172,7 +181,7 @@ const CollectionDetails = () => {
             <h2>Filter</h2>
 
             {/* accordion with collection api */}
-            <div className="accordion" id="accordionExample">
+            {/* <div className="accordion" id="accordionExample">
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne">
                   <button
@@ -233,10 +242,10 @@ const CollectionDetails = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* accordion with attribute api */}
-            {/* <div className="accordion" id="accordionExample">
+            <div className="accordion" id="accordionExample">
               {customAttribues &&
                 customAttribues.map((item, index) => (
                   <div className="accordion-item">
@@ -260,7 +269,11 @@ const CollectionDetails = () => {
                     >
                       <div className="accordion-body">
                         {item.values?.map((subItem) => (
-                          <p onClick={() => handleAttribute(subItem.value)}>
+                          <p
+                            onClick={() =>
+                              handleAttribute(item.key, subItem.value)
+                            }
+                          >
                             {subItem.value} - {subItem.count}
                           </p>
                         ))}
@@ -268,7 +281,7 @@ const CollectionDetails = () => {
                     </div>
                   </div>
                 ))}
-            </div> */}
+            </div>
           </div>
           {/* data from user collection */}
 

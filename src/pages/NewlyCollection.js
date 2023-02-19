@@ -47,8 +47,8 @@ const NewlyCollection = () => {
                 // .filter((data) => data.floorAsk?.price !== null)
                 .sort(
                   (a, b) =>
-                    b.floorAsk?.price?.currency?.decimals -
-                    a.floorAsk?.price?.currency?.decimals
+                    b.floorAsk?.price?.amount?.decimal -
+                    a.floorAsk?.price?.amount?.decimal
                 )
                 .map((collection, index) => (
                   <tr key={index}>
@@ -81,7 +81,7 @@ const NewlyCollection = () => {
                       <FaEthereum />
                       {collection.floorAsk?.price === null
                         ? 0
-                        : collection.floorAsk?.price?.currency?.decimals.toFixed(
+                        : collection.floorAsk?.price?.amount?.decimal.toFixed(
                             2
                           )}
                     </td>

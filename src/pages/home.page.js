@@ -352,10 +352,11 @@ const Home = () => {
               <iframe
                 width="560"
                 height="315"
-                src={`https://www.youtube.com/embed/qt1equGhkQE?autoplay=1&mute=1&loop=1`}
+                src={`https://www.youtube.com/embed/qt1equGhkQE?autoplay=1&loop=1&mute=1`}
                 title="YouTube video player"
                 allow="autoplay; encrypted-media"
                 allowFullScreen
+                loop
               />
             </div>
             <div className="bg-overlay bg-linear-gradient-2"></div>
@@ -544,7 +545,7 @@ const Home = () => {
       </div>
 
       <section className="section">
-        <div className="container mt-4 pt-2 mt-lg-0 pt-lg-0">
+        {/* <div className="container mt-4 pt-2 mt-lg-0 pt-lg-0">
           <div className="row row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1 g-4">
             {allData.map((data) => {
               return (
@@ -640,7 +641,7 @@ const Home = () => {
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         <div className="container mt-100 mt-60">
           <div className="row align-items-end mb-4 pb-2">

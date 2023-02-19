@@ -84,7 +84,7 @@ const Collection = () => {
                     <td>
                       {" "}
                       <FaEthereum />
-                      {collection.floorAsk?.price?.currency?.decimals.toFixed(
+                      {collection.floorAsk?.price?.amount?.decimal.toFixed(
                         2
                       )}{" "}
                     </td>

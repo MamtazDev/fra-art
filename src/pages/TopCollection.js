@@ -48,8 +48,8 @@ const TopCollection = () => {
                 // .reverse()
                 .sort(
                   (a, b) =>
-                    b.floorAsk?.price?.currency?.decimals -
-                    a.floorAsk?.price?.currency?.decimals
+                    b.floorAsk?.price?.amount?.decimal -
+                    a.floorAsk?.price?.amount?.decimal
                 )
                 .map((collection, index) => (
                   <tr key={index}>
@@ -80,9 +80,7 @@ const TopCollection = () => {
                     <td>
                       {" "}
                       <FaEthereum />
-                      {collection.floorAsk?.price?.currency?.decimals.toFixed(
-                        2
-                      )}
+                      {collection.floorAsk?.price?.amount?.decimal.toFixed(2)}
                     </td>
                     <td>{collection.tokenCount}</td>
                   </tr>

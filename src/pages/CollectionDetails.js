@@ -245,7 +245,7 @@ const CollectionDetails = () => {
             </div> */}
 
             {/* accordion with attribute api */}
-            <div className="accordion" id="accordionExample">
+            <div className="accordion " id="accordionExample">
               {customAttribues &&
                 customAttribues.map((item, index) => (
                   <div className="accordion-item">
@@ -255,7 +255,7 @@ const CollectionDetails = () => {
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target={"#collapse" + index}
-                        aria-expanded="true"
+                        aria-expanded="false"
                         aria-controls={"collapse" + index}
                       >
                         {item.key}
@@ -288,7 +288,7 @@ const CollectionDetails = () => {
           <div className="col-12 col-lg-9">
             {/* <h1>Data from user collection api: {id}</h1> */}
             <div>
-              <div className="row g-5">
+              <div className="row g-0 gap-0">
                 {collections.length === 0 && (
                   <div>
                     <h1 className="text-danger text-center">
@@ -308,31 +308,71 @@ const CollectionDetails = () => {
                     // })
                     .map((collection, index) => (
                       // console.log(collection, "gggg")
-                      <div className="col-12 col-md-6 col-lg-3" key={index}>
-                        <Link
-                          to={`/trendingDetails/${collection.token?.collection?.id}/${collection.token.tokenId}`}
-                        >
-                          <img
-                            className="w-100"
-                            src={collection.token?.image}
-                            alt=""
-                          />
-                        </Link>
-                        <div className="text-center mt-2">
-                          <div className="d-flex justify-content-around">
-                            <p>{collection.token?.name}</p>{" "}
-                            <p className="border rounded px-2">
-                              {" "}
-                              {collection.token?.rarity}
+                      <div
+                        className="col-12 col-md-6 col-lg-3 card "
+                        key={index}
+                      >
+                        <div className="border  m-1 box position-relative">
+                          <Link
+                            to={`/trendingDetails/${collection.token?.collection?.id}/${collection.token.tokenId}`}
+                          >
+                            <div className="card__box">
+                              <img
+                                className="w-100"
+                                src={collection.token?.image}
+                                alt=""
+                              />
+                            </div>
+                          </Link>
+                          <div className="text-center mt-2 box__content">
+                            <div className="d-flex justify-content-around mt-2">
+                              <p>{collection.token?.name}</p>{" "}
+                              <p className="border rounded px-2">
+                                {" "}
+                                {collection.token?.rarity}
+                              </p>
+                            </div>
+                            <p className="text-start ms-4 fw-bold">
+                              <FaEthereum />
+                              {
+                                collection.market?.floorAsk?.price?.amount
+                                  ?.decimal
+                              }
                             </p>
+                            <div class="d-flex align-items-center">
+                              <a
+                                href="#!"
+                                class="w-50 bg-primary text-white text-center p-1"
+                              >
+                                Buy Now
+                              </a>
+                              <a
+                                href="#!"
+                                class="w-50 w-50 bg-white text-dark text-center p-1"
+                              >
+                                Add to Cart
+                              </a>
+                            </div>
                           </div>
-                          <p>
-                            <FaEthereum />
-                            {
-                              collection.market?.floorAsk?.price?.currency
-                                ?.decimals
-                            }
-                          </p>
+                          {/* <div className="text-center mt-2">
+                            <div className="d-flex justify-content-around">
+                              <p>{collection.token?.name}</p>{" "}
+                              <p className="border rounded px-2">
+                                {" "}
+                                {collection.token?.rarity}
+                              </p>
+                            </div>
+                            <p className="text-start ms-4">
+                              <FaEthereum />
+                              {
+                                collection.market?.floorAsk?.price?.amount
+                                  ?.decimal
+                              }
+                            </p>
+                            <div>
+                              <button type="">Buy Now</button>
+                            </div>
+                          </div> */}
                         </div>
                       </div>
                     ))}

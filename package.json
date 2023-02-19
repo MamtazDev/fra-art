@@ -30,6 +30,7 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "sass": "^1.49.7",
+    "swiper": "^9.0.5",
     "tiny-slider": "^2.9.4",
     "web-vitals": "^2.1.4",
     "web3": "^1.5.1",

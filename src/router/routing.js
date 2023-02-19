@@ -60,6 +60,7 @@ import User from "../pages/User";
 import HotCollection from "../pages/HotCollection";
 import NewlyCollection from "../pages/NewlyCollection";
 import TopCollection from "../pages/TopCollection";
+import Slider from "../pages/Slider";
 
 const Routing = () => {
   const location = useLocation();
@@ -195,6 +196,7 @@ const Routing = () => {
           <Route path="/top" element={<TopCollection />} />
           <Route path="/trending/:id" element={<CollectionDetails />} />
           <Route path="/trendingDetails/:pid/:token" element={<User />} />
+          <Route path="/slider" element={<Slider />} />
         </Routes>
         <BackToTop />
         {!location.pathname.includes("admin") && <Footer />}

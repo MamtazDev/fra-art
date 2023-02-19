@@ -101,3 +101,15 @@ a{
 .box:hover .box__content{
   bottom: 0;
 }
+
+
+
+.new-slide{
+  margin-top: -180px;
+}
+
+@media (max-width: 768px) {
+  .new-slide {
+    margin: 20px 0 0;
+  }
+}

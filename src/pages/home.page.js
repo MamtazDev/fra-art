@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { tns } from "tiny-slider/src/tiny-slider";
 import Choices from "choices.js";
 import Countdown from "react-countdown";
+import Slider from "../pages/Slider";
 
 import {
   client01,
@@ -56,6 +57,8 @@ import {
 import { Link } from "react-router-dom";
 import "./new.css";
 import { ParamsContext } from "../context/ParamsProvider";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
 
 const Home = () => {
   const { setUserId } = useContext(ParamsContext);
@@ -324,6 +327,7 @@ const Home = () => {
   const [allData, setAllData] = useState(AuctionData);
   const [type, setType] = useState("all");
   const [collections, setCollections] = useState([]);
+  const [volumeCollection, setVolumeCollection] = useState([]);
 
   useEffect(() => {
     fetch("https://api.reservoir.tools/collections/v5")
@@ -339,7 +343,13 @@ const Home = () => {
     }
   }, []);
 
-  console.log("collections", collections);
+  useEffect(() => {
+    fetch("https://api.reservoir.tools/collections/v5?sortBy=allTimeVolume")
+      .then((res) => res.json())
+      .then((data) => setVolumeCollection(data.collections));
+  }, []);
+
+  console.log("collections", volumeCollection);
 
   return (
     <>
@@ -352,7 +362,7 @@ const Home = () => {
               <iframe
                 width="560"
                 height="315"
-                src={`https://www.youtube.com/embed/qt1equGhkQE?autoplay=1&loop=1&mute=1`}
+                src={`https://www.youtube.com/embed/qt1equGhkQE?autoplay=1&loop=&mute=1`}
                 title="YouTube video player"
                 allow="autoplay; encrypted-media"
                 allowFullScreen
@@ -378,6 +388,88 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <div className="container ">
+        <div className="row justify-content-center">
+          <div className="col-12">
+            <div className="features-absolute new-slide">
+              <div className="row justify-content-center" id="reserve-form">
+                <div className="col-xl-10 mt-lg-5">
+                  <div className="card bg-white feature-top  border-0 shadow rounded p-3">
+                    <form className="d-none">
+                      <div className="registration-form text-dark text-start">
+                        <div className="row g-lg-0">
+                          <div className="col-lg-3 col-md-6">
+                            <div className="filter-search-form position-relative filter-border">
+                              <i className="uil uil-search icons"></i>
+                              <input
+                                name="name"
+                                type="text"
+                                id="search-keyword"
+                                className="form-control filter-input-box bg-light border-0"
+                                placeholder="Search your keywords"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="col-lg-3 col-md-6 mt-3 mt-md-0">
+                            <div className="filter-search-form position-relative filter-border">
+                              <i className="uil uil-usd-circle icons"></i>
+                              <select
+                                className="form-select"
+                                data-trigger
+                                name="choices-criteria"
+                                id="choices-criteria"
+                                aria-label="Default select example"
+                                defaultValue={"Auction Product"}
+                              >
+                                <option value="1">Auction Product</option>
+                                <option value="2">On Sale</option>
+                                <option value="3">Offers</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className="col-lg-3 col-md-6 mt-3 mt-lg-0">
+                            <div className="filter-search-form position-relative filter-border">
+                              <i className="uil uil-window icons"></i>
+                              <select
+                                className="form-select "
+                                data-trigger
+                                name="choices-type"
+                                id="choices-type"
+                                aria-label="Default select example"
+                                defaultValue={"Art"}
+                              >
+                                <option value="1">Art</option>
+                                <option value="2">Games</option>
+                                <option value="3">Music</option>
+                                <option value="4">Videos</option>
+                                <option value="5">Memes</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className="col-lg-3 col-md-6 mt-3 mt-lg-0">
+                            <input
+                              type="submit"
+                              id="search"
+                              name="search"
+                              style={{ height: 60 }}
+                              className="btn btn-primary rounded-md searchbtn submit-btn w-100"
+                              value="Search"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <Slider volumeCollection={volumeCollection} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="container mt-100 mt-60">
         <div className="row justify-content-center">
@@ -387,87 +479,6 @@ const Home = () => {
               <p className="text-muted mb-0">
                 Best Collection of the week's NFTs
               </p>
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-12">
-              <div className="features-absolute">
-                <div className="row justify-content-center" id="reserve-form">
-                  <div className="col-xl-10 mt-lg-5">
-                    <div className="card bg-white feature-top border-0 shadow rounded p-3">
-                      <form>
-                        <div className="registration-form text-dark text-start">
-                          <div className="row g-lg-0">
-                            <div className="col-lg-3 col-md-6">
-                              <div className="filter-search-form position-relative filter-border">
-                                <i className="uil uil-search icons"></i>
-                                <input
-                                  name="name"
-                                  type="text"
-                                  id="search-keyword"
-                                  className="form-control filter-input-box bg-light border-0"
-                                  placeholder="Search your keywords"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="col-lg-3 col-md-6 mt-3 mt-md-0">
-                              <div className="filter-search-form position-relative filter-border">
-                                <i className="uil uil-usd-circle icons"></i>
-                                <select
-                                  className="form-select"
-                                  data-trigger
-                                  name="choices-criteria"
-                                  id="choices-criteria"
-                                  aria-label="Default select example"
-                                  defaultValue={"Auction Product"}
-                                >
-                                  <option value="1">Auction Product</option>
-                                  <option value="2">On Sale</option>
-                                  <option value="3">Offers</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div className="col-lg-3 col-md-6 mt-3 mt-lg-0">
-                              <div className="filter-search-form position-relative filter-border">
-                                <i className="uil uil-window icons"></i>
-                                <select
-                                  className="form-select "
-                                  data-trigger
-                                  name="choices-type"
-                                  id="choices-type"
-                                  aria-label="Default select example"
-                                  defaultValue={"Art"}
-                                >
-                                  <option value="1">Art</option>
-                                  <option value="2">Games</option>
-                                  <option value="3">Music</option>
-                                  <option value="4">Videos</option>
-                                  <option value="5">Memes</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div className="col-lg-3 col-md-6 mt-3 mt-lg-0">
-                              <input
-                                type="submit"
-                                id="search"
-                                name="search"
-                                style={{ height: 60 }}
-                                className="btn btn-primary rounded-md searchbtn submit-btn w-100"
-                                value="Search"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

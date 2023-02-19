@@ -377,8 +377,9 @@ const Home = () => {
                     {/* The way to Find <br /> any{" "}
                     <span className="text-gradient-primary">Digital</span>{" "}
                     Content */}
-                    Empower your NFT Journey <br /> with buy and sell fractions
-                    of NFTs
+                    Empower your{" "}
+                    <span className="text-gradient-primary">NFT Journey</span>{" "}
+                    <br /> with buy and sell fractions of NFTs
                   </h4>
                   <p className="text-white title-dark mb-0">
                     Fractionalization is also a unique way to unlock NFT utility

@@ -260,7 +260,7 @@ const Navbar = ({ nav }) => {
                                 className="rounded-circle"
                               />
                             </div>
-                            <div>{itm.name}</div>
+                            <div className="text-text">{itm.name}</div>
                           </div>
                         </Link>
                       ))}
@@ -405,7 +405,7 @@ const Navbar = ({ nav }) => {
                             ></path>
                           </svg>
                           <div>
-                            <p>Trending</p>
+                            <p className="text-text">Trending</p>
                             <div className="small-text">
                               Tracking what's hot in real-time
                             </div>
@@ -431,7 +431,7 @@ const Navbar = ({ nav }) => {
                             ></path>
                           </svg>
                           <div>
-                            <p>Hot Mints</p>
+                            <p className="text-text">Hot Mints</p>
                             <div className="small-text">
                               Hot collections minting now!
                             </div>
@@ -455,7 +455,7 @@ const Navbar = ({ nav }) => {
                             ></path>
                           </svg>
                           <div>
-                            <p>Newly Added</p>
+                            <p className="text-text">Newly Added</p>
                             <div className="small-text">
                               Recently included collections
                             </div>
@@ -480,7 +480,7 @@ const Navbar = ({ nav }) => {
                             ></path>
                           </svg>
                           <div>
-                            <p>Top Collection</p>
+                            <p className="text-text">Top Collection</p>
                             <div className="small-text">
                               High-value collections with key metrics
                             </div>

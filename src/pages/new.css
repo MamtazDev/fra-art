@@ -105,10 +105,14 @@ a{
 
 
 .new-slide{
-  margin-top: -180px;
+  margin-top: -120px;
 }
 .pointer{
   cursor: pointer;
+}
+.text-text{
+  font-size: 15px;
+  color: black;
 }
 
 @media (max-width: 768px) {

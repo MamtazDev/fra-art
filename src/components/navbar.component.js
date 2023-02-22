@@ -1,9 +1,11 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { client01, logoLight, logoDark } from "../utils/images.util";
 import "../../src/pages/new.css";
+import { ParamsContext } from "../context/ParamsProvider";
 
 const Navbar = ({ nav }) => {
+  const { setActive } = useContext(ParamsContext);
   const [myPublicAddress, setMyPublicAddress] = useState("qhut0...hfteh45");
   const [headerId, setHeaderId] = useState(0);
   const [value, setValue] = useState("");
@@ -159,7 +161,7 @@ const Navbar = ({ nav }) => {
     checkWalletConnet();
   }, [checkWalletConnet]);
   useEffect(() => {
-    fetch("https://api.reservoir.tools/collections/v5")
+    fetch("https://api.reservoir.tools/collections/v5?sortBy=floorAskPrice")
       .then((res) => res.json())
       .then((data) => setCollection(data.collections));
   }, []);
@@ -390,7 +392,10 @@ const Navbar = ({ nav }) => {
                   Collections
                   <ul className="child_collection shadow rounded  px-0  d-flex flex-column">
                     <li className="w-100  px-2 d-flex flex-column py-2">
-                      <Link to="/trending">
+                      <Link
+                        to="/trending"
+                        onClick={() => setActive("trending")}
+                      >
                         <div className="d-flex align-items-center gap-2">
                           <svg
                             width="24"
@@ -414,7 +419,11 @@ const Navbar = ({ nav }) => {
                       </Link>{" "}
                     </li>
                     <li className="w-100  px-2 py-2">
-                      <Link to="/hot" className="d-flex gap-2">
+                      <Link
+                        to="/hot"
+                        className="d-flex gap-2"
+                        onClick={() => setActive("hot")}
+                      >
                         <div className="d-flex align-items-center gap-2">
                           <svg
                             width="25"
@@ -440,7 +449,11 @@ const Navbar = ({ nav }) => {
                       </Link>
                     </li>
                     <li className="w-100  px-2 py-2">
-                      <Link to="/newly" className="d-flex gap-2">
+                      <Link
+                        to="/newly"
+                        className="d-flex gap-2"
+                        onClick={() => setActive("newly")}
+                      >
                         <div className="d-flex align-items-center gap-2">
                           <svg
                             width="24"
@@ -464,7 +477,11 @@ const Navbar = ({ nav }) => {
                       </Link>
                     </li>
                     <li className="w-100  px-2 py-2">
-                      <Link to="/top" className="d-flex gap-2">
+                      <Link
+                        to="/top"
+                        className="d-flex gap-2"
+                        onClick={() => setActive("top")}
+                      >
                         <div className="d-flex align-items-center gap-2">
                           <svg
                             width="25"
@@ -528,7 +545,7 @@ const Navbar = ({ nav }) => {
                   <Link to="/crowdpad">Crowdpad</Link>
                 </li> */}
                 <li className="parent-parent-menu-item">
-                  <Link to="/rockpool">Fra-Art pool</Link>
+                  <Link to="/rockpool">FraPool</Link>
                 </li>
                 {/* <li className="parent-parent-menu-item">
                   <Link to="/marketplace">Marketplace</Link>

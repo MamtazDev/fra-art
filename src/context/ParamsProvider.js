@@ -8,7 +8,9 @@ const ParamsProvider = ({ children }) => {
   if (userId.length > 0) {
     localStorage.setItem("params", userId);
   }
-  const paramsInfo = { userId, setUserId };
+
+  const [active, setActive] = useState("");
+  const paramsInfo = { userId, setUserId, active, setActive };
   return (
     <ParamsContext.Provider value={paramsInfo}>
       {children}

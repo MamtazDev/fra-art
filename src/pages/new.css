@@ -61,7 +61,10 @@ ul.child_collection li p:hover{
   color: blue;
 }
 
-
+.activeTab{
+  background-color: #5a66f9;
+  color: white !important ;
+}
 
 a{
   text-decoration: none;
@@ -113,6 +116,10 @@ a{
 .text-text{
   font-size: 15px;
   color: black;
+}
+
+.hover-background:hover{
+background-color: #eeeffe;
 }
 
 @media (max-width: 768px) {

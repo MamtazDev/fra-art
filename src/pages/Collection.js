@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ParamsContext } from "../context/ParamsProvider";
 import { FaEthereum } from "react-icons/fa";
+import CollectionNav from "./CollectionNav";
 
 const Collection = () => {
   const { setUserId } = useContext(ParamsContext);
@@ -34,6 +35,7 @@ const Collection = () => {
     <div>
       <div className="container my-5 ">
         <h2 className="mt-5 text-center  py-5">All Collection</h2>
+        <CollectionNav></CollectionNav>
         <div className="row g-5">
           <table className="table caption-top">
             <thead>
@@ -51,7 +53,7 @@ const Collection = () => {
                 // .slice(0, load)
                 .sort((a, b) => b.floorSale["1day"] - a.floorSale["1day"])
                 .map((collection, index) => (
-                  <tr key={index}>
+                  <tr key={index} className="pointer hover-background">
                     <th scope="row">{index + 1}</th>
                     <td
                     // onClick={() => setUserId(collection?.primaryContract)}

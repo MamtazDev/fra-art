@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const User = () => {
@@ -7,6 +7,39 @@ const User = () => {
   const [isloading, setIsloading] = useState(true);
   const [collection, setCollection] = useState({});
   const [attribute, setAttribute] = useState([]);
+  const [myPublicAddress, setMyPublicAddress] = useState("qhut0...hfteh45");
+
+  const isMetaMaskInstalled = useCallback(() => {
+    const { ethereum } = window;
+    return Boolean(ethereum && ethereum.isMetaMask);
+  }, []);
+
+  const _handleConnectWallet = useCallback(async () => {
+    const modal = document.getElementById("modal-metamask");
+
+    if (!isMetaMaskInstalled()) {
+      modal.classList.add("show");
+      modal.style.display = "block";
+      return;
+    }
+    try {
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      const walletAddress =
+        accounts[0].split("").slice(0, 6).join("") +
+        "..." +
+        accounts[0]
+          .split("")
+          .slice(accounts[0].length - 7, accounts[0].length)
+          .join("");
+      setMyPublicAddress(walletAddress);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [isMetaMaskInstalled]);
+
   useEffect(() => {
     fetch(`https://api.opensea.io/api/v1/asset/${pid}/${token}`)
       .then((res) => res.json())
@@ -167,10 +200,9 @@ const User = () => {
                     </div>
                   </div>
                   <a
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    href="#exampleModalToggle"
-                    role="button"
+                    onClick={_handleConnectWallet}
+                    id="connectWallet"
+                    className="btn btn-primary"
                   >
                     Buy Now
                   </a>
@@ -249,7 +281,7 @@ const User = () => {
     ))}
   </div> */}
 
-            <div
+            {/* <div
               class="modal fade"
               id="exampleModalToggle"
               aria-hidden="true"
@@ -279,7 +311,7 @@ const User = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

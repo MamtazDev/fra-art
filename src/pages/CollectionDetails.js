@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import twitter from "../assets/images/Twitter.svg";
 import ether from "../assets/images/etherscan-logo-circle.svg";
@@ -19,6 +19,7 @@ const CollectionDetails = () => {
 
   const [customAttribues, setCustomAttribute] = useState([]);
   const [searchAtt, setSearchAtt] = useState([]);
+  const [myPublicAddress, setMyPublicAddress] = useState("qhut0...hfteh45");
 
   // const volumeHandler = (e) => {
   //   console.log("Input value", e.target.value);
@@ -41,6 +42,37 @@ const CollectionDetails = () => {
     // parseInt(item?.volume?.allTime) === valN
     console.log(vluSrt);
   };
+
+  const isMetaMaskInstalled = useCallback(() => {
+    const { ethereum } = window;
+    return Boolean(ethereum && ethereum.isMetaMask);
+  }, []);
+
+  const _handleConnectWallet = useCallback(async () => {
+    const modal = document.getElementById("modal-metamask");
+
+    if (!isMetaMaskInstalled()) {
+      modal.classList.add("show");
+      modal.style.display = "block";
+      return;
+    }
+    try {
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      const walletAddress =
+        accounts[0].split("").slice(0, 6).join("") +
+        "..." +
+        accounts[0]
+          .split("")
+          .slice(accounts[0].length - 7, accounts[0].length)
+          .join("");
+      setMyPublicAddress(walletAddress);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [isMetaMaskInstalled]);
 
   const handleAttribute = (keys, values) => {
     if (searchAtt.length > 0) {
@@ -114,9 +146,11 @@ const CollectionDetails = () => {
 
   useEffect(() => {}, [collections]);
   // console.log("collec", collections);
+
+  console.log("collection", collection);
   return (
     <div>
-      <div
+      {/* <div
         style={{
           backgroundImage: `url(${collection[0]?.banner})`,
           backgroundRepeat: "no-repeat",
@@ -195,7 +229,74 @@ const CollectionDetails = () => {
             <i className="fa-solid fa-angle-down"></i>
           </p>
         </div>
-      </div>
+      </div> */}
+
+      <section style={{ marginTop: "60px" }}>
+        <div
+          style={{
+            backgroundImage: `url(${collection[0]?.banner})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            // backgroundBlendMode: "overlay",
+            backgroundColor: "rgba(255, 255, 255, 0.685)",
+            height: "200px",
+          }}
+        ></div>
+
+        <div style={{ marginTop: "-70px" }} className="container ">
+          {" "}
+          <img
+            width={100}
+            className="rounded-circle border border-5 "
+            src={collection[0]?.image}
+            alt=""
+          />
+        </div>
+
+        <div className="container">
+          <section className="d-flex flex-column flex-lg-row align-items-center gap-5">
+            <div className="d-flex flex-column w-50">
+              <h2>{collection[0]?.name}</h2>
+              <p className="small-text">{collection[0]?.description}</p>
+            </div>
+
+            <div className="w-50 px-3 py-3">
+              <div className="row g-4 ">
+                <div className="col-12 col-lg-3 border rounded-start py-3 text-center">
+                  <p className="text-secondary p-0 m-0">Floor Price</p>
+                  <h6>
+                    {" "}
+                    <FaEthereum />
+                    {collection[0]?.floorAsk?.price?.amount?.decimal}
+                  </h6>
+                </div>
+                <div className="col-12 col-lg-3 border  py-3 text-center">
+                  <p className="text-secondary p-0 m-0">Total volume</p>
+                  <h6>
+                    <FaEthereum />
+                    {(collection[0]?.volume?.allTime / 1000).toFixed(2)}k
+                  </h6>
+                </div>
+                <div className="col-12 col-lg-3 border  py-3 text-center">
+                  <p className="text-secondary p-0 m-0">Items</p>
+                  <h6>{collection[0]?.tokenCount}</h6>
+                </div>
+                <div className="col-12 col-lg-3 border rounded-end py-3 text-center">
+                  <p className="text-secondary p-0 m-0">Top Offer</p>
+                  <h6>
+                    {/* 🥈💸{" "} */}
+                    {Math.max(
+                      collection[0]?.floorSale["1day"],
+                      collection[0]?.floorSale["7day"],
+                      collection[0]?.floorSale["30day"]
+                    )}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
 
       <div className="py-5 my-5 px-4">
         <div className="row g-5">
@@ -388,6 +489,8 @@ const CollectionDetails = () => {
                               <a
                                 href="#!"
                                 class="w-100 bg-primary text-white text-center p-1"
+                                onClick={_handleConnectWallet}
+                                id="connectWallet"
                               >
                                 Buy Now
                               </a>
@@ -412,6 +515,23 @@ const CollectionDetails = () => {
                               <button type="">Buy Now</button>
                             </div>
                           </div> */}
+                          {/* <li className="list-inline-item mb-0 me-3">
+                            <p
+                              id="connectWallet"
+                              onClick={_handleConnectWallet}
+                            >
+                              <span className="btn-icon-dark">
+                                <span className="btn btn-icon btn-pills btn-primary">
+                                  <i className="uil uil-wallet fs-6"></i>
+                                </span>
+                              </span>
+                              <span className="btn-icon-light">
+                                <span className="btn btn-icon btn-pills btn-light">
+                                  <i className="uil uil-wallet fs-6"></i>
+                                </span>
+                              </span>
+                            </p>
+                          </li> */}
                         </div>
                       </div>
                     ))

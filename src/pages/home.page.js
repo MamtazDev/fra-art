@@ -397,7 +397,7 @@ const Home = () => {
             <div className="features-absolute new-slide">
               <div className="row justify-content-center" id="reserve-form">
                 <div className="col-xl-10 mt-lg-5">
-                  <div className="card bg-white feature-top  border-0 shadow rounded p-3">
+                  <div className="card bg-white feature-top  border-0 shadow rounded ">
                     <form className="d-none">
                       <div className="registration-form text-dark text-start">
                         <div className="row g-lg-0">

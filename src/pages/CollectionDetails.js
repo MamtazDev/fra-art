@@ -18,6 +18,53 @@ const CollectionDetails = () => {
   const [attribute, setAttribute] = useState([]);
 
   const [customAttribues, setCustomAttribute] = useState([]);
+  const [searchAtt, setSearchAtt] = useState([]);
+
+  // const volumeHandler = (e) => {
+  //   console.log("Input value", e.target.value);
+  //   const valN = e.target.value;
+  //   const vluSrt = collectionsAll.filter((item) =>
+  //     JSON.stringify(item.collection?.volume?.allTime).includes(valN)
+  //   );
+  //   setCollections(vluSrt);
+  //   // parseInt(item?.volume?.allTime) === valN
+  //   console.log(vluSrt);
+  // };
+
+  const nameHandler = (e) => {
+    console.log("Input value", e.target.value);
+    const valN = e.target.value;
+    const vluSrt = collectionsAll.filter((item) =>
+      item.token?.name.toLowerCase().includes(valN)
+    );
+    setCollections(vluSrt);
+    // parseInt(item?.volume?.allTime) === valN
+    console.log(vluSrt);
+  };
+
+  const handleAttribute = (keys, values) => {
+    if (searchAtt.length > 0) {
+      searchAtt.map((item) => {
+        if (item.keys === keys) {
+          item.values = values;
+          let x = [...searchAtt];
+          // console.log(x);
+          return setSearchAtt(x);
+        } else {
+          return setSearchAtt([...searchAtt, { keys, values }]);
+        }
+      });
+    } else {
+      setSearchAtt([...searchAtt, { keys, values }]);
+    }
+  };
+
+  console.log(searchAtt, "gggg");
+
+  const handleCross = (keys, values) => {
+    const updateAtt = searchAtt.filter((item) => item.keys !== keys);
+    setSearchAtt(updateAtt);
+  };
 
   useEffect(() => {
     axios
@@ -55,73 +102,7 @@ const CollectionDetails = () => {
       .then((data) => setAttribute(data.attributes));
   }, []);
 
-  // const volumeHandler = (e) => {
-  //   console.log("Input value", e.target.value);
-  //   const valN = e.target.value;
-  //   const vluSrt = collectionsAll.filter((item) =>
-  //     JSON.stringify(item.collection?.volume?.allTime).includes(valN)
-  //   );
-  //   setCollections(vluSrt);
-  //   // parseInt(item?.volume?.allTime) === valN
-  //   console.log(vluSrt);
-  // };
-
-  const nameHandler = (e) => {
-    console.log("Input value", e.target.value);
-    const valN = e.target.value;
-    const vluSrt = collectionsAll.filter((item) =>
-      item.token?.name.toLowerCase().includes(valN)
-    );
-    setCollections(vluSrt);
-    // parseInt(item?.volume?.allTime) === valN
-    console.log(vluSrt);
-  };
-
-  const [searchAtt, setSearchAtt] = useState([]);
-
-  const [test, setTest] = useState("");
-
-  const handleAttribute = (keys, values) => {
-    // const filtered = collectionsAll.filter((item) =>
-    //   item.token?.attributes.some((itms) => itms.value.includes(keys))
-    // );
-    // setCollections(filtered);
-    // fetch(
-    //   `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true&attributes%5BEar%5D=Wireless+Earbuds&attributes%5BFace%5D=Eye+Scar`
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => setCollections(data.tokens));
-
-    if (searchAtt.length > 0) {
-      searchAtt.map((item) => {
-        if (item.keys === keys) {
-          item.values = values;
-          let x = [...searchAtt];
-          return setSearchAtt(x);
-        } else {
-          return setSearchAtt([...searchAtt, { keys, values }]);
-        }
-      });
-    } else {
-      setSearchAtt([...searchAtt, { keys, values }]);
-    }
-  };
-
-  console.log(searchAtt, "gggg");
-
-  const handleCross = (keys, values) => {
-    const updateAtt = searchAtt.filter((item) => item.keys !== keys);
-    setSearchAtt(updateAtt);
-  };
-
-  // const valueeee = `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true&${searchAtt
-  //   .map((atri) => `attributes%5B${atri.keys}%5D=${atri.values}`)
-  //   .join("&")} `;
-
-  // console.log("tesss", valueeee);
-
   useEffect(() => {
-    // if (searchAtt.length > 0) {
     fetch(
       `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true&${searchAtt
         .map((atri) => `attributes%5B${atri.keys}%5D=${atri.values}`)
@@ -129,7 +110,6 @@ const CollectionDetails = () => {
     )
       .then((res) => res.json())
       .then((data) => setCollections(data.tokens));
-    // }
   }, [searchAtt]);
 
   useEffect(() => {}, [collections]);
@@ -305,7 +285,7 @@ const CollectionDetails = () => {
                     </h2>
                     <div
                       id={"collapse" + index}
-                      className="accordion-collapse collapse show"
+                      className="accordion-collapse collapse"
                       aria-labelledby={"heading" + index}
                       data-bs-parent="#accordionExample"
                     >
@@ -332,31 +312,36 @@ const CollectionDetails = () => {
           <div className="col-12 col-lg-9">
             {/* <h1>Data from user collection api: {id}</h1> */}
             <div className="d-flex gap-2 mb-3">
-              {searchAtt.map((item, idx) => (
-                <div className="border p-2 px-3 rounded-pill bg-light d-flex gap-3">
-                  <p className="m-0">
-                    {" "}
-                    {item.keys} {item.values}
-                  </p>{" "}
-                  <p
-                    className="m-0 pointer"
-                    onClick={() => handleCross(item.keys, item.values)}
-                  >
-                    x
-                  </p>
-                </div>
-              ))}
+              {searchAtt
+                .filter(
+                  (obj, index, self) =>
+                    index === self.findIndex((t) => t.keys === obj.keys)
+                )
+                .map((item, idx) => (
+                  <div className="border p-2 px-3 rounded-pill bg-light d-flex gap-3">
+                    <p className="m-0">
+                      {" "}
+                      {item.keys} {item.values}
+                    </p>{" "}
+                    <p
+                      className="m-0 pointer"
+                      onClick={() => handleCross(item.keys, item.values)}
+                    >
+                      x
+                    </p>
+                  </div>
+                ))}
             </div>
             <div>
               <div className="row g-0 gap-0">
-                {collections.length === 0 && (
+                {/* {collections && collection.length === 0 && (
                   <div>
                     <h1 className="text-danger text-center">
                       No item available in this collection
                     </h1>
                   </div>
-                )}
-                {collections.length > 0 &&
+                )} */}
+                {collections && collections.length > 0 ? (
                   collections
                     // ?.filter((item) => {
                     //   return filteredData.toLowerCase() === ""
@@ -429,7 +414,14 @@ const CollectionDetails = () => {
                           </div> */}
                         </div>
                       </div>
-                    ))}
+                    ))
+                ) : (
+                  <div className="mt-5">
+                    <h1 className="text-danger text-center">
+                      No item available in this collection
+                    </h1>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -77,21 +77,63 @@ const CollectionDetails = () => {
     console.log(vluSrt);
   };
 
+  const [searchAtt, setSearchAtt] = useState([]);
+
+  const [test, setTest] = useState("");
+
   const handleAttribute = (keys, values) => {
     // const filtered = collectionsAll.filter((item) =>
     //   item.token?.attributes.some((itms) => itms.value.includes(keys))
     // );
     // setCollections(filtered);
+    // fetch(
+    //   `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true&attributes%5BEar%5D=Wireless+Earbuds&attributes%5BFace%5D=Eye+Scar`
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => setCollections(data.tokens));
 
+    if (searchAtt.length > 0) {
+      searchAtt.map((item) => {
+        if (item.keys === keys) {
+          item.values = values;
+          let x = [...searchAtt];
+          return setSearchAtt(x);
+        } else {
+          return setSearchAtt([...searchAtt, { keys, values }]);
+        }
+      });
+    } else {
+      setSearchAtt([...searchAtt, { keys, values }]);
+    }
+  };
+
+  console.log(searchAtt, "gggg");
+
+  const handleCross = (keys, values) => {
+    const updateAtt = searchAtt.filter((item) => item.keys !== keys);
+    setSearchAtt(updateAtt);
+  };
+
+  // const valueeee = `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true&${searchAtt
+  //   .map((atri) => `attributes%5B${atri.keys}%5D=${atri.values}`)
+  //   .join("&")} `;
+
+  // console.log("tesss", valueeee);
+
+  useEffect(() => {
+    // if (searchAtt.length > 0) {
     fetch(
-      `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true&attributes%5B${keys}%5D=${values}`
+      `https://api.reservoir.tools/tokens/v5?collection=${id}&sortBy=floorAskPrice&sortDirection=asc&includeTopBid=false&includeAttributes=true&includeDynamicPricing=true&normalizeRoyalties=true&${searchAtt
+        .map((atri) => `attributes%5B${atri.keys}%5D=${atri.values}`)
+        .join("&")} `
     )
       .then((res) => res.json())
       .then((data) => setCollections(data.tokens));
-  };
+    // }
+  }, [searchAtt]);
 
   useEffect(() => {}, [collections]);
-  console.log("collec", collections);
+  // console.log("collec", collections);
   return (
     <div>
       <div
@@ -285,8 +327,26 @@ const CollectionDetails = () => {
           </div>
           {/* data from user collection */}
 
+          {/* <div>hello</div> */}
+
           <div className="col-12 col-lg-9">
             {/* <h1>Data from user collection api: {id}</h1> */}
+            <div className="d-flex gap-2 mb-3">
+              {searchAtt.map((item, idx) => (
+                <div className="border p-2 px-3 rounded-pill bg-light d-flex gap-3">
+                  <p className="m-0">
+                    {" "}
+                    {item.keys} {item.values}
+                  </p>{" "}
+                  <p
+                    className="m-0 pointer"
+                    onClick={() => handleCross(item.keys, item.values)}
+                  >
+                    x
+                  </p>
+                </div>
+              ))}
+            </div>
             <div>
               <div className="row g-0 gap-0">
                 {collections.length === 0 && (

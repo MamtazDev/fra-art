@@ -5,6 +5,7 @@ import twitter from "../assets/images/Twitter.svg";
 import ether from "../assets/images/etherscan-logo-circle.svg";
 import { ParamsContext } from "../context/ParamsProvider";
 import { FaEthereum } from "react-icons/fa";
+import { BsLightningChargeFill } from "react-icons/bs";
 
 const CollectionDetails = () => {
   const { id } = useParams();
@@ -470,28 +471,32 @@ const CollectionDetails = () => {
                               />
                             </div>
                           </Link>
-                          <div className="text-center mt-2 box__content">
-                            <div className="d-flex justify-content-around mt-2">
-                              <p>{collection.token?.name}</p>{" "}
-                              <p className="border rounded px-2">
+                          <div className="text-center mt-2 ">
+                            <div className="d-flex px-2 mt-2">
+                              <p className="fw-bold">
                                 {" "}
-                                {collection.token?.rarity}
+                                #{collection.token?.rarity}
+                              </p>
+                              <p>{collection.token?.name}</p>{" "}
+                            </div>
+                            <div className="d-flex justify-content-between px-2">
+                              <p>Last Price</p>
+                              <p className="text-start ms-4">
+                                <FaEthereum />
+                                {
+                                  collection.market?.floorAsk?.price?.amount
+                                    ?.decimal
+                                }
                               </p>
                             </div>
-                            <p className="text-start ms-4 fw-bold">
-                              <FaEthereum />
-                              {
-                                collection.market?.floorAsk?.price?.amount
-                                  ?.decimal
-                              }
-                            </p>
                             <div class="d-flex align-items-center">
                               <a
                                 href="#!"
-                                class="w-100 bg-primary text-white text-center p-1"
+                                class="w-100  text-primary fw-bold text-center pb-3"
                                 onClick={_handleConnectWallet}
                                 id="connectWallet"
                               >
+                                <BsLightningChargeFill className="me-2" />
                                 Buy Now
                               </a>
                             </div>

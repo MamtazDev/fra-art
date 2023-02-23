@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { client01, logoLight, logoDark } from "../utils/images.util";
 import "../../src/pages/new.css";
 import { ParamsContext } from "../context/ParamsProvider";
+import PreNav from "../pages/PreNav";
 
 const Navbar = ({ nav }) => {
   const { setActive } = useContext(ParamsContext);
@@ -171,6 +172,7 @@ const Navbar = ({ nav }) => {
   return (
     <>
       <header id="topnav" className="defaultscroll sticky">
+        <PreNav />
         <div className="container">
           <a className="logo" href="/">
             <span className="">

@@ -4,6 +4,16 @@ import { client01, logoLight, logoDark } from "../utils/images.util";
 import "../../src/pages/new.css";
 import { ParamsContext } from "../context/ParamsProvider";
 import PreNav from "../pages/PreNav";
+import { BiCartAlt } from "react-icons/bi";
+import { GoLightBulb } from "react-icons/go";
+import { MdOutlineDarkMode } from "react-icons/md";
+import metamask from "../assets/images/svg/metamask.svg";
+import coinbase from "../assets/images/svg/coinbase.svg";
+import wallet from "../assets/images/svg/walletconnect.svg";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import { Badge, Modal } from "react-bootstrap";
+import {TbWorld} from "react-icons/tb";
+import search from "../assets/images/search.png";
 
 const Navbar = ({ nav }) => {
   const { setActive } = useContext(ParamsContext);
@@ -11,6 +21,9 @@ const Navbar = ({ nav }) => {
   const [headerId, setHeaderId] = useState(0);
   const [value, setValue] = useState("");
   const [collections, setCollection] = useState([]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const isMetaMaskInstalled = useCallback(() => {
     const { ethereum } = window;
@@ -172,7 +185,7 @@ const Navbar = ({ nav }) => {
   return (
     <>
       <header id="topnav" className="defaultscroll sticky">
-        <PreNav />
+     
         <div className="container">
           <a className="logo" href="/">
             <span className="">
@@ -200,7 +213,7 @@ const Navbar = ({ nav }) => {
           </div>
 
           <ul className="buy-button list-inline mb-0">
-            <li className="list-inline-item mb-0 me-3">
+            {/* <li className="list-inline-item mb-0 me-3">
               <div className="dropdown">
                 <button
                   type="button"
@@ -379,6 +392,71 @@ const Navbar = ({ nav }) => {
                   </div>
                 </div>
               </div>
+            </li> */}
+
+            <li className="list-inline-item mb-0 me-3">
+              <GoLightBulb className="fs-4" />
+            </li>
+            <li className="list-inline-item mb-0 me-3">
+              <MdOutlineDarkMode className="fs-3" />
+            </li>
+            <li className="list-inline-item mb-0 me-3">
+              <TbWorld className="fs-4" /> <span className="fw-bold">EN</span>
+            </li>
+            <li className="list-inline-item mb-0 me-3">
+              <BiCartAlt className="fs-3" /> <Badge className="rounded-circle" bg="primary">0</Badge>
+            </li>
+
+           
+            <li className="list-inline-item mb-0">
+              <div>
+                <button className="wallet_btn py-1 px-3" onClick={handleShow}>
+                  Connect Your Wallet
+                </button>
+
+                <Modal
+                  //   style={{ width: "720px" }}
+                  aria-labelledby="contained-modal-title-vcenter"
+                  centered
+                  size="lg"
+                  show={show}
+                  onHide={handleClose}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title className="text-center">
+                      Connect Your Wallet
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p className="text-center">
+                      By connecting your wallet, you agree to our{" "}
+                      <Link to="#">Terms of Service</Link> and our{" "}
+                      <Link to="#">Privacy Policy</Link> .
+                    </p>
+                    <div className="option d-flex justify-content-between align-items-center">
+                      <p className="mb-0 fw-bold">
+                        <img src={metamask} alt="" /> MetaMask
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+                    <div className="option d-flex justify-content-between align-items-center">
+                      <p className="mb-0 fw-bold">
+                        <img src={wallet} alt="" /> Wallet Connect
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+                    <div className="option d-flex justify-content-between align-items-center">
+                      <p className="mb-0 fw-bold">
+                        <img src={coinbase} alt="" /> Coinless Wallet
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+                    <p className="text-center cursor-pointer">
+                      I don't have a wallet{" "}
+                    </p>
+                  </Modal.Body>
+                </Modal>
+              </div>
             </li>
           </ul>
 
@@ -386,11 +464,16 @@ const Navbar = ({ nav }) => {
             {headerId === 0 ? (
               <ul className="navigation-menu nav-left">
                 <li className="parent-parent-menu-item">
-                  <Link to="/">Home</Link>
+                  <Link className="fw-bold" to="/">
+                    Home
+                  </Link>
                 </li>
                 {/* <li className="parent-parent-menu-item"> */}
 
-                <li className="parent_collection pointer parent-parent-menu-item">
+                <li
+                  style={{ fontSize: "18px" }}
+                  className="parent_collection pointer parent-parent-menu-item fw-bold"
+                >
                   Collections
                   <ul className="child_collection shadow rounded  px-0  d-flex flex-column">
                     <li className="w-100  px-2 d-flex flex-column py-2">
@@ -547,7 +630,69 @@ const Navbar = ({ nav }) => {
                   <Link to="/crowdpad">Crowdpad</Link>
                 </li> */}
                 <li className="parent-parent-menu-item">
-                  <Link to="/rockpool">FraPool</Link>
+                  <Link className="fw-bold" to="/rockpool">
+                    FraPool
+                  </Link>
+                </li>
+                <li className="list-inline-item mb-0 me-3">
+                  <div className="search-bar">
+                    <div id="itemSearch" className="menu-search mb-0">
+                      <form
+                        role="search"
+                        method="get"
+                        id="searchItemform"
+                        className="searchform"
+                      >
+                        <input
+                          style={{ marginTop: "20px"}}
+                          type="search"
+                          className="search p-1 ps-4 pe-1 form-control border rounded"
+                          name="s"
+                          id="searchItem"
+                         
+                          value={value}
+                          onChange={handleChange}
+                        />
+
+                        <input
+                          className="d-none"
+                          type="submit"
+                          id="searchItemsubmit"
+                          value="Search"
+                        />
+                      </form>
+                    </div>
+                  </div>
+                  <div className="bg-white shadow rounded">
+                    {collections
+                      .filter((item) => {
+                        const searchTerm = value.toLocaleLowerCase();
+                        const collectionName = item.name.toLocaleLowerCase();
+                        // if()
+                        return (
+                          searchTerm && collectionName.startsWith(searchTerm)
+                        );
+                      })
+                      .slice(0, 5)
+                      .map((itm) => (
+                        <Link
+                          className="bg-white shadow"
+                          to={`/trending/${itm?.primaryContract}`}
+                        >
+                          <div className="p-2 d-flex align-items-center gap-2">
+                            <div>
+                              <img
+                                width={20}
+                                height={20}
+                                src={itm.image}
+                                className="rounded-circle"
+                              />
+                            </div>
+                            <div className="text-text">{itm.name}</div>
+                          </div>
+                        </Link>
+                      ))}
+                  </div>
                 </li>
                 {/* <li className="parent-parent-menu-item">
                   <Link to="/marketplace">Marketplace</Link>

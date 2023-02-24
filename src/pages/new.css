@@ -158,6 +158,14 @@ a {
   opacity: 1;
   transition: 0.1s ease-in-out;
 }
+#topnav .navigation-menu>li>a{
+  font-size: 18px;
+}
+.search{
+  background-image: url("../assets/images/search.png");
+background-position: left 3% center;
+  background-repeat: no-repeat;
+}
 
 @media (max-width: 768px) {
   .new-slide {

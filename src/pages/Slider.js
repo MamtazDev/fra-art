@@ -6,21 +6,32 @@ import "swiper/css/pagination";
 
 import "./Slide.css";
 
-import { Autoplay, Navigation, Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import { Link } from "react-router-dom";
 
 export default function Slide({ volumeCollection }) {
   console.log("datassssss", volumeCollection);
   return (
     <div className="slider__wide">
-      <Swiper
+      <Swiper 
+        modules={[Pagination, Autoplay]}
+        spaceBetween={30}
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+          reverseDirection: true,
+        
+        }}
+        loop={true}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
         breakpoints={{
-          // when window width is >= 640px
           380: {
             width: 380,
             slidesPerView: 1,
           },
-          // when window width is >= 768px
+
           640: {
             width: 640,
             slidesPerView: 2,
@@ -30,18 +41,6 @@ export default function Slide({ volumeCollection }) {
             slidesPerView: 3,
           },
         }}
-        // slidesPerView={3}
-        spaceBetween={30}
-        // loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
         <div className="sliders">

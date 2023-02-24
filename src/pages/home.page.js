@@ -670,7 +670,7 @@ const Home = () => {
           </div>
         </div> */}
 
-        <div className="container mt-100 mt-60">
+        <div className="container">
           <div className="row align-items-end mb-4 pb-2">
             <div className="col-md-8">
               <div className="section-title">

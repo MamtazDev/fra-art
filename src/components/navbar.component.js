@@ -12,7 +12,7 @@ import coinbase from "../assets/images/svg/coinbase.svg";
 import wallet from "../assets/images/svg/walletconnect.svg";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Badge, Modal } from "react-bootstrap";
-import {TbWorld} from "react-icons/tb";
+import { TbWorld } from "react-icons/tb";
 import search from "../assets/images/search.png";
 
 const Navbar = ({ nav }) => {
@@ -185,8 +185,7 @@ const Navbar = ({ nav }) => {
   return (
     <>
       <header id="topnav" className="defaultscroll sticky">
-     
-        <div className="container">
+        <div className="container custom__container">
           <a className="logo" href="/">
             <span className="">
               <img src={logoDark} height="42" className={"l-dark"} alt="" />
@@ -394,20 +393,22 @@ const Navbar = ({ nav }) => {
               </div>
             </li> */}
 
-            <li className="list-inline-item mb-0 me-3">
+            <li className="list-inline-item mb-0 me-5">
               <GoLightBulb className="fs-4" />
             </li>
-            <li className="list-inline-item mb-0 me-3">
+            <li className="list-inline-item mb-0 me-5">
               <MdOutlineDarkMode className="fs-3" />
             </li>
-            <li className="list-inline-item mb-0 me-3">
+            <li className="list-inline-item mb-0 me-5">
               <TbWorld className="fs-4" /> <span className="fw-bold">EN</span>
             </li>
-            <li className="list-inline-item mb-0 me-3">
-              <BiCartAlt className="fs-3" /> <Badge className="rounded-circle" bg="primary">0</Badge>
+            <li className="list-inline-item mb-0 me-5">
+              <BiCartAlt className="fs-3" />{" "}
+              <Badge className="rounded-circle" bg="primary">
+                0
+              </Badge>
             </li>
 
-           
             <li className="list-inline-item mb-0">
               <div>
                 <button className="wallet_btn py-1 px-3" onClick={handleShow}>
@@ -415,43 +416,44 @@ const Navbar = ({ nav }) => {
                 </button>
 
                 <Modal
-                  //   style={{ width: "720px" }}
+                  //   style={{ width: "720px",
+                  // margin:"auto" }}
                   aria-labelledby="contained-modal-title-vcenter"
                   centered
-                  size="lg"
+                  // size="lg"
                   show={show}
                   onHide={handleClose}
                 >
-                  <Modal.Header closeButton>
-                    <Modal.Title className="text-center">
+                  <Modal.Header closeButton className="mx-auto border-0 pb-0">
+                    <Modal.Title className="mx-auto">
                       Connect Your Wallet
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <p className="text-center">
+                    <p style={{ fontSize: "14px" }} className="text-center">
                       By connecting your wallet, you agree to our{" "}
                       <Link to="#">Terms of Service</Link> and our{" "}
                       <Link to="#">Privacy Policy</Link> .
                     </p>
-                    <div className="option d-flex justify-content-between align-items-center">
-                      <p className="mb-0 fw-bold">
+                    <div className="option d-flex justify-content-between align-items-center border-bottom">
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
                         <img src={metamask} alt="" /> MetaMask
                       </p>
                       <AiOutlineArrowRight className="icon" />
                     </div>
-                    <div className="option d-flex justify-content-between align-items-center">
-                      <p className="mb-0 fw-bold">
+                    <div className="option d-flex justify-content-between align-items-center border-bottom">
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
                         <img src={wallet} alt="" /> Wallet Connect
                       </p>
                       <AiOutlineArrowRight className="icon" />
                     </div>
-                    <div className="option d-flex justify-content-between align-items-center">
-                      <p className="mb-0 fw-bold">
+                    <div className="option d-flex justify-content-between align-items-center border-bottom">
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
                         <img src={coinbase} alt="" /> Coinless Wallet
                       </p>
                       <AiOutlineArrowRight className="icon" />
                     </div>
-                    <p className="text-center cursor-pointer">
+                    <p className="text-center cursor-pointer pt-3">
                       I don't have a wallet{" "}
                     </p>
                   </Modal.Body>
@@ -463,7 +465,7 @@ const Navbar = ({ nav }) => {
           <div id="navigation">
             {headerId === 0 ? (
               <ul className="navigation-menu nav-left">
-                <li className="parent-parent-menu-item">
+                <li className="parent-parent-menu-item me-5">
                   <Link className="fw-bold" to="/">
                     Home
                   </Link>
@@ -472,7 +474,7 @@ const Navbar = ({ nav }) => {
 
                 <li
                   style={{ fontSize: "18px" }}
-                  className="parent_collection pointer parent-parent-menu-item fw-bold"
+                  className="parent_collection pointer parent-parent-menu-item fw-bold me-5"
                 >
                   Collections
                   <ul className="child_collection shadow rounded  px-0  d-flex flex-column">
@@ -629,7 +631,7 @@ const Navbar = ({ nav }) => {
                 {/* <li className="parent-parent-menu-item">
                   <Link to="/crowdpad">Crowdpad</Link>
                 </li> */}
-                <li className="parent-parent-menu-item">
+                <li className="parent-parent-menu-item me-5">
                   <Link className="fw-bold" to="/rockpool">
                     FraPool
                   </Link>
@@ -644,12 +646,11 @@ const Navbar = ({ nav }) => {
                         className="searchform"
                       >
                         <input
-                          style={{ marginTop: "20px"}}
+                          style={{ marginTop: "20px" }}
                           type="search"
-                          className="search p-1 ps-4 pe-1 form-control border rounded"
+                          className="search p-1 ps-4 pe-5 form-control border rounded"
                           name="s"
                           id="searchItem"
-                         
                           value={value}
                           onChange={handleChange}
                         />
@@ -712,6 +713,13 @@ const Navbar = ({ nav }) => {
               </ul>
             ) : headerId === 2 ? (
               <ul className="navigation-menu nav-right">
+                <li className="parent-parent-menu-item">
+                  <Link to="/">Home</Link>
+                </li>
+                <li className="parent-parent-menu-item">
+                  <Link to="/marketplace">Explore</Link>
+                </li>
+
                 <li className="parent-parent-menu-item">
                   <Link to="/rockpool/pools">Join Pools</Link>
                 </li>

@@ -73,7 +73,9 @@ const Collection = () => {
         <div className="d-flex justify-content-between">
           <div>
             <input
-              class="form-control me-2"
+            style={{width:"300px",
+          borderRadius:"50px"}}
+              class="search form-control ps-5"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -141,17 +143,17 @@ const Collection = () => {
         </div>
         {/* data sorting navbar end */}
 
-        <div className="row g-5">
-          <table className="table caption-top">
+        <div className="my-5">
+          <table className="table caption-top shadow rounded">
             <thead>
-              <tr>
+              <tr className="">
                 <th scope="col">#</th>
                 <th scope="col">Collection</th>
-                <th scope="col">Floor Price</th>
-                <th scope="col"> Volume({dataSort})</th>
-                <th scope="col"> Sales({dataSort})</th>
-                <th scope="col">Holders</th>
-                <th scope="col">Listed</th>
+                <th className="text-end" scope="col">Floor Price</th>
+                <th className="text-end" scope="col"> Volume({dataSort})</th>
+                <th className="text-end" scope="col"> Sales({dataSort})</th>
+                <th className="text-end" scope="col">Holders</th>
+                <th className="text-end" scope="col">Listed</th>
               </tr>
             </thead>
             {/* <tbody>
@@ -231,7 +233,7 @@ const Collection = () => {
               {newCollections.map((collection, index) => {
                 return (
                   <tr key={index} className="pointer hover-background">
-                    <th scope="row">{index + 1}</th>
+                    <th style={{fontSize:"14px"}} scope="row">{index + 1}</th>
                     <td
                     // onClick={() => setUserId(collection?.primaryContract)}
                     >
@@ -239,40 +241,50 @@ const Collection = () => {
                         to={`/trending/${collection.collection?.collTags?.contract}`}
                       >
                         <img
-                          width={50}
-                          height={50}
+                          width={40}
+                          height={40}
                           className="rounded-circle  me-4"
                           src={collection.collection?.logo}
                           alt=""
                         />
+                        <span style={{fontSize:"14px"}}
+                        className="text-black fw-bold">
 
                         {collection.collection?.name}
+                        </span>
+
                       </Link>{" "}
                     </td>
                     <td>
-                      <div>
+                      <div className="text-end">
+                        <div style={{fontSize:"14px"}}>
+                          
                         <FaEthereum />
                         {collection.floorPrice?.tokenPrice}
-                        <div>
+                        </div>
+                        <div className="text-secondary fw-bold" style={{fontSize:"12px"}}>
                           {(collection.floorPriceChange * 100).toFixed(3)}%
                         </div>
                       </div>
                     </td>
-                    <td>
-                      <div>
+                    <td className="text-end">
+                      <div style={{fontSize:"14px"}}>
                         <FaEthereum />
                         {collection.volumeEth.toFixed(2)}
-                        <div>
+                      </div>
+                        <div className="text-success fw-bold" style={{fontSize:"12px"}}>
                           {(collection.volumeEthChange * 100).toFixed(2)}%
                         </div>
-                      </div>
                     </td>
-                    <td>
+                    <td className="text-end">
+                      <div style={{fontSize:"14px"}}>
+                        
                       {collection.saleNum}
-                      <div>{(collection.saleNumChange * 100).toFixed(2)}%</div>
+                      </div>
+                      <div  className="text-success fw-bold" style={{fontSize:"12px"}}>{(collection.saleNumChange * 100).toFixed(2)}%</div>
                     </td>
-                    <td>{collection.holderNum}</td>
-                    <td>
+                    <td style={{fontSize:"14px"}} className="text-end">{collection.holderNum}</td>
+                    <td style={{fontSize:"14px"}} className="text-end">
                       {(
                         (collection.listingNum / collection.supply) *
                         100

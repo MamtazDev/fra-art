@@ -65,7 +65,7 @@ const TopCollection = () => {
   console.log("toppp", topCollections);
   return (
     <div>
-      <div className="container my-5 ">
+      <div className="container custom__container my-5 ">
         <h2 className="mt-5 text-center  py-5">Top Collection</h2>
         <CollectionNav></CollectionNav>
 

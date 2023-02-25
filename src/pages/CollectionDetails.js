@@ -6,7 +6,7 @@ import ether from "../assets/images/etherscan-logo-circle.svg";
 import { ParamsContext } from "../context/ParamsProvider";
 import { FaEthereum } from "react-icons/fa";
 import { BsLightningChargeFill } from "react-icons/bs";
-
+import { AiOutlineStar } from "react-icons/ai";
 const CollectionDetails = () => {
   const { id } = useParams();
   // const { userId } = useContext(ParamsContext);
@@ -464,20 +464,39 @@ const CollectionDetails = () => {
                             to={`/trendingDetails/${collection.token?.collection?.id}/${collection.token.tokenId}`}
                           >
                             <div className="card__box">
-                              <img
-                                className="w-100"
-                                src={collection.token?.image}
-                                alt=""
-                              />
+                              <div className="main">
+                                <img
+                                  className="parent_img w-100"
+                                  src={collection.token?.image}
+                                  alt=""
+                                />
+                                <p className="bg-white p-2 rounded">0.0222</p>
+                                <div className="w-100 card_bottom px-4 d-flex justify-content-between align-items-center">
+                                  <div className="small-img">
+                                    <img
+                                      className="rounded-circle"
+                                      width={30}
+                                      src={collection.token?.image}
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div
+                                    style={{ height: "25px", width: "25px" }}
+                                    className="text-center bg-success  rounded-circle"
+                                  >
+                                    <AiOutlineStar className="text-secondary fw-bold" />
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </Link>
                           <div className="text-center mt-2 ">
-                            <div className="d-flex px-2 mt-2">
-                              <p className="fw-bold">
+                            <div className="d-flex px-2 mt-4">
+                              <p className="fw-bold mb-0">
                                 {" "}
                                 #{collection.token?.rarity}
                               </p>
-                              <p>{collection.token?.name}</p>{" "}
+                              {/* <p>{collection.token?.name}</p>{" "} */}
                             </div>
                             <div className="d-flex justify-content-between px-2">
                               <p>Last Price</p>

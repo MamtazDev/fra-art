@@ -96,14 +96,28 @@ a {
   transition: 0.1s ease-in-out;
 }
 
-.card__box img {
+/* .card__box img {
   width: 100%;
   transition: 0.1s ease-in-out;
+} */
+/* .card__box .main {
+ position: relative;
+} */
+.card__box p{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.card__box .card_bottom{
+  position: absolute;
+  bottom: 119px;
+  z-index: 9999;
+ 
 }
 
-.box:hover .card__box img {
+/* .box:hover .card__box img {
   transform: scale(1.01);
-}
+} */
 
 .box:hover .box__content {
   bottom: 0;

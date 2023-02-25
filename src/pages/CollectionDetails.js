@@ -7,6 +7,7 @@ import { ParamsContext } from "../context/ParamsProvider";
 import { FaEthereum } from "react-icons/fa";
 import { BsLightningChargeFill } from "react-icons/bs";
 import { AiOutlineStar } from "react-icons/ai";
+import {MdShoppingCart} from 'react-icons/md';
 const CollectionDetails = () => {
   const { id } = useParams();
   // const { userId } = useContext(ParamsContext);
@@ -470,6 +471,7 @@ const CollectionDetails = () => {
                                   src={collection.token?.image}
                                   alt=""
                                 />
+                                <MdShoppingCart className="cart_icon"/>
                                 <p className="bg-white p-2 rounded">0.0222</p>
                                 <div className="w-100 card_bottom px-4 d-flex justify-content-between align-items-center">
                                   <div className="small-img">

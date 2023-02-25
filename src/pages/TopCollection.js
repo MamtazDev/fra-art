@@ -73,7 +73,8 @@ const TopCollection = () => {
         <div className="d-flex justify-content-between">
           <div>
             <input
-              class="form-control me-2"
+               style={{ width: "300px", borderRadius: "50px" }}
+               class="search form-control me-2 ps-5"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -139,17 +140,17 @@ const TopCollection = () => {
         </div>
         {/* data sorting navbar end */}
 
-        <div className="row g-5">
-          <table className="table caption-top">
+        <div className="my-5">
+          <table className="table caption-top shadow rounded">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Collection</th>
-                <th scope="col"> Market Cap</th>
-                <th scope="col">Volume({dataSort})</th>
-                <th scope="col">Floor Price</th>
-                <th scope="col">Sales({dataSort})</th>
-                <th scope="col">Whales</th>
+                <th className="text-end" scope="col"> Market Cap</th>
+                <th className="text-end" scope="col">Volume({dataSort})</th>
+                <th className="text-end" scope="col">Floor Price</th>
+                <th className="text-end" scope="col">Sales({dataSort})</th>
+                <th className="text-end" scope="col">Whales</th>
               </tr>
             </thead>
             <tbody>
@@ -185,27 +186,30 @@ const TopCollection = () => {
                 // </tr>
 
                 <tr key={index} className="pointer hover-background">
-                  <th scope="row">{index + 1}</th>
+                  <th style={{fontSize:"14px"}}  scope="row">{index + 1}</th>
                   <td>
                     <Link to={`/trending/${collection?.contracts[0]}`}>
                       <img
-                        width={50}
-                        height={50}
+                        width={40}
+                        height={40}
                         className="rounded-circle  me-4"
                         src={collection.logo}
                         alt=""
                       />
+                      <span style={{fontSize:"14px"}}  className="text-black fw-bold">
+
                       {collection.name}
+                      </span>
                     </Link>{" "}
                   </td>
-                  <td>
-                    <div>
+                  <td  className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       <FaEthereum />
                       {(collection.marketCapEth / 1000).toFixed(2)}K
                     </div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       <FaEthereum />{" "}
                       {collection.volumeEth1h &&
                         (collection.volumeEth1h / 1000).toFixed(2) + "k"}
@@ -223,14 +227,14 @@ const TopCollection = () => {
                         (collection.volumeEth / 1000).toFixed(2) + "k"}
                     </div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       <FaEthereum />
                       {collection.floorPrice?.tokenPrice}
                     </div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       {collection.saleNum1h && collection.saleNum1h}
                       {collection.saleNum6h && collection.saleNum6h}
                       {collection.saleNum12h && collection.saleNum12h}
@@ -240,7 +244,7 @@ const TopCollection = () => {
                       {collection.saleNum && collection.saleNum}
                     </div>
                   </td>
-                  <td>{collection.whaleNum}</td>
+                  <td className="text-end" style={{fontSize:"14px"}} >{collection.whaleNum}</td>
                 </tr>
               ))}
             </tbody>

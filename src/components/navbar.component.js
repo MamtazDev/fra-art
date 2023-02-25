@@ -14,7 +14,6 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { Badge, Modal } from "react-bootstrap";
 import { TbWorld } from "react-icons/tb";
 
-
 const Navbar = ({ nav }) => {
   const { setActive } = useContext(ParamsContext);
   const [myPublicAddress, setMyPublicAddress] = useState("qhut0...hfteh45");
@@ -24,6 +23,21 @@ const Navbar = ({ nav }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const modaldata = [
+    {
+      image: metamask,
+      name: "MetaMask",
+    },
+    {
+      image: wallet,
+      name: "Wallet Connect",
+    },
+    {
+      image: coinbase,
+      name: "Coinbase Wallet",
+    },
+  ];
 
   const isMetaMaskInstalled = useCallback(() => {
     const { ethereum } = window;
@@ -403,20 +417,37 @@ const Navbar = ({ nav }) => {
               {/* <TbWorld className="fs-4" /> <span className="fw-bold">EN</span> */}
 
               <div class="dropdown">
-  <button class="border-0 bg-transparent dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-  <TbWorld className="fs-4" /> <span className="fw-bold">EN</span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Japan</a></li>
-    <li><a class="dropdown-item" href="#">Japan</a></li>
-    <li><a class="dropdown-item" href="#">Japan</a></li>
-   
-  </ul>
-</div>
-
-
+                <button
+                  class="border-0 bg-transparent dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <TbWorld className="fs-4" />{" "}
+                  <span className="fw-bold">EN</span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Japan
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Japan
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Japan
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
-            <li style={{cursor:"pointer"}} className="list-inline-item mb-0 me-5">
+            <li
+              style={{ cursor: "pointer" }}
+              className="list-inline-item mb-0 me-5"
+            >
               <BiCartAlt className="fs-3" />{" "}
               <Badge className="rounded-circle" bg="primary">
                 0
@@ -449,25 +480,23 @@ const Navbar = ({ nav }) => {
                       <Link to="#">Terms of Service</Link> and our{" "}
                       <Link to="#">Privacy Policy</Link> .
                     </p>
-                    <div className="option d-flex justify-content-between align-items-center border-bottom">
-                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
-                        <img src={metamask} alt="" /> MetaMask
-                      </p>
-                      <AiOutlineArrowRight className="icon" />
-                    </div>
-                    <div className="option d-flex justify-content-between align-items-center border-bottom">
-                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
-                        <img src={wallet} alt="" /> Wallet Connect
-                      </p>
-                      <AiOutlineArrowRight className="icon" />
-                    </div>
-                    <div className="option d-flex justify-content-between align-items-center border-bottom">
-                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
-                        <img src={coinbase} alt="" /> Coinless Wallet
-                      </p>
-                      <AiOutlineArrowRight className="icon" />
-                    </div>
-                    <p className="text-center cursor-pointer pt-3">
+
+                    {modaldata.map((data, i) => (
+                      <div
+                        style={{ cursor: "pointer" }}
+                        className="option d-flex justify-content-between align-items-center border-bottom"
+                      >
+                        <p
+                          style={{ fontSize: "20px" }}
+                          className="mb-0 fw-bold"
+                        >
+                          <img src={data.image} alt="" /> {data.name}
+                        </p>
+                        <AiOutlineArrowRight className="icon" />
+                      </div>
+                    ))}
+
+                    <p style={{cursor:"pointer"}} className="text-center cursor-pointer pt-3">
                       I don't have a wallet{" "}
                     </p>
                   </Modal.Body>
@@ -660,7 +689,7 @@ const Navbar = ({ nav }) => {
                         className="searchform"
                       >
                         <input
-                          style={{ marginTop: "20px",width:"400px" }}
+                          style={{ marginTop: "20px", width: "400px" }}
                           type="search"
                           className="search p-1 ps-4 pe-5 form-control border rounded "
                           name="s"

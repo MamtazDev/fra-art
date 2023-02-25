@@ -67,7 +67,8 @@ const NewlyCollection = () => {
         <div className="d-flex justify-content-between">
           <div>
             <input
-              class="form-control me-2"
+               style={{ width: "300px", borderRadius: "50px" }}
+               class="search form-control me-2 ps-5"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -103,19 +104,19 @@ const NewlyCollection = () => {
         </div>
         {/* data sorting navbar end */}
 
-        <div className="row g-5">
-          <table className="table caption-top">
+        <div className="my-5">
+          <table className="table caption-top shadow rounded">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Collection</th>
-                <th scope="col">Market Cap</th>
-                <th scope="col">{dataSort.toLocaleUpperCase()}</th>
-                <th scope="col">Volume({dataSort.toLocaleUpperCase()})</th>
-                <th scope="col">Floor Price</th>
-                <th scope="col">Minters</th>
-                <th scope="col">Whale Minters</th>
-                <th scope="col">Total Mint Gas</th>
+                <th className="text-end" scope="col">Market Cap</th>
+                <th className="text-end" scope="col">{dataSort.toLocaleUpperCase()}</th>
+                <th className="text-end" scope="col">Volume({dataSort.toLocaleUpperCase()})</th>
+                <th className="text-end" scope="col">Floor Price</th>
+                <th className="text-end" scope="col">Minters</th>
+                <th className="text-end" scope="col">Whale Minters</th>
+                <th className="text-end" scope="col">Total Mint Gas</th>
               </tr>
             </thead>
             <tbody>
@@ -158,38 +159,44 @@ const NewlyCollection = () => {
                 // </tr>
 
                 <tr key={index} className="pointer hover-background">
-                  <th scope="row">{index + 1}</th>
+                  <th style={{fontSize:"14px"}}  scope="row">{index + 1}</th>
                   <td>
                     <Link to={`/trending/${collection?.contracts[0]}`}>
                       <img
-                        width={50}
-                        height={50}
+                        width={40}
+                        height={40}
                         className="rounded-circle  me-4"
                         src={collection.logo}
                         alt=""
                       />
+                      <span style={{fontSize:"14px"}} className="text-black fw-bold">
+
                       {collection.name}
+                      </span>
                     </Link>{" "}
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div  style={{fontSize:"14px"}} >
                       <FaEthereum />
                       {(collection.marketCap / 1000).toFixed(2)}
                     </div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div className="text-success fw-bold" style={{fontSize:"14px"}} >
                       {collection.marketCapEthChange24h &&
                         (collection.marketCapEthChange24h * 100).toFixed(2)}
                       {collection.marketCapEthChange7d &&
                         (collection.marketCapEthChange7d * 100).toFixed(2)}
                       {collection.marketCapEthChange30d &&
                         (collection.marketCapEthChange30d * 100).toFixed(2)}
+                        {
+                          !collection.marketCapEthChange24h && !collection.marketCapEthChange7d && !collection.marketCapEthChange30d && 0
+                        }
                       %
                     </div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       <FaEthereum />
                       {collection.volumeEth24h &&
                         collection.volumeEth24h.toFixed(2)}
@@ -199,20 +206,20 @@ const NewlyCollection = () => {
                         collection.volumeEth30d.toFixed(2)}
                     </div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       <FaEthereum />
                       {collection.floorPrice?.tokenPrice}
                     </div>
                   </td>
-                  <td>
-                    <div>{collection.minterNum}</div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >{collection.minterNum}</div>
                   </td>
-                  <td>
-                    <div>{collection.whaleMinterNum}</div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >{collection.whaleMinterNum}</div>
                   </td>
-                  <td>
-                    <div>{collection.totalMintGas.toFixed(4)}</div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >{collection.totalMintGas.toFixed(4)}</div>
                   </td>
                 </tr>
               ))}

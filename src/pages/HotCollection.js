@@ -75,7 +75,8 @@ const HotCollection = () => {
         <div className="d-flex justify-content-between">
           <div>
             <input
-              class="form-control me-2"
+              style={{ width: "300px", borderRadius: "50px" }}
+              class="search form-control me-2 ps-5"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -142,18 +143,31 @@ const HotCollection = () => {
           </div>
         </div>
         {/* data sorting navbar end */}
-        <div className="row g-5">
-          <table className="table caption-top">
+        <div className="my-5">
+          <table className="table caption-top shadow rounded">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Collection</th>
-                <th scope="col">Mints({dataSort})</th>
-                <th scope="col">Notable Minters</th>
-                <th scope="col"> Unique Minters</th>
-                <th scope="col">Mint Price</th>
-                <th scope="col">Total Mints</th>
-                <th scope="col">Sales({dataSort})</th>
+                <th className="text-end" scope="col">
+                  Mints({dataSort})
+                </th>
+                <th className="text-end" scope="col">
+                  Notable Minters
+                </th>
+                <th className="text-end" scope="col">
+                  {" "}
+                  Unique Minters
+                </th>
+                <th className="text-end" scope="col">
+                  Mint Price
+                </th>
+                <th className="text-end" scope="col">
+                  Total Mints
+                </th>
+                <th className="text-end" scope="col">
+                  Sales({dataSort})
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -191,7 +205,7 @@ const HotCollection = () => {
                 // </tr>
 
                 <tr key={index} className="pointer hover-background">
-                  <th scope="row">{index + 1}</th>
+                  <th style={{fontSize:"14px"}}  scope="row">{index + 1}</th>
                   <td
                   //  onClick={() => setUserId(collection?.primaryContract)}
                   >
@@ -199,43 +213,47 @@ const HotCollection = () => {
                       to={`/trending/${collection.collection?.contractAddress}`}
                     >
                       <img
-                        width={50}
-                        height={50}
+                        width={40}
+                        height={40}
                         className="rounded-circle  me-4"
                         src={collection.collection?.logo}
                         alt=""
                       />
+                      <span style={{fontSize:"14px"}}  className="text-black fw-bold">
+
                       {collection.collection?.collectionName}
+                      </span>
                     </Link>{" "}
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       {collection.mints}
-                      <div>{(collection.mintsChange * 100).toFixed(2)}%</div>
                     </div>
+                      <div style={{fontSize:"12px"}} className="text-success fw-bold" >{(collection.mintsChange * 100).toFixed(2)}%</div>
                   </td>
-                  <td>
-                    <div>{collection.notableMinterNum}</div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >{collection.notableMinterNum}</div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       {collection.uniqueMinterNum}
-                      <span className="ms-2">
+                          </div>
+                      <div style={{fontSize:"12px"}}  className="">
                         (
                         {(
                           (collection.uniqueMinterNum / collection.totalMints) *
                           100
                         ).toFixed(2)}
                         %)
-                      </span>
                     </div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       <FaEthereum />{" "}
                       {collection.latestMintPriceInETH.toFixed(4)}
-                      <div>
-                        <span className="me-2">floor</span>
+                          </div>
+                      <div style={{fontSize:"12px"}} >
+                        <span className="me-2 bg-light px-2 rounded-pill">floor</span>
                         <span>
                           <FaEthereum />
                           {collection.floorPriceInETH
@@ -243,21 +261,20 @@ const HotCollection = () => {
                             : 0}
                         </span>
                       </div>
-                    </div>
                   </td>
-                  <td>
-                    <div>{collection.totalMints}</div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >{collection.totalMints}</div>
                   </td>
-                  <td>
-                    <div>
+                  <td className="text-end">
+                    <div style={{fontSize:"14px"}} >
                       {collection.sales}
-                      <div>
+                        </div>
+                      <div style={{fontSize:"12px"}} >
                         {collection.salesChange
                           ? (collection.salesChange * 100).toFixed(2)
                           : 0}
                         %
                       </div>
-                    </div>
                   </td>
                 </tr>
               ))}

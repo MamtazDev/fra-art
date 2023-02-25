@@ -9,7 +9,7 @@ import "./Slide.css";
 import { Autoplay, Pagination } from "swiper";
 import { Link } from "react-router-dom";
 
-export default function Slide({ volumeCollection }) {
+export default function BannerSlider({ volumeCollection }) {
   console.log("datassssss", volumeCollection);
   return (
     <div className="slider__wide">

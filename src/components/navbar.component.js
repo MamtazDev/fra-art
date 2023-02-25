@@ -13,7 +13,7 @@ import wallet from "../assets/images/svg/walletconnect.svg";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Badge, Modal } from "react-bootstrap";
 import { TbWorld } from "react-icons/tb";
-import search from "../assets/images/search.png";
+
 
 const Navbar = ({ nav }) => {
   const { setActive } = useContext(ParamsContext);
@@ -393,16 +393,30 @@ const Navbar = ({ nav }) => {
               </div>
             </li> */}
 
-            <li className="list-inline-item mb-0 me-5">
+            {/* <li className="list-inline-item mb-0 me-5">
               <GoLightBulb className="fs-4" />
             </li>
             <li className="list-inline-item mb-0 me-5">
               <MdOutlineDarkMode className="fs-3" />
-            </li>
+            </li> */}
             <li className="list-inline-item mb-0 me-5">
-              <TbWorld className="fs-4" /> <span className="fw-bold">EN</span>
+              {/* <TbWorld className="fs-4" /> <span className="fw-bold">EN</span> */}
+
+              <div class="dropdown">
+  <button class="border-0 bg-transparent dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
+  <TbWorld className="fs-4" /> <span className="fw-bold">EN</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Japan</a></li>
+    <li><a class="dropdown-item" href="#">Japan</a></li>
+    <li><a class="dropdown-item" href="#">Japan</a></li>
+   
+  </ul>
+</div>
+
+
             </li>
-            <li className="list-inline-item mb-0 me-5">
+            <li style={{cursor:"pointer"}} className="list-inline-item mb-0 me-5">
               <BiCartAlt className="fs-3" />{" "}
               <Badge className="rounded-circle" bg="primary">
                 0
@@ -646,9 +660,9 @@ const Navbar = ({ nav }) => {
                         className="searchform"
                       >
                         <input
-                          style={{ marginTop: "20px" }}
+                          style={{ marginTop: "20px",width:"400px" }}
                           type="search"
-                          className="search p-1 ps-4 pe-5 form-control border rounded"
+                          className="search p-1 ps-4 pe-5 form-control border rounded "
                           name="s"
                           id="searchItem"
                           value={value}

@@ -60,7 +60,7 @@ import User from "../pages/User";
 import HotCollection from "../pages/HotCollection";
 import NewlyCollection from "../pages/NewlyCollection";
 import TopCollection from "../pages/TopCollection";
-import Slider from "../pages/Slider";
+import Slider from "../pages/BannerSlider";
 
 const Routing = () => {
   const location = useLocation();

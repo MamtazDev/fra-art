@@ -65,7 +65,7 @@ const Collection = () => {
 
   return (
     <div>
-      <div className="container my-5 ">
+      <div className="container custom__container  my-5 ">
         <h2 className="mt-5 text-center  py-5">All Collection</h2>
         <CollectionNav></CollectionNav>
 

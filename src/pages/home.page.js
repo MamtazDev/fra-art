@@ -2,7 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { tns } from "tiny-slider/src/tiny-slider";
 import Choices from "choices.js";
 import Countdown from "react-countdown";
-import Slider from "../pages/Slider";
+import BannerSlider from "./BannerSlider";
+import Slider from "react-slick";
+// import "~slick-carousel/slick/slick.css";
+// import "~slick-carousel/slick/slick-theme.css";
 
 import {
   client01,
@@ -59,6 +62,8 @@ import "./new.css";
 import { ParamsContext } from "../context/ParamsProvider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const Home = () => {
   const { setUserId } = useContext(ParamsContext);
@@ -350,6 +355,25 @@ const Home = () => {
   }, []);
 
   console.log("collections", volumeCollection);
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
 
   return (
     <>
@@ -391,12 +415,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-
-
-
-
-
 
       <div className="container ">
         <div className="row justify-content-center">
@@ -472,7 +490,7 @@ const Home = () => {
                         </div>
                       </div>
                     </form>
-                    <Slider volumeCollection={volumeCollection} />
+                    <BannerSlider volumeCollection={volumeCollection} />
                   </div>
                 </div>
               </div>
@@ -480,12 +498,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-
-
-
-
-
 
       <div className="container mt-100 mt-60">
         <div className="row justify-content-center">
@@ -674,7 +686,7 @@ const Home = () => {
           <div className="row align-items-end mb-4 pb-2">
             <div className="col-md-8">
               <div className="section-title">
-                <h4 className="title mb-2">Best Creators & Sellers</h4>
+                <h4 className="title mb-2">Top Collections</h4>
                 <p className="text-muted mb-0">
                   Best sellers of the week's NFTs
                 </p>
@@ -683,27 +695,36 @@ const Home = () => {
 
             <div className="col-md-4">
               <div className="text-end d-md-block d-none">
-                <a href="/" className="btn btn-link primary text-dark">
+                <Link to="/top" className="btn btn-link primary text-dark">
                   See More <i className="uil uil-arrow-right"></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
 
           <div className="row">
             <div className="col-12 mt-3">
-              <div className="tiny-five-item-nav-arrow">
-                {creator?.map((data, index) => {
+              <Carousel
+                infinite={true}
+                swipeable={true}
+                // autoPlay={true}
+                autoPlaySpeed={1000}
+                removeArrowOnDeviceType={["desktop","tablet", "mobile"]}
+
+                responsive={responsive}
+              >
+                {volumeCollection?.map((data, index) => {
                   return (
                     <div className="tiny-slide" key={index}>
                       <div className="card creators creators-two creator-primary rounded-md shadow overflow-hidden mx-2 my-3">
                         <div
                           className="py-5"
-                          style={{ background: `url(${data.background})` }}
+                          width={300}
+                          style={{ background: `url(${data.banner})` }}
                         ></div>
                         <div className="position-relative mt-n5">
                           <img
-                            src={data.Image}
+                            src={data.image}
                             className="avatar avatar-md-md rounded-pill shadow-sm bg-light img-thumbnail mx-auto d-block"
                             alt=""
                           />
@@ -718,7 +739,70 @@ const Home = () => {
                             >
                               {data.name}
                             </a>
-                            <small className="text-muted">@{data.author}</small>
+                            <small className="text-muted">
+                              @
+                              {data.floorAsk?.token?.contract &&
+                                data.floorAsk?.token?.contract.slice(0, 4) +
+                                  "..." +
+                                  data.floorAsk?.token?.contract.slice(
+                                    data.floorAsk?.token?.contract.length - 4,
+                                    data.floorAsk?.token?.contract.length
+                                  )}
+                            </small>
+
+                            <div className="mt-3">
+                              <a
+                                href=""
+                                onClick={(e) => e.preventDefault()}
+                                className="btn btn-pills btn-soft-primary"
+                              >
+                                Info
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </Carousel>
+
+              {/* <div className="tiny-five-item-nav-arrow">
+                {volumeCollection?.map((data, index) => {
+                  return (
+                    <div className="tiny-slide" key={index}>
+                      <div className="card creators creators-two creator-primary rounded-md shadow overflow-hidden mx-2 my-3">
+                        <div
+                          className="py-5"
+                          width={300}
+                          style={{ background: `url(${data.banner})` }}
+                        ></div>
+                        <div className="position-relative mt-n5">
+                          <img
+                            src={data.image}
+                            className="avatar avatar-md-md rounded-pill shadow-sm bg-light img-thumbnail mx-auto d-block"
+                            alt=""
+                          />
+
+                          <div className="content text-center pt-2 p-4">
+                            <a
+                              href="/"
+                              onClick={(e) => {
+                                e.preventDefault();
+                              }}
+                              className="text-dark h6 name d-block mb-0"
+                            >
+                              {data.name}
+                            </a>
+                            <small className="text-muted">
+                              @
+                              {data.floorAsk?.token?.contract &&
+                                data.floorAsk?.token?.contract.slice(0, 4) +
+                                  "..." +
+                                  data.floorAsk?.token?.contract.slice(
+                                    data.floorAsk?.token?.contract.length - 4,data.floorAsk?.token?.contract.length
+                                  )}
+                            </small>
 
                             <div className="mt-3">
                               <a
@@ -735,7 +819,7 @@ const Home = () => {
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -743,7 +827,7 @@ const Home = () => {
             <div className="col">
               <div className="text-center d-md-none d-block">
                 <a href="/" className="btn btn-link primary text-dark">
-                  See More <i className="uil uil-arrow-right"></i>
+                  See More<i className="uil uil-arrow-right"></i>
                 </a>
               </div>
             </div>

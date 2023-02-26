@@ -45,6 +45,7 @@ const CollectionDetails = () => {
     console.log(vluSrt);
   };
 
+  // modallllllll
   const isMetaMaskInstalled = useCallback(() => {
     const { ethereum } = window;
     return Boolean(ethereum && ethereum.isMetaMask);
@@ -75,7 +76,7 @@ const CollectionDetails = () => {
       console.error(error);
     }
   }, [isMetaMaskInstalled]);
-
+// modallllll end
   const handleAttribute = (keys, values) => {
     if (searchAtt.length > 0) {
       searchAtt.map((item) => {

@@ -23,7 +23,7 @@ const Navbar = ({ nav }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+   
   const modaldata = [
     {
       image: metamask,
@@ -71,6 +71,7 @@ const Navbar = ({ nav }) => {
   }, [checkWalletConnet]);
 
   const _handleConnectWallet = useCallback(async () => {
+    setShow(false)
     const modal = document.getElementById("modal-metamask");
 
     if (!isMetaMaskInstalled()) {
@@ -483,6 +484,9 @@ const Navbar = ({ nav }) => {
 
                     {modaldata.map((data, i) => (
                       <div
+
+                      onClick={_handleConnectWallet}
+                      id="connectWallet"
                         style={{ cursor: "pointer" }}
                         className="option d-flex justify-content-between align-items-center border-bottom"
                       >
@@ -496,7 +500,12 @@ const Navbar = ({ nav }) => {
                       </div>
                     ))}
 
-                    <p style={{cursor:"pointer"}} className="text-center cursor-pointer pt-3">
+                    <p
+                      onClick={_handleConnectWallet}
+                      id="connectWallet"
+                      style={{ cursor: "pointer" }}
+                      className="text-center cursor-pointer pt-3"
+                    >
                       I don't have a wallet{" "}
                     </p>
                   </Modal.Body>

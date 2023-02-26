@@ -537,7 +537,7 @@ const Navbar = ({ nav }) => {
 
           <div id="navigation">
             {headerId === 0 ? (
-              <ul className="navigation-menu nav-left">
+              <ul style={{flexWrap:"nowrap"}} className="navigation-menu nav-left">
                 <li className="parent-parent-menu-item me-5">
                   <Link className="fw-bold" to="/">
                     Home

@@ -207,8 +207,41 @@ a {
 .modal-dialog {
   max-width: 718px;
 }
+.en{
+  position: relative;
+  cursor: pointer;
+}
+.en_hov{
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  visibility: hidden;
+  z-index: 9999;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.en:hover .en_hov{
+  visibility: visible;
+}
+.navigation-menu .nav-left{
+  flex-wrap: nowrap !important;
+}
+#searchItem{
+  width: 400px;
+ }
 
-
+@media (max-width: 1454px) {
+ #searchItem{
+  width: 80%;
+ }
+}
+@media (max-width: 1289px) {
+ #searchItem{
+  width: 50%;
+ }
+}
 @media (max-width: 768px) {
   .new-slide {
     margin: 20px 0 0;

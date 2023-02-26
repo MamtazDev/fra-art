@@ -23,7 +23,7 @@ const Navbar = ({ nav }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-   
+
   const modaldata = [
     {
       image: metamask,
@@ -71,7 +71,7 @@ const Navbar = ({ nav }) => {
   }, [checkWalletConnet]);
 
   const _handleConnectWallet = useCallback(async () => {
-    setShow(false)
+    setShow(false);
     const modal = document.getElementById("modal-metamask");
 
     if (!isMetaMaskInstalled()) {
@@ -414,10 +414,21 @@ const Navbar = ({ nav }) => {
             <li className="list-inline-item mb-0 me-5">
               <MdOutlineDarkMode className="fs-3" />
             </li> */}
-            <li className="list-inline-item mb-0 me-5">
+            <li className="list-inline-item mb-0 me-5 en">
               {/* <TbWorld className="fs-4" /> <span className="fw-bold">EN</span> */}
+              <TbWorld className="fs-4" />{" "}
+                  <span className="fw-bold">EN</span>
 
-              <div class="dropdown">
+<div className="en_hov shadow">
+  <p>JP</p>
+  <p>KE</p>
+  <p>LV</p>
+</div>
+
+
+
+
+              {/* <div class="dropdown">
                 <button
                   class="border-0 bg-transparent dropdown-toggle"
                   data-bs-toggle="dropdown"
@@ -443,7 +454,7 @@ const Navbar = ({ nav }) => {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </li>
             <li
               style={{ cursor: "pointer" }}
@@ -481,28 +492,38 @@ const Navbar = ({ nav }) => {
                       <Link to="#">Terms of Service</Link> and our{" "}
                       <Link to="#">Privacy Policy</Link> .
                     </p>
-
-                    {modaldata.map((data, i) => (
-                      <div
-
+                    <div
                       onClick={_handleConnectWallet}
                       id="connectWallet"
-                        style={{ cursor: "pointer" }}
-                        className="option d-flex justify-content-between align-items-center border-bottom"
-                      >
-                        <p
-                          style={{ fontSize: "20px" }}
-                          className="mb-0 fw-bold"
-                        >
-                          <img src={data.image} alt="" /> {data.name}
-                        </p>
-                        <AiOutlineArrowRight className="icon" />
-                      </div>
-                    ))}
+                      style={{ cursor: "pointer" }}
+                      className="option d-flex justify-content-between align-items-center border-bottom"
+                    >
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
+                        <img src={metamask} alt="" /> MetaMask
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+                    <div
+                      style={{ cursor: "pointer" }}
+                      className="option d-flex justify-content-between align-items-center border-bottom"
+                    >
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
+                        <img src={wallet} alt="" /> Wallet Connect
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+
+                    <div
+                      style={{ cursor: "pointer" }}
+                      className="option d-flex justify-content-between align-items-center border-bottom"
+                    >
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
+                        <img src={coinbase} alt="" /> Coinbase Wallet
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
 
                     <p
-                      onClick={_handleConnectWallet}
-                      id="connectWallet"
                       style={{ cursor: "pointer" }}
                       className="text-center cursor-pointer pt-3"
                     >
@@ -698,7 +719,7 @@ const Navbar = ({ nav }) => {
                         className="searchform"
                       >
                         <input
-                          style={{ marginTop: "20px", width: "400px" }}
+                          style={{ marginTop: "20px" }}
                           type="search"
                           className="search p-1 ps-4 pe-5 form-control border rounded "
                           name="s"

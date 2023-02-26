@@ -716,7 +716,10 @@ const Home = () => {
                 {volumeCollection?.map((data, index) => {
                   return (
                     <div className="tiny-slide" key={index}>
-                      <div className="card creators creators-two creator-primary rounded-md shadow overflow-hidden mx-2 my-3">
+                         <Link
+                        to={`/trending/${data.primaryContract}`}
+                      >
+                         <div className="card creators creators-two creator-primary rounded-md shadow overflow-hidden mx-2 my-3">
                         <div
                           className="py-5"
                           width={300}
@@ -762,6 +765,8 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
+                      </Link>
+                     
                     </div>
                   );
                 })}

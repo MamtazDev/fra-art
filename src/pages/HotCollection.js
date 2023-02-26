@@ -205,7 +205,9 @@ const HotCollection = () => {
                 // </tr>
 
                 <tr key={index} className="pointer hover-background">
-                  <th style={{fontSize:"14px"}}  scope="row">{index + 1}</th>
+                  <th style={{ fontSize: "14px" }} scope="row">
+                    {index + 1}
+                  </th>
                   <td
                   //  onClick={() => setUserId(collection?.primaryContract)}
                   >
@@ -219,62 +221,71 @@ const HotCollection = () => {
                         src={collection.collection?.logo}
                         alt=""
                       />
-                      <span style={{fontSize:"14px"}}  className="text-black fw-bold">
-
-                      {collection.collection?.collectionName}
+                      <span
+                        style={{ fontSize: "14px" }}
+                        className="text-black fw-bold"
+                      >
+                        {collection.collection?.collectionName}
                       </span>
                     </Link>{" "}
                   </td>
                   <td className="text-end">
-                    <div style={{fontSize:"14px"}} >
-                      {collection.mints}
+                    <div style={{ fontSize: "14px" }}>{collection.mints}</div>
+                    <div
+                      style={{ fontSize: "12px" }}
+                    className={ (collection.mintsChange * 100)<0? "text-danger fw-bold": "text-success fw-bold" }
+                    >
+                      {(collection.mintsChange * 100).toFixed(2)}%
                     </div>
-                      <div style={{fontSize:"12px"}} className="text-success fw-bold" >{(collection.mintsChange * 100).toFixed(2)}%</div>
                   </td>
                   <td className="text-end">
-                    <div style={{fontSize:"14px"}} >{collection.notableMinterNum}</div>
+                    <div style={{ fontSize: "14px" }}>
+                      {collection.notableMinterNum}
+                    </div>
                   </td>
                   <td className="text-end">
-                    <div style={{fontSize:"14px"}} >
+                    <div style={{ fontSize: "14px" }}>
                       {collection.uniqueMinterNum}
-                          </div>
-                      <div style={{fontSize:"12px"}}  className="">
-                        (
-                        {(
-                          (collection.uniqueMinterNum / collection.totalMints) *
-                          100
-                        ).toFixed(2)}
-                        %)
+                    </div>
+                    <div style={{ fontSize: "12px" }} className="">
+                      (
+                      {(
+                        (collection.uniqueMinterNum / collection.totalMints) *
+                        100
+                      ).toFixed(2)}
+                      %)
                     </div>
                   </td>
                   <td className="text-end">
-                    <div style={{fontSize:"14px"}} >
+                    <div style={{ fontSize: "14px" }}>
                       <FaEthereum />{" "}
                       {collection.latestMintPriceInETH.toFixed(4)}
-                          </div>
-                      <div style={{fontSize:"12px"}} >
-                        <span className="me-2 bg-light px-2 rounded-pill">floor</span>
-                        <span>
-                          <FaEthereum />
-                          {collection.floorPriceInETH
-                            ? collection.floorPriceInETH
-                            : 0}
-                        </span>
-                      </div>
-                  </td>
-                  <td className="text-end">
-                    <div style={{fontSize:"14px"}} >{collection.totalMints}</div>
-                  </td>
-                  <td className="text-end">
-                    <div style={{fontSize:"14px"}} >
-                      {collection.sales}
-                        </div>
-                      <div style={{fontSize:"12px"}} >
-                        {collection.salesChange
-                          ? (collection.salesChange * 100).toFixed(2)
+                    </div>
+                    <div style={{ fontSize: "12px" }}>
+                      <span className="me-2 bg-light px-2 rounded-pill">
+                        floor
+                      </span>
+                      <span>
+                        <FaEthereum />
+                        {collection.floorPriceInETH
+                          ? collection.floorPriceInETH
                           : 0}
-                        %
-                      </div>
+                      </span>
+                    </div>
+                  </td>
+                  <td className="text-end">
+                    <div style={{ fontSize: "14px" }}>
+                      {collection.totalMints}
+                    </div>
+                  </td>
+                  <td className="text-end">
+                    <div style={{ fontSize: "14px" }}>{collection.sales}</div>
+                    <div style={{ fontSize: "12px" }}>
+                      {collection.salesChange
+                        ? (collection.salesChange * 100).toFixed(2)
+                        : 0}
+                      %
+                    </div>
                   </td>
                 </tr>
               ))}

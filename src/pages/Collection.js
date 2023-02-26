@@ -272,7 +272,7 @@ const Collection = () => {
                         <FaEthereum />
                         {collection.volumeEth.toFixed(2)}
                       </div>
-                        <div className="text-success fw-bold" style={{fontSize:"12px"}}>
+                        <div className={(collection.volumeEthChange * 100)  < 0 ? "text-danger fw-bold": "text-success fw-bold" } style={{fontSize:"12px"}}>
                           {(collection.volumeEthChange * 100).toFixed(2)}%
                         </div>
                     </td>
@@ -281,7 +281,7 @@ const Collection = () => {
                         
                       {collection.saleNum}
                       </div>
-                      <div  className="text-success fw-bold" style={{fontSize:"12px"}}>{(collection.saleNumChange * 100).toFixed(2)}%</div>
+                      <div className={(collection.saleNumChange * 100)  < 0 ? "text-danger fw-bold": "text-success fw-bold" } style={{fontSize:"12px"}}>{(collection.saleNumChange * 100).toFixed(2)}%</div>
                     </td>
                     <td style={{fontSize:"14px"}} className="text-end">{collection.holderNum}</td>
                     <td style={{fontSize:"14px"}} className="text-end">

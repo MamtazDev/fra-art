@@ -182,7 +182,7 @@ const NewlyCollection = () => {
                     </div>
                   </td>
                   <td className="text-end">
-                    <div className="text-success fw-bold" style={{fontSize:"14px"}} >
+                    <div className={collection.marketCapEthChange24h<0 || collection.marketCapEthChange7d<0 || collection.marketCapEthChange30d < 0 ? "text-danger fw-bold": "text-success fw-bold" } style={{fontSize:"14px"}} >
                       {collection.marketCapEthChange24h &&
                         (collection.marketCapEthChange24h * 100).toFixed(2)}
                       {collection.marketCapEthChange7d &&

@@ -405,7 +405,7 @@
     #topnav {
         .navigation-menu {
             display: flex;
-            // flex-wrap: wrap;
+            flex-wrap: wrap;
             justify-content: center;
             > .has-submenu {
                 &:hover,

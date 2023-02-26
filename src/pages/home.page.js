@@ -378,7 +378,7 @@ const Home = () => {
   return (
     <>
       <section className="bg-half-100 d-table w-100 pb-0">
-        <div className="container position-relative" style={{ zIndex: 1 }}>
+        <div className="container custom__container position-relative" style={{ zIndex: 1 }}>
           <div className="bg-half-100 rounded-md shadow-sm position-relative overflow-hidden">
             <div className="bg-video-wrapper">
               {/* <iframe src="https://player.vimeo.com/video/502163294?background=1&autoplay=1&loop=1&byline=0&title=0"></iframe> */}

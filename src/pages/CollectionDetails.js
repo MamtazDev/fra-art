@@ -7,7 +7,14 @@ import { ParamsContext } from "../context/ParamsProvider";
 import { FaEthereum } from "react-icons/fa";
 import { BsLightningChargeFill } from "react-icons/bs";
 import { AiOutlineStar } from "react-icons/ai";
-import {MdShoppingCart} from 'react-icons/md';
+import { MdShoppingCart } from "react-icons/md";
+import { GrTwitter } from "react-icons/gr";
+import { BiWorld } from "react-icons/bi";
+import { AiOutlineShareAlt } from "react-icons/ai";
+import { MdOutlinedFlag } from "react-icons/md";
+import { MdLoop } from "react-icons/md";
+import { AiOutlineCaretDown } from "react-icons/ai";
+
 const CollectionDetails = () => {
   const { id } = useParams();
   // const { userId } = useContext(ParamsContext);
@@ -76,7 +83,7 @@ const CollectionDetails = () => {
       console.error(error);
     }
   }, [isMetaMaskInstalled]);
-// modallllll end
+  // modallllll end
   const handleAttribute = (keys, values) => {
     if (searchAtt.length > 0) {
       searchAtt.map((item) => {
@@ -151,6 +158,7 @@ const CollectionDetails = () => {
   // console.log("collec", collections);
 
   console.log("collection", collection);
+
   return (
     <div>
       {/* <div
@@ -256,7 +264,7 @@ const CollectionDetails = () => {
           />
         </div>
 
-        <div className="container">
+        <div className="px-4">
           <section className="d-flex flex-column flex-lg-row align-items-center gap-5">
             <div className="d-flex flex-column w-50">
               <h2>{collection[0]?.name}</h2>
@@ -264,6 +272,18 @@ const CollectionDetails = () => {
             </div>
 
             <div className="w-50 px-3 py-3">
+              <div className="d-flex justify-content-end text-secondary mb-3 ">
+                <GrTwitter className="me-3 border rounded-circle p-1 d-block fs-3" />
+
+                <BiWorld className="me-3 border rounded-circle p-1 d-block fs-3" />
+
+                <AiOutlineShareAlt className="me-3 border rounded-circle p-1 d-block fs-3" />
+                <MdOutlinedFlag className="me-3 border rounded-circle p-1 d-block fs-3" />
+                <span className=" border rounded-pill px-2 d-block ">
+                  <AiOutlineStar /> <span>0</span>
+                </span>
+              </div>
+
               <div className="row g-4 ">
                 <div className="col-12 col-lg-3 border rounded-start py-3 text-center">
                   <p className="text-secondary p-0 m-0">Floor Price</p>
@@ -298,6 +318,57 @@ const CollectionDetails = () => {
               </div>
             </div>
           </section>
+        </div>
+        <div className="px-4 d-flex align-items-center justify-content-between">
+          <div className=" d-flex align-items-center">
+            <div className="me-3">
+              <input
+                style={{ width: "300px", borderRadius: "50px" }}
+                class="search form-control ps-5"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                // onChange={handleChange}
+              />
+            </div>
+            <MdLoop className="fs-4 me-3" />
+            <p className="d-flex align-items-center mb-0 me-3">
+              <span className="live me-2"></span>Live View{" "}
+            </p>
+            <p className="mb-0 me-3">1 min ago</p>
+            <p className="mb-0">3,456 results</p>
+          </div>
+          <div>
+            <div class="dropdown">
+              <a
+                class="btn border dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Price: Low to high <AiOutlineCaretDown />
+              </a>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#">
+                    High to low
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    Low to medium{" "}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    Medium to high
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -455,7 +526,7 @@ const CollectionDetails = () => {
                     //         JSON.stringify(item.collection?.volume?.allTime)
                     //       ).includes(filteredData);
                     // })
-                    .map((collection, index) => (
+                    .map((collect, index) => (
                       // console.log(collection, "gggg")
                       <div
                         className="col-12 col-md-6 col-lg-3 card "
@@ -463,29 +534,29 @@ const CollectionDetails = () => {
                       >
                         <div className="border  m-1 box position-relative">
                           <Link
-                            to={`/trendingDetails/${collection.token?.collection?.id}/${collection.token.tokenId}`}
+                            to={`/trendingDetails/${collect.token?.collection?.id}/${collect.token.tokenId}`}
                           >
                             <div className="card__box">
                               <div className="main">
                                 <img
                                   className="parent_img w-100"
-                                  src={collection.token?.image}
+                                  src={collect.token?.image}
                                   alt=""
                                 />
-                                <MdShoppingCart className="cart_icon"/>
+                                <MdShoppingCart className="cart_icon" />
                                 <p className="bg-white p-2 rounded">0.0222</p>
                                 <div className="w-100 card_bottom px-4 d-flex justify-content-between align-items-center">
                                   <div className="small-img">
                                     <img
                                       className="rounded-circle"
                                       width={30}
-                                      src={collection.token?.image}
+                                      src={collection[0]?.image}
                                       alt=""
                                     />
                                   </div>
                                   <div
                                     style={{ height: "25px", width: "25px" }}
-                                    className="text-center bg-success  rounded-circle"
+                                    className="text-center bg-light  rounded-circle"
                                   >
                                     <AiOutlineStar className="text-secondary fw-bold" />
                                   </div>
@@ -497,7 +568,7 @@ const CollectionDetails = () => {
                             <div className="d-flex px-2 mt-4">
                               <p className="fw-bold mb-0">
                                 {" "}
-                                #{collection.token?.rarity}
+                                #{collect.token?.rarity}
                               </p>
                               {/* <p>{collection.token?.name}</p>{" "} */}
                             </div>
@@ -506,7 +577,7 @@ const CollectionDetails = () => {
                               <p className="text-start ms-4">
                                 <FaEthereum />
                                 {
-                                  collection.market?.floorAsk?.price?.amount
+                                  collect.market?.floorAsk?.price?.amount
                                     ?.decimal
                                 }
                               </p>

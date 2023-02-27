@@ -778,14 +778,14 @@ const Navbar = ({ nav }) => {
             ) : headerId === 1 ? (
               <ul className="navigation-menu nav-right">
                 <li className="parent-parent-menu-item">
-                  <Link to="/crowdpad">Join Crowdpads</Link>
+                  <Link to="/crowdpad">Join FraPad</Link>
                 </li>
                 <li className="parent-parent-menu-item">
-                  <Link to="/crowdpad/create">Create Crowdpad</Link>
+                  <Link to="/crowdpad/create">Create FraPad</Link>
                 </li>
               </ul>
             ) : headerId === 2 ? (
-              <ul className="navigation-menu nav-right">
+              <ul className="navigation-menu nav-left">
                 <li className="parent-parent-menu-item">
                   <Link to="/">Home</Link>
                 </li>

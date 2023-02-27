@@ -157,7 +157,7 @@ const CollectionDetails = () => {
   useEffect(() => {}, [collections]);
   // console.log("collec", collections);
 
-  console.log("collection", collection);
+  console.log("collection", collections);
 
   return (
     <div>
@@ -272,10 +272,15 @@ const CollectionDetails = () => {
             </div>
 
             <div className="w-50 px-3 py-3">
-              <div className="d-flex justify-content-end text-secondary mb-3 ">
-                <GrTwitter className="me-3 border rounded-circle p-1 d-block fs-3" />
+              <div className="d-flex justify-content-end  mb-3 ">
+                <Link to={`https://twitter.com/${collection[0]?.twitterUsername}`}>
+                <GrTwitter className="me-3 border rounded-circle p-1 d-block fs-3 text-secondary" />
+                </Link>
+                <Link to={`https://twitter.com/${collection[0]?.externalUrl}`}>
+            
+                <BiWorld className="me-3 border rounded-circle p-1 d-block fs-3 text-secondary" />
+                </Link>
 
-                <BiWorld className="me-3 border rounded-circle p-1 d-block fs-3" />
 
                 <AiOutlineShareAlt className="me-3 border rounded-circle p-1 d-block fs-3" />
                 <MdOutlinedFlag className="me-3 border rounded-circle p-1 d-block fs-3" />
@@ -336,7 +341,7 @@ const CollectionDetails = () => {
               <span className="live me-2"></span>Live View{" "}
             </p>
             <p className="mb-0 me-3">1 min ago</p>
-            <p className="mb-0">3,456 results</p>
+            <p className="mb-0">{collection[0]?.tokenCount} results</p>
           </div>
           <div>
             <div class="dropdown">

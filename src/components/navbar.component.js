@@ -709,6 +709,9 @@ const Navbar = ({ nav }) => {
                     FraPool
                   </Link>
                 </li>
+                <li className="parent-parent-menu-item">
+                  <Link to="/marketplace">Marketplace</Link>
+                </li>
                 <li className="list-inline-item mb-0 me-3">
                   <div className="search-bar">
                     <div id="itemSearch" className="menu-search mb-0">
@@ -768,9 +771,7 @@ const Navbar = ({ nav }) => {
                       ))}
                   </div>
                 </li>
-                {/* <li className="parent-parent-menu-item">
-                  <Link to="/marketplace">Marketplace</Link>
-                </li> */}
+               
                 {/* <li className="parent-parent-menu-item">
                   <Link to="/bridge">Bridge</Link>
                 </li> */}

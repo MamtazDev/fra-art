@@ -23,6 +23,7 @@ const CollectionDetails = () => {
   const [collectionsAll, setCollectionsAll] = useState({});
 
   const [collection, setCollection] = useState([]);
+  const [value, setValue] = useState("");
   const [visible, setVisible] = useState(false);
   const [attribute, setAttribute] = useState([]);
 
@@ -155,6 +156,10 @@ const CollectionDetails = () => {
   }, [searchAtt]);
 
   useEffect(() => {}, [collections]);
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
   // console.log("collec", collections);
 
   console.log("collection", collections);
@@ -326,16 +331,31 @@ const CollectionDetails = () => {
         </div>
         <div className="px-4 d-flex align-items-center justify-content-between">
           <div className=" d-flex align-items-center">
-            <div className="me-3">
-              <input
-                style={{ width: "300px", borderRadius: "50px" }}
-                class="search form-control ps-5"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                // onChange={handleChange}
-              />
-            </div>
+          <div id="itemSearch" className="menu-search mb-0 me-3">
+                      <form
+                        role="search"
+                        method="get"
+                        id="searchItemform"
+                        className="searchform"
+                      >
+                        <input
+                        
+                          type="search"
+                          className="search p-1 ps-4 pe-5 form-control border rounded "
+                          name="s"
+                          id="searchItem"
+                          value={value}
+                          onChange={handleChange}
+                        />
+
+                        <input
+                          className="d-none"
+                          type="submit"
+                          id="searchItemsubmit"
+                          value="Search"
+                        />
+                      </form>
+                    </div>
             <MdLoop className="fs-4 me-3" />
             <p className="d-flex align-items-center mb-0 me-3">
               <span className="live me-2"></span>Live View{" "}
@@ -522,7 +542,7 @@ const CollectionDetails = () => {
                   </div>
                 )} */}
                 {collections && collections.length > 0 ? (
-                  collections
+                  collections 
                     // ?.filter((item) => {
                     //   return filteredData.toLowerCase() === ""
                     //     ? item

@@ -14,6 +14,7 @@ import { AiOutlineShareAlt } from "react-icons/ai";
 import { MdOutlinedFlag } from "react-icons/md";
 import { MdLoop } from "react-icons/md";
 import { AiOutlineCaretDown } from "react-icons/ai";
+import moment from "moment";
 
 const CollectionDetails = () => {
   const { id } = useParams();
@@ -21,6 +22,8 @@ const CollectionDetails = () => {
 
   const [collections, setCollections] = useState([]);
   const [collectionsAll, setCollectionsAll] = useState({});
+  const [searchCollection, setSearchCollection] = useState([]);
+  const [price, setPrice] = useState("2");
 
   const [collection, setCollection] = useState([]);
   const [value, setValue] = useState("");
@@ -51,6 +54,24 @@ const CollectionDetails = () => {
     setCollections(vluSrt);
     // parseInt(item?.volume?.allTime) === valN
     console.log(vluSrt);
+  };
+
+  const handleChange = (event) => {
+    const searchValue = event.target.value;
+
+    const searchedData = searchCollection.filter((item) => {
+      const searchTerm = searchValue.toLocaleLowerCase();
+      const collectionName = item.token?.tokenId.toLocaleLowerCase();
+      return searchTerm && collectionName.startsWith(searchTerm);
+    });
+
+    if (searchValue.length > 0) {
+      setCollections(searchedData);
+    } else {
+      setCollections(searchCollection);
+    }
+
+    console.log(searchedData);
   };
 
   // modallllllll
@@ -152,17 +173,15 @@ const CollectionDetails = () => {
         .join("&")} `
     )
       .then((res) => res.json())
-      .then((data) => setCollections(data.tokens));
+      .then((data) => {
+        setCollections(data.tokens);
+        setSearchCollection(data.tokens);
+      });
   }, [searchAtt]);
 
   useEffect(() => {}, [collections]);
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
 
   // console.log("collec", collections);
-
-  console.log("collection", collections);
 
   return (
     <div>
@@ -278,14 +297,14 @@ const CollectionDetails = () => {
 
             <div className="w-50 px-3 py-3">
               <div className="d-flex justify-content-end  mb-3 ">
-                <Link to={`https://twitter.com/${collection[0]?.twitterUsername}`}>
-                <GrTwitter className="me-3 border rounded-circle p-1 d-block fs-3 text-secondary" />
+                <Link
+                  to={`https://twitter.com/${collection[0]?.twitterUsername}`}
+                >
+                  <GrTwitter className="me-3 border rounded-circle p-1 d-block fs-3 text-secondary" />
                 </Link>
                 <Link to={`https://twitter.com/${collection[0]?.externalUrl}`}>
-            
-                <BiWorld className="me-3 border rounded-circle p-1 d-block fs-3 text-secondary" />
+                  <BiWorld className="me-3 border rounded-circle p-1 d-block fs-3 text-secondary" />
                 </Link>
-
 
                 <AiOutlineShareAlt className="me-3 border rounded-circle p-1 d-block fs-3" />
                 <MdOutlinedFlag className="me-3 border rounded-circle p-1 d-block fs-3" />
@@ -331,68 +350,53 @@ const CollectionDetails = () => {
         </div>
         <div className="px-4 d-flex align-items-center justify-content-between">
           <div className=" d-flex align-items-center">
-          <div id="itemSearch" className="menu-search mb-0 me-3">
-                      <form
-                        role="search"
-                        method="get"
-                        id="searchItemform"
-                        className="searchform"
-                      >
-                        <input
-                        
-                          type="search"
-                          className="search p-1 ps-4 pe-5 form-control border rounded "
-                          name="s"
-                          id="searchItem"
-                          value={value}
-                          onChange={handleChange}
-                        />
+            <div id="itemSearch" className="menu-search mb-0 me-3">
+              <form
+                role="search"
+                method="get"
+                id="searchItemform"
+                className="searchform"
+              >
+                <input
+                  type="search"
+                  className="search p-1 ps-5 pe-5 form-control border rounded "
+                  name="s"
+                  id="searchItem"
+                  // value={value}
+                  onChange={handleChange}
+                />
 
-                        <input
-                          className="d-none"
-                          type="submit"
-                          id="searchItemsubmit"
-                          value="Search"
-                        />
-                      </form>
-                    </div>
+                <input
+                  className="d-none"
+                  type="submit"
+                  id="searchItemsubmit"
+                  value="Search"
+                />
+              </form>
+            </div>
             <MdLoop className="fs-4 me-3" />
             <p className="d-flex align-items-center mb-0 me-3">
               <span className="live me-2"></span>Live View{" "}
             </p>
-            <p className="mb-0 me-3">1 min ago</p>
+            <p className="mb-0 me-3">
+              {collections &&
+                collections.length > 0 &&
+                moment()
+                  .startOf("hour")
+                  .fromNow(collections[0].token?.lastFlagUpdate)}{" "}
+              ago
+            </p>
             <p className="mb-0">{collection[0]?.tokenCount} results</p>
           </div>
           <div>
-            <div class="dropdown">
-              <a
-                class="btn border dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Price: Low to high <AiOutlineCaretDown />
-              </a>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    High to low
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Low to medium{" "}
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Medium to high
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <select
+              className="form-select pointer"
+              aria-label="Default select example"
+              onChange={(e) => setPrice(e.target.value)}
+            >
+              <option value="2">Price: Low to High</option>
+              <option value="1">Price: High to Low</option>
+            </select>
           </div>
         </div>
       </section>
@@ -542,7 +546,20 @@ const CollectionDetails = () => {
                   </div>
                 )} */}
                 {collections && collections.length > 0 ? (
-                  collections 
+                  collections
+                    .sort((a, b) => {
+                      if (price === "2") {
+                        return (
+                          a.market?.floorAsk?.price?.amount?.decimal -
+                          b.market?.floorAsk?.price?.amount?.decimal
+                        );
+                      } else if (price === "1") {
+                        return (
+                          b.market?.floorAsk?.price?.amount?.decimal -
+                          a.market?.floorAsk?.price?.amount?.decimal
+                        );
+                      }
+                    })
                     // ?.filter((item) => {
                     //   return filteredData.toLowerCase() === ""
                     //     ? item
@@ -551,6 +568,9 @@ const CollectionDetails = () => {
                     //         JSON.stringify(item.collection?.volume?.allTime)
                     //       ).includes(filteredData);
                     // })
+                    // .sort((a,b)=> a.market?.floorAsk?.price?.amount
+                    // ?.decimal -b.market?.floorAsk?.price?.amount
+                    // ?.decimal)
                     .map((collect, index) => (
                       // console.log(collection, "gggg")
                       <div
@@ -569,7 +589,8 @@ const CollectionDetails = () => {
                                   alt=""
                                 />
                                 <MdShoppingCart className="cart_icon" />
-                                <p className="bg-white p-2 rounded">0.0222</p>
+                              <p className="bg-white p-2 rounded"> {collect.market?.floorAsk?.price?.amount
+                                  ?.decimal.toFixed(2)}</p>
                                 <div className="w-100 card_bottom px-4 d-flex justify-content-between align-items-center">
                                   <div className="small-img">
                                     <img
@@ -589,11 +610,11 @@ const CollectionDetails = () => {
                               </div>
                             </div>
                           </Link>
-                          <div className="text-center mt-2 ">
+                          <div className="text-center mt-3 mx-2">
                             <div className="d-flex px-2 mt-4">
                               <p className="fw-bold mb-0">
                                 {" "}
-                                #{collect.token?.rarity}
+                                #{collect.token?.tokenId}
                               </p>
                               {/* <p>{collection.token?.name}</p>{" "} */}
                             </div>

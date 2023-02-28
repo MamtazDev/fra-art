@@ -724,7 +724,7 @@ const Navbar = ({ nav }) => {
                         <input
                           style={{ marginTop: "20px" }}
                           type="search"
-                          className="search p-1 ps-4 pe-5 form-control border rounded "
+                          className="search p-1 ps-5 pe-5 form-control border rounded "
                           name="s"
                           id="searchItem"
                           value={value}

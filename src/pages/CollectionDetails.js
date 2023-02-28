@@ -630,9 +630,7 @@ const CollectionDetails = () => {
                                   collect.market?.floorAsk?.price?.amount
                                     ?.decimal
                                 } */}
-                                {
-                                  collect.token?.lastSell?.value
-                                }
+                                {collect.token?.lastSell?.value}
                               </p>
                             </div>
                             <div class="d-flex align-items-center">

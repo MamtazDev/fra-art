@@ -592,7 +592,7 @@ const CollectionDetails = () => {
                                 <p className="bg-white p-2 rounded">
                                   {" "}
                                   {collect.market?.floorAsk?.price?.amount?.decimal.toFixed(
-                                    2
+                                    4
                                   )}
                                 </p>
                                 <div className="w-100 card_bottom px-4 d-flex justify-content-between align-items-center">
@@ -626,9 +626,12 @@ const CollectionDetails = () => {
                               <p>Last Price</p>
                               <p className="text-start ms-4">
                                 <FaEthereum />
-                                {
+                                {/* {
                                   collect.market?.floorAsk?.price?.amount
                                     ?.decimal
+                                } */}
+                                {
+                                  collect.token?.lastSell?.value
                                 }
                               </p>
                             </div>

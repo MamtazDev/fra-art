@@ -738,7 +738,7 @@ const Home = () => {
                               onClick={(e) => {
                                 e.preventDefault();
                               }}
-                              className="text-dark h6 name d-block mb-0"
+                              className=" text-dark h6 name d-block mb-0"
                             >
                               {data.name}
                             </a>

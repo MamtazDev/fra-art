@@ -181,7 +181,7 @@ const CollectionDetails = () => {
 
   useEffect(() => {}, [collections]);
 
-  // console.log("collec", collections);
+  console.log("collec", collections);
 
   return (
     <div>

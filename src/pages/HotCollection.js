@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ParamsContext } from "../context/ParamsProvider";
 import { FaEthereum } from "react-icons/fa";
 import CollectionNav from "./CollectionNav";
+import ques from "../assets/images/ques.png";
 
 const HotCollection = () => {
   const { setUserId } = useContext(ParamsContext);
@@ -214,13 +215,24 @@ const HotCollection = () => {
                     <Link
                       to={`/trending/${collection.collection?.contractAddress}`}
                     >
-                      <img
-                        width={40}
-                        height={40}
-                        className="rounded-circle  me-4"
-                        src={collection.collection?.logo}
-                        alt=""
-                      />
+                      {collection.collection?.logo ? (
+                        <img
+                          width={40}
+                          height={40}
+                          className="rounded-circle  me-4"
+                          src={collection.collection?.logo}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          width={40}
+                          height={40}
+                          className="rounded-circle  me-4"
+                          src={ques}
+                          alt=""
+                        />
+                      )}
+
                       <span
                         style={{ fontSize: "14px" }}
                         className="text-black fw-bold"
@@ -233,7 +245,11 @@ const HotCollection = () => {
                     <div style={{ fontSize: "14px" }}>{collection.mints}</div>
                     <div
                       style={{ fontSize: "12px" }}
-                    className={ (collection.mintsChange * 100)<0? "text-danger fw-bold": "text-success fw-bold" }
+                      className={
+                        collection.mintsChange * 100 < 0
+                          ? "text-danger fw-bold"
+                          : "text-success fw-bold"
+                      }
                     >
                       {(collection.mintsChange * 100).toFixed(2)}%
                     </div>

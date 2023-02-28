@@ -12,7 +12,7 @@ const Collection = () => {
   const [allNewCollections, setAllNewCollections] = useState([]);
   const [dataSort, setDataSort] = useState("1h");
 
-  const [load, setLoad] = useState(6);
+  const [load, setLoad] = useState(20);
   const [show, setShow] = useState(true);
 
   const handleChange = (event) => {
@@ -51,7 +51,7 @@ const Collection = () => {
   }, [dataSort]);
 
   const handleLoadMore = () => {
-    setLoad(load + 6);
+    setLoad(load + 20);
   };
   useEffect(() => {
     if (load >= collections.length) {
@@ -230,7 +230,9 @@ const Collection = () => {
 
             {/* collection list */}
             <tbody>
-              {newCollections.map((collection, index) => {
+              {newCollections
+              // .slice(0, load)
+              .map((collection, index) => {
                 return (
                   <tr key={index} className="pointer hover-background">
                     <th style={{fontSize:"14px"}} scope="row">{index + 1}</th>

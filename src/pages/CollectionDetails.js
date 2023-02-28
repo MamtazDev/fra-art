@@ -589,8 +589,12 @@ const CollectionDetails = () => {
                                   alt=""
                                 />
                                 <MdShoppingCart className="cart_icon" />
-                              <p className="bg-white p-2 rounded"> {collect.market?.floorAsk?.price?.amount
-                                  ?.decimal.toFixed(2)}</p>
+                                <p className="bg-white p-2 rounded">
+                                  {" "}
+                                  {collect.market?.floorAsk?.price?.amount?.decimal.toFixed(
+                                    2
+                                  )}
+                                </p>
                                 <div className="w-100 card_bottom px-4 d-flex justify-content-between align-items-center">
                                   <div className="small-img">
                                     <img

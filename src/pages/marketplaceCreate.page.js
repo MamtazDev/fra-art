@@ -174,7 +174,7 @@ const MarketplaceCreate = () => {
               </h4>
             </div>
             <div className="col-lg-4">
-              <div className="hstack gap-3 justify-content-end">
+              {/* <div className="hstack gap-3 justify-content-end">
                 <button className="btn btn-soft-primary">
                   <img src={ethereum} style={{ paddingRight: "15px" }} />
                   Ethereum
@@ -183,7 +183,7 @@ const MarketplaceCreate = () => {
                   <img src={polygon} style={{ paddingRight: "15px" }} />
                   Polygon
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

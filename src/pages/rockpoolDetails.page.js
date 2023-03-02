@@ -347,7 +347,7 @@ const RockpoolDetails = () => {
                       role="tabpanel"
                       aria-labelledby="detail-tab"
                     >
-                      <h3>RockPool Details</h3>
+                      <h3>FraPool Details</h3>
                       <p className="text-dark">
                         Fraction Name
                         <br />

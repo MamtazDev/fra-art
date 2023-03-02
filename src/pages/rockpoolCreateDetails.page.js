@@ -127,7 +127,7 @@ const RockpoolCreateDetails = () => {
                 </div>
               )}
               <button className="btn btn-primary rounded-md w-100 mt-3">
-                Create Rockpool
+                Create FraPool
               </button>
             </div>
           </div>

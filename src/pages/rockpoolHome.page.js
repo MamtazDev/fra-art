@@ -28,13 +28,13 @@ function RockpoolHome() {
             <div className="col-lg-7 col-md-6">
               <div className="title-heading">
                 <h6 className="text-light title-dark fw-normal">
-                  Rockpool: the best of the Opensea is here
+                  FraPool: the best of the Opensea is here
                 </h6>
                 <h4 className="heading text-white title-dark fw-bold mb-3">
                   Buy collectively to own <br /> extraordinary NFTs
                 </h4>
                 <p className="text-white-50 para-desc mb-0 mb-0">
-                  Rockpool is a tool that allows you to collectively buy any NFT
+                  FraPool is a tool that allows you to collectively buy any NFT
                   (ERC721) listed at a fixed price on OpenSea.
                 </p>
 
@@ -380,7 +380,7 @@ function RockpoolHome() {
                     aria-labelledby="headingOne"
                   >
                     <div className="accordion-body text-muted bg-white">
-                      It's pretty fast, as RockPool has optimization. So just
+                      It's pretty fast, as FraPool has optimization. So just
                       click "Join Pools" or "Create a Pool" to start. To join a
                       Pool, it will certainly be faster. And to create a Private
                       Pool, you will have to choose the curator fee and a few
@@ -464,7 +464,7 @@ function RockpoolHome() {
                     aria-labelledby="headingFour"
                   >
                     <div className="accordion-body text-muted bg-white">
-                      You will still be buying from OpenSea! But with RockPool,
+                      You will still be buying from OpenSea! But with FraPool,
                       you buy fractions of NFTs collectively, which makes you
                       vary the portfolio, expose yourself to less risk and
                       acquire an NFT more easily. In addition, buying this
@@ -582,7 +582,7 @@ function RockpoolHome() {
                     aria-labelledby="headingEight"
                   >
                     <div className="accordion-body text-muted bg-white">
-                      Every NFT purchased and fractionalized by RockPool has a
+                      Every NFT purchased and fractionalized by FraPool has a
                       multiplier of the final amount (Auction Price Multiplier).
                       Example: a Mutant Ape that costs 20 Eth with the Auction
                       Price Multiplier of 1.5x – its resale price is 30 Eth. In

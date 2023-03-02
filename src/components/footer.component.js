@@ -131,7 +131,7 @@ const Footer = () => {
                       </li>
                       <li>
                         <Link to="/rockpool" className="text-foot">
-                          <i className="uil uil-angle-right-b me-1"></i>Rockpool
+                          <i className="uil uil-angle-right-b me-1"></i>FraPool
                         </Link>
                       </li>
                       <li>

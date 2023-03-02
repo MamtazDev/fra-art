@@ -339,7 +339,7 @@ function RockpoolHome() {
         <div className="container">
           <div className="row justify-content-center text-center">
             <h3 className="title mb-5 fw-bold">
-              The best of the OpenSea is on the RockPool!
+              The best of the OpenSea is on the FraPool!
             </h3>
             <iframe
               width="1300"

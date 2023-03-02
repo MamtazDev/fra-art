@@ -298,11 +298,11 @@ const Collection = () => {
               })}
             </tbody>
           </table>
-          {show && (
+          {/* {show && (
             <button onClick={handleLoadMore} type="">
               Load More
             </button>
-          )}
+          )} */}
         </div>
       </div>
     </div>

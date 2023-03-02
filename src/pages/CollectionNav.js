@@ -14,7 +14,7 @@ const CollectionNav = () => {
         }`}
         onClick={() => setActive("trending")}
       >
-        <div>Treding</div>
+        <div>Trending</div>
       </Link>
       <Link
         to="/hot"

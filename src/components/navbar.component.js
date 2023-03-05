@@ -11,7 +11,7 @@ import metamask from "../assets/images/svg/metamask.svg";
 import coinbase from "../assets/images/svg/coinbase.svg";
 import wallet from "../assets/images/svg/walletconnect.svg";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { Badge, Modal } from "react-bootstrap";
+import { Badge, Button, Modal } from "react-bootstrap";
 import { TbWorld } from "react-icons/tb";
 
 const Navbar = ({ nav }) => {
@@ -20,24 +20,17 @@ const Navbar = ({ nav }) => {
   const [headerId, setHeaderId] = useState(0);
   const [value, setValue] = useState("");
   const [collections, setCollection] = useState([]);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
-  const modaldata = [
-    {
-      image: metamask,
-      name: "MetaMask",
-    },
-    {
-      image: wallet,
-      name: "Wallet Connect",
-    },
-    {
-      image: coinbase,
-      name: "Coinbase Wallet",
-    },
-  ];
+  const [show, setShow] = useState(false);
+
+  const [shownext, setShownext] = useState(false);
+  // const handleClosenext = () =>{)};
+  const handleShownext = () => {
+    setTimeout(() => {
+      setShownext(true);
+    }, 0);
+    setShow(false);
+  };
 
   const isMetaMaskInstalled = useCallback(() => {
     const { ethereum } = window;
@@ -72,6 +65,7 @@ const Navbar = ({ nav }) => {
 
   const _handleConnectWallet = useCallback(async () => {
     setShow(false);
+    setShownext(false);
     const modal = document.getElementById("modal-metamask");
 
     if (!isMetaMaskInstalled()) {
@@ -209,7 +203,7 @@ const Navbar = ({ nav }) => {
           </a>
           <div className="menu-extras">
             <div className="menu-item">
-              <a
+              <button
                 className="navbar-toggle"
                 id="isToggle"
                 onClick={(e) => {
@@ -222,7 +216,7 @@ const Navbar = ({ nav }) => {
                   <span></span>
                   <span></span>
                 </div>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -462,7 +456,10 @@ const Navbar = ({ nav }) => {
 
             <li className="list-inline-item mb-0">
               <div>
-                <button className="wallet_btn py-1 px-3" onClick={handleShow}>
+                <button
+                  className="wallet_btn py-1 px-3"
+                  onClick={() => setShow(true)}
+                >
                   Connect Your Wallet
                 </button>
 
@@ -473,7 +470,7 @@ const Navbar = ({ nav }) => {
                   centered
                   // size="lg"
                   show={show}
-                  onHide={handleClose}
+                  onHide={() => setShow(false)}
                 >
                   <Modal.Header closeButton className="mx-auto border-0 pb-0">
                     <Modal.Title className="mx-auto">
@@ -517,6 +514,17 @@ const Navbar = ({ nav }) => {
                       <AiOutlineArrowRight className="icon" />
                     </div>
 
+                    <div
+                      onClick={handleShownext}
+                      style={{ cursor: "pointer" }}
+                      className="option d-flex justify-content-between align-items-center border-bottom"
+                    >
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
+                        <img src={coinbase} alt="" /> Bull Pass
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+
                     <p
                       style={{ cursor: "pointer" }}
                       className="text-center cursor-pointer pt-3"
@@ -524,6 +532,51 @@ const Navbar = ({ nav }) => {
                       I don't have a wallet{" "}
                     </p>
                   </Modal.Body>
+                </Modal>
+
+                <Modal show={shownext}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Bull Pass Payment</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <form>
+                      <div class="mb-3">
+                        <label
+                          for="exampleFormControlInput1"
+                          class="form-label"
+                        >
+                          Email address
+                        </label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleFormControlInput1"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label
+                          for="exampleFormControlInput1"
+                          class="form-label"
+                        >
+                         Password
+                        </label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="exampleFormControlInput1"
+                        />
+                      </div>
+                    </form>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      variant="primary"
+                      onClick={() => setShownext(false)}
+                    >
+                      Submit
+                    </Button>
+                 
+                  </Modal.Footer>
                 </Modal>
               </div>
             </li>

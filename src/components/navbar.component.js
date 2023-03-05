@@ -464,8 +464,6 @@ const Navbar = ({ nav }) => {
                 </button>
 
                 <Modal
-                  //   style={{ width: "720px",
-                  // margin:"auto" }}
                   aria-labelledby="contained-modal-title-vcenter"
                   centered
                   // size="lg"

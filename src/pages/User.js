@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Button, Modal } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import metamask from "../assets/images/svg/metamask.svg";
+import coinbase from "../assets/images/svg/coinbase.svg";
+import wallet from "../assets/images/svg/walletconnect.svg";
+import { FaEthereum } from "react-icons/fa";
 
 const User = () => {
   const { pid } = useParams();
@@ -8,13 +14,41 @@ const User = () => {
   const [collection, setCollection] = useState({});
   const [attribute, setAttribute] = useState([]);
   const [myPublicAddress, setMyPublicAddress] = useState("qhut0...hfteh45");
+  const [show, setShow] = useState(false);
 
+  const [shownext, setShownext] = useState(false);
+
+  const handleShownext = () => {
+    setTimeout(() => {
+      setShownext(true);
+    }, 0);
+    setShow(false);
+  };
   const isMetaMaskInstalled = useCallback(() => {
     const { ethereum } = window;
     return Boolean(ethereum && ethereum.isMetaMask);
   }, []);
 
+  const checkWalletConnet = useCallback(async () => {
+    if (isMetaMaskInstalled()) {
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      if (!!accounts[0]) {
+        const walletAddress =
+          accounts[0].split("").slice(0, 6).join("") +
+          "..." +
+          accounts[0]
+            .split("")
+            .slice(accounts[0].length - 7, accounts[0].length)
+            .join("");
+        setMyPublicAddress(walletAddress);
+      }
+    }
+  }, [isMetaMaskInstalled]);
   const _handleConnectWallet = useCallback(async () => {
+    setShow(false);
+    setShownext(false);
     const modal = document.getElementById("modal-metamask");
 
     if (!isMetaMaskInstalled()) {
@@ -39,6 +73,37 @@ const User = () => {
       console.error(error);
     }
   }, [isMetaMaskInstalled]);
+
+  // const isMetaMaskInstalled = useCallback(() => {
+  //   const { ethereum } = window;
+  //   return Boolean(ethereum && ethereum.isMetaMask);
+  // }, []);
+
+  // const _handleConnectWallet = useCallback(async () => {
+  //   const modal = document.getElementById("modal-metamask");
+
+  //   if (!isMetaMaskInstalled()) {
+  //     modal.classList.add("show");
+  //     modal.style.display = "block";
+  //     return;
+  //   }
+  //   try {
+  //     await window.ethereum.request({ method: "eth_requestAccounts" });
+  //     const accounts = await window.ethereum.request({
+  //       method: "eth_accounts",
+  //     });
+  //     const walletAddress =
+  //       accounts[0].split("").slice(0, 6).join("") +
+  //       "..." +
+  //       accounts[0]
+  //         .split("")
+  //         .slice(accounts[0].length - 7, accounts[0].length)
+  //         .join("");
+  //     setMyPublicAddress(walletAddress);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, [isMetaMaskInstalled]);
 
   useEffect(() => {
     fetch(`https://api.opensea.io/api/v1/asset/${pid}/${token}`)
@@ -200,13 +265,124 @@ const User = () => {
                     </div>
                   </div>
                   <a
-                    onClick={_handleConnectWallet}
+                    // onClick={_handleConnectWallet}
                     id="connectWallet"
                     className="btn btn-primary"
+                    onClick={() => setShow(true)}
                   >
                     Buy Now
                   </a>
                 </div>
+                <Modal
+                  aria-labelledby="contained-modal-title-vcenter"
+                  centered
+                  // size="lg"
+                  show={show}
+                  onHide={() => setShow(false)}
+                >
+                  <Modal.Header closeButton className="mx-auto border-0 pb-0">
+                    <Modal.Title className="mx-auto">
+                      Connect Your Wallet
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <p style={{ fontSize: "14px" }} className="text-center">
+                      By connecting your wallet, you agree to our{" "}
+                      <Link to="#">Terms of Service</Link> and our{" "}
+                      <Link to="#">Privacy Policy</Link> .
+                    </p>
+                    <div
+                      onClick={_handleConnectWallet}
+                      id="connectWallet"
+                      style={{ cursor: "pointer" }}
+                      className="option d-flex justify-content-between align-items-center border-bottom"
+                    >
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
+                        <img src={metamask} alt="" /> MetaMask
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+                    <div
+                      style={{ cursor: "pointer" }}
+                      className="option d-flex justify-content-between align-items-center border-bottom"
+                    >
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
+                        <img src={wallet} alt="" /> Wallet Connect
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+
+                    <div
+                      style={{ cursor: "pointer" }}
+                      className="option d-flex justify-content-between align-items-center border-bottom"
+                    >
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
+                        <img src={coinbase} alt="" /> Coinbase Wallet
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+
+                    <div
+                      onClick={handleShownext}
+                      style={{ cursor: "pointer" }}
+                      className="option d-flex justify-content-between align-items-center border-bottom"
+                    >
+                      <p style={{ fontSize: "20px" }} className="mb-0 fw-bold">
+                        <img src={coinbase} alt="" /> Bull Pass
+                      </p>
+                      <AiOutlineArrowRight className="icon" />
+                    </div>
+
+                    <p
+                      style={{ cursor: "pointer" }}
+                      className="text-center cursor-pointer pt-3"
+                    >
+                      I don't have a wallet{" "}
+                    </p>
+                  </Modal.Body>
+                </Modal>
+
+                <Modal show={shownext}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Bull Pass Payment</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <form>
+                      <div class="mb-3">
+                        <label
+                          for="exampleFormControlInput1"
+                          class="form-label"
+                        >
+                          Email address
+                        </label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleFormControlInput1"
+                        />
+                      </div>
+
+                      <div class="mb-3">
+                        <p className="text-black">
+                          Price: <FaEthereum />{" "}
+                          {collection?.collection?.stats?.one_day_average_price
+                            ? collection?.collection?.stats?.one_day_average_price.toFixed(
+                                4
+                              )
+                            : "-"}
+                        </p>
+                      </div>
+                    </form>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      variant="primary"
+                      onClick={() => setShownext(false)}
+                    >
+                      Submit
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
 
                 {/* <div className="border rounded p-3">
                   <h6>Attributes</h6>

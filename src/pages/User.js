@@ -15,16 +15,16 @@ const User = () => {
   const [attribute, setAttribute] = useState([]);
   const [myPublicAddress, setMyPublicAddress] = useState("qhut0...hfteh45");
   const [show, setShow] = useState(false);
-  const [email, setEmail]= useState("")
+  const [email, setEmail] = useState("");
 
   const [shownext, setShownext] = useState(false);
 
-  const [payment,setPayment] = useState('');
-  useEffect(()=>{
-    fetch('http://localhost:8080/PaymentAPI/dhhasansaha11@gmail.com/10000')
-    .then(res=>res.json())
-    .then(data=>console.log(data))
-  },[])
+  const [payment, setPayment] = useState("");
+  useEffect(() => {
+    fetch("http://localhost:8080/PaymentAPI/dhhasansaha11@gmail.com/10000")
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
 
   const handleShownext = () => {
     setTimeout(() => {
@@ -113,20 +113,21 @@ const User = () => {
   //   }
   // }, [isMetaMaskInstalled]);
 
-  
-
-  const handleSubmit =(price)=>{
-    fetch(`http://localhost:8080/PaymentAPI/${email}/${price}`)
-    .then(res=>res.json())
-    .then(data=>{
-      if(data ==="success 1" ){
-        setShownext(false)
-        setTimeout(()=>{
-          alert('Payment Successfull')
-        },150)
-      }
-    })
-  }
+  const handleSubmit = (price) => {
+    // fetch(`http://localhost:8080/PaymentAPI/${email}/${price}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data === "success 1") {
+    //       setShownext(false);
+    //       setTimeout(() => {
+    //         alert("Payment Successfull");
+    //       }, 150);
+    //     }
+    //   });
+    setShownext(false)
+         
+         
+  };
 
   useEffect(() => {
     fetch(`https://api.opensea.io/api/v1/asset/${pid}/${token}`)
@@ -382,7 +383,7 @@ const User = () => {
                           type="email"
                           class="form-control"
                           id="exampleFormControlInput1"
-                          onChange={(e)=>setEmail(e.target.value)}
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
 
@@ -402,7 +403,11 @@ const User = () => {
                     <Button
                       variant="primary"
                       // onClick={() => setShownext(false)}
-                      onClick={()=>handleSubmit(collection?.collection?.stats?.one_day_average_price)}
+                      onClick={() =>
+                        handleSubmit(
+                          collection?.collection?.stats?.one_day_average_price
+                        )
+                      }
                     >
                       Submit
                     </Button>

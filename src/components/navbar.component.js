@@ -556,10 +556,10 @@ const Navbar = ({ nav }) => {
                           for="exampleFormControlInput1"
                           class="form-label"
                         >
-                         Password
+                         Price
                         </label>
                         <input
-                          type="password"
+                          type="text"
                           class="form-control"
                           id="exampleFormControlInput1"
                         />

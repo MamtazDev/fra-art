@@ -63,6 +63,37 @@ const Navbar = ({ nav }) => {
     checkWalletConnet();
   }, [checkWalletConnet]);
 
+
+ // language change
+ useEffect(() => {
+  const script = document.createElement("script");
+
+  script.src =
+    "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  script.async = true;
+  document.body.appendChild(script);
+
+  console.log('google translate',window.googleTranslateElementInit)
+  window.googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en,ja",
+        includedLanguages: "en,ja",
+        layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+      },
+      "google_translate_element"
+    );
+  };
+  return () => {
+    // document.body.removeChild(script);
+    delete window.googleTranslateElementInit;
+  };
+}, []);
+
+
+
+
+
   const _handleConnectWallet = useCallback(async () => {
     setShow(false);
     setShownext(false);
@@ -408,14 +439,15 @@ const Navbar = ({ nav }) => {
             <li className="list-inline-item mb-0 me-5">
               <MdOutlineDarkMode className="fs-3" />
             </li> */}
-            <li className="list-inline-item mb-0 me-5 en">
+            <li className="list-inline-item mb-0 me-3 en">
+            <div id="google_translate_element"></div>
               {/* <TbWorld className="fs-4" /> <span className="fw-bold">EN</span> */}
-              <TbWorld className="fs-4" /> <span className="fw-bold">EN</span>
+              {/* <TbWorld className="fs-4" /> <span className="fw-bold">EN</span>
               <div className="en_hov shadow">
                 <p>JP</p>
                 <p>KE</p>
                 <p>LV</p>
-              </div>
+              </div> */}
               {/* <div class="dropdown">
                 <button
                   class="border-0 bg-transparent dropdown-toggle"
@@ -446,7 +478,7 @@ const Navbar = ({ nav }) => {
             </li>
             <li
               style={{ cursor: "pointer" }}
-              className="list-inline-item mb-0 me-5"
+              className="list-inline-item mb-0 me-3"
             >
               <BiCartAlt className="fs-3" />{" "}
               <Badge className="rounded-circle" bg="primary">
@@ -556,7 +588,7 @@ const Navbar = ({ nav }) => {
                           for="exampleFormControlInput1"
                           class="form-label"
                         >
-                         Price
+                          Price
                         </label>
                         <input
                           type="text"
@@ -573,7 +605,6 @@ const Navbar = ({ nav }) => {
                     >
                       Submit
                     </Button>
-                 
                   </Modal.Footer>
                 </Modal>
               </div>

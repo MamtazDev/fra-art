@@ -227,6 +227,17 @@ a {
 .navigation-menu .nav-left {
   flex-wrap: nowrap !important;
 }
+.skiptranslate.goog-te-gadget img {
+  display: none !important;
+}
+.goog-te-gadget-simple {
+  border: none !important;
+}
+.goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span {
+  text-decoration: none;
+  border: none !important;
+  margin-right: 2px;
+}
 #searchItem {
   width: 400px;
 }

@@ -190,6 +190,10 @@ const Routing = () => {
           <Route path="/admin/otp2" element={<Otp2 />} />
           <Route path="/admin/verify-email" element={<VerifyEmail />} />
           <Route path="/admin/reset" element={<Reset />} />
+
+
+
+          
           <Route path="/trending" element={<Collection />} />
           <Route path="/hot" element={<HotCollection />} />
           <Route path="/newly" element={<NewlyCollection />} />

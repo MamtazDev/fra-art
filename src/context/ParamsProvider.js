@@ -11,6 +11,7 @@ const ParamsProvider = ({ children }) => {
 
   const [active, setActive] = useState("");
   const paramsInfo = { userId, setUserId, active, setActive };
+  
   return (
     <ParamsContext.Provider value={paramsInfo}>
       {children}

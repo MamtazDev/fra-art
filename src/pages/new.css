@@ -238,6 +238,12 @@ a {
   border: none !important;
   margin-right: 2px;
 }
+.goog-te-banner-frame{
+  display: none !important;
+}
+.VIpgJd-ZVi9od-ORHb-OEVmcd{
+  display: none !important;
+}
 #searchItem {
   width: 400px;
 }

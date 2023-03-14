@@ -114,19 +114,18 @@ const User = () => {
   // }, [isMetaMaskInstalled]);
 
   const handleSubmit = (price) => {
-    // fetch(`http://localhost:8080/PaymentAPI/${email}/${price}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data === "success 1") {
-    //       setShownext(false);
-    //       setTimeout(() => {
-    //         alert("Payment Successfull");
-    //       }, 150);
-    //     }
-    //   });
-    setShownext(false)
-         
-         
+    // fetch(`https://test-panda.opediatech.com/PaymentAPI/dhhasansaha11@gmail.com/100`)
+    fetch(`https://test-panda.opediatech.com/PaymentAPI/${email}/${price}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data === "success") {
+          setShownext(false);
+          setTimeout(() => {
+            alert("Payment Successful");
+          }, 150);
+        }
+      });
+    // setShownext(false)
   };
 
   useEffect(() => {

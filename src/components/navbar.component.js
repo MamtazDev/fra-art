@@ -894,7 +894,7 @@ const Navbar = ({ nav }) => {
                   style={{ flexWrap: "nowrap" }}
                   className="navigation-menu nav-left"
                 >
-                  <li className="parent-parent-menu-item me-5">
+                  <li className="parent-parent-menu-item me-3">
                     <Link className="fw-bold" to="/">
                       Home
                     </Link>
@@ -903,7 +903,7 @@ const Navbar = ({ nav }) => {
 
                   <li
                     style={{ fontSize: "18px" }}
-                    className="parent_collection pointer parent-parent-menu-item fw-bold me-5"
+                    className="parent_collection pointer parent-parent-menu-item fw-bold me-3"
                   >
                     Explore
                     <ul className="child_collection shadow rounded  px-0  d-flex flex-column">
@@ -1060,7 +1060,7 @@ const Navbar = ({ nav }) => {
                   {/* <li className="parent-parent-menu-item">
                   <Link to="/crowdpad">Crowdpad</Link>
                 </li> */}
-                  <li className="parent-parent-menu-item me-5">
+                  <li className="parent-parent-menu-item me-3">
                     <Link className="fw-bold" to="/rockpool">
                       FraPool
                     </Link>
